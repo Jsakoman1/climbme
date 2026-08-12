@@ -1,58 +1,85 @@
 kind: dora_domain_library
 version: 1
 vocabulary:
-- id: concept-1
-  description: user account
-- id: concept-2
-  description: climbing attempt
-- id: concept-3
-  description: route
-- id: concept-4
-  description: French grade
-- id: concept-5
-  description: training session
-- id: concept-6
-  description: dashboard metric
-- id: concept-7
-  description: achievement
+- id: account
+  description: One authenticated ClimbMe user with a unique email and private performance data.
+- id: climbing-attempt
+  description: One dated attempt on one named route at a location and sector; it is the primary record in the climbing log.
+- id: route-projection
+  description: A per-user derived view that groups attempts by normalized route identity and shows first attempt, send outcome, total attempts and current status.
+- id: french-grade
+  description: One explicit ordered French sport grade label from the V1 catalog; it is not a conversion from another grade system.
+- id: training-session
+  description: One dated training, rest or mobility session with duration and optional subjective component scores.
+- id: dashboard-metric
+  description: A deterministic per-user aggregate with a documented formula and no cross-user data.
+- id: achievement
+  description: A derived milestone such as first redpoint or onsight at a new highest French grade.
 entities:
-- id: entity-1
-  description: user account
-- id: entity-2
-  description: climbing attempt
-- id: entity-3
-  description: route
-- id: entity-4
-  description: French grade
-- id: entity-5
-  description: training session
-- id: entity-6
-  description: dashboard metric
-- id: entity-7
-  description: achievement
+- id: user
+  description: Owns all attempts, route projections, training sessions, metrics and achievements returned to an authenticated session.
+- id: climbing_attempt
+  description: Persisted private attempt record; its fields preserve the climber-entered route context and result.
+- id: training_session
+  description: Persisted private training or recovery record.
+- id: grade_catalog_entry
+  description: Application-owned ordered French sport-grade definition used only for supported V1 analytics.
 invariants:
-- id: declared-permission-intent
-  description: Each authenticated climber can create, view, correct and delete only
-    their own climbing and training data.
+- id: private-user-isolation
+  description: Every service query and mutation scopes records to the authenticated user; client-provided user identifiers never grant access.
+- id: attempt-primary-record
+  description: A climbing-log row is one attempt, not one route or one session. Route views and dashboard totals derive from attempts.
+- id: no-route-duplication
+  description: A user creates an attempt; Route Database fields derive from the same private attempts and do not require a duplicate route-maintenance form.
+- id: explicit-grade-order
+  description: Grade ordering uses the declared French catalog, never lexical string comparison or inferred cross-scale mapping.
+- id: send-semantics
+  description: Send outcome is explicit. PROJECT records an unsuccessful working attempt; a successful later ascent records its actual sent style such as REDPOINT.
+- id: private-partner-data
+  description: Partner text is private contextual data and is never exposed to another user or used for public analytics.
+- id: derived-achievement-safety
+  description: Achievements derive from a user's own eligible sent attempts and do not mutate the source attempt.
 permission_rules:
-- id: declared-permission
-  actor: Registered climbers who want private performance tracking.
-  action: Each authenticated climber can create, view, correct and delete only their
-    own climbing and training data.
-  boundary: Permission details require explicit review before implementation.
+- id: anonymous-registration
+  actor: Anonymous visitor
+  action: Register one account and sign in with valid credentials.
+  boundary: Duplicate or invalid registration creates no account; rate limits and CSRF protections apply.
+- id: private-performance-owner
+  actor: Authenticated climber
+  action: Create, read, update, delete and export only their own attempts and training sessions; read only their own derived analytics.
+  boundary: Another account's identifiers, route names, partner text and analytic aggregates are never readable or mutable.
 workflows:
-- id: declared-workflow
-  initial_state: not-declared
+- id: climbing-attempt-lifecycle
+  initial_state: absent
   transitions:
-  - from: not-declared
-    to: review-required
-    action: A visitor registers and signs in, then records a private attempt and sees
-      it persist in their own chronological log.
+  - from: absent
+    to: recorded
+    action: Authenticated climber saves a valid private attempt.
+  - from: recorded
+    to: recorded
+    action: Owner corrects a valid attempt without changing another account's data.
+  - from: recorded
+    to: deleted
+    action: Owner explicitly deletes the attempt; derived route and dashboard views recalculate.
+- id: session-lifecycle
+  initial_state: anonymous
+  transitions:
+  - from: anonymous
+    to: authenticated
+    action: Visitor registers or signs in with valid credentials.
+  - from: authenticated
+    to: anonymous
+    action: User signs out or the server session expires.
 acceptance_scenarios:
-- id: first-capability-intent
-  given: Climbers need a fast, private way to retain attempt history and see performance
-    progression without a paid or confusing logbook.
-  when: Record and review one private climbing attempt
-  then: The project records the owner-confirmed full V1 scope, authority boundaries,
-    unresolved public-launch policies and one serial delivery shape without implementing
-    product behavior.
+- id: private-attempt-round-trip
+  given: A registered climber has signed in.
+  when: They save a valid French-grade climbing attempt and refresh the web application.
+  then: They see it in their own chronological log and another account cannot read it.
+- id: no-duplicate-route-entry
+  given: A climber has recorded attempts for one route.
+  when: They view Route Database.
+  then: First-attempt date, send date, total attempts, sent style and status derive from those attempts.
+- id: analytics-precise-labels
+  given: A climber has attempts and sends across grades and dates.
+  when: They view Dashboard.
+  then: It separately reports attempt volume, sends, unique routes, climbing days and configured grade-based aggregates.

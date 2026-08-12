@@ -1,0 +1,22 @@
+kind: work
+version: 1
+id: climbme-v1-08-responsive-runtime-evidence
+title: Prove responsive core journeys
+status: draft
+baseline: b0dd60ce44aafb2750b313cb05027edc1ca4c819
+strict_verification: true
+serial_task_execution: true
+master_plan: docs/work/climbme-v1-master.yaml
+execution_inventory: docs/work/climbme-v1-execution-inventory.yaml
+tasks:
+- id: prove-responsive-core-journeys
+  title: Capture runtime evidence for responsive private core workflows
+  type: verification
+  status: pending
+  inventory_item: responsive-runtime-evidence
+  observable_outcome: Browser evidence proves registration/sign-in, private attempt entry, route view, training entry and dashboard rendering at desktop and mobile viewport sizes.
+  dependencies: [dashboard-achievements-ui]
+  paths: [frontend/package.json, frontend/playwright.config.js, frontend/e2e/climbme-core.spec.js, docs/runtime-evidence/climbme-core-desktop.md, docs/runtime-evidence/climbme-core-mobile.md]
+  required_paths: [frontend/package.json, frontend/playwright.config.js, frontend/e2e/climbme-core.spec.js, docs/runtime-evidence/climbme-core-desktop.md, docs/runtime-evidence/climbme-core-mobile.md]
+  validation: npm --prefix frontend run test:runtime
+  evidence_boundary: [Local synthetic browser evidence only; no production Railway deployment or real-user data.]

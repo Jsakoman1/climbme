@@ -1,27 +1,51 @@
 kind: dora_product_brief
 version: 1
-product: climbme
-user_problem: Climbers need a fast, private way to retain attempt history and see
-  performance progression without a paid or confusing logbook.
+product: ClimbMe
+user_problem: >-
+  Climbers need a fast, private and understandable way to retain every climbing
+  attempt, training session and season outcome, then see meaningful performance
+  progression without a paid or confusing logbook.
 primary_users:
-- Registered climbers who want private performance tracking.
+- Registered climbers who track their own performance.
 intended_outcomes:
-- Record and review one private climbing attempt
+- A visitor can register and sign in to a private ClimbMe account.
+- A climber can quickly record every climbing attempt in English with its date,
+  location, sector, route, French grade, style, send result and optional
+  performance context.
+- A climber can inspect a derived Route Database without duplicating attempt data.
+- A climber can record climbing and off-wall training sessions.
+- A climber can use a dashboard with the owner-required KPIs, grade progression,
+  sends by grade, style distribution, attempts-to-send, location send rate and
+  annual volume.
+- A climber can review automatically derived achievements and an annual summary.
+- The application can build into one containerized Spring/Vue service and connect
+  to PostgreSQL through Railway environment variables, without claiming a live
+  production deployment until its external ownership gate is satisfied.
+product_principles:
+- id: fast-honest-entry
+  statement: Logging one real attempt must be quicker and clearer than maintaining a spreadsheet.
+- id: private-by-default
+  statement: Public registration never makes climbing, training, partner or analytics data visible to another account.
+- id: precise-analytics
+  statement: Dashboard labels and formulas distinguish attempts, sends, routes and climbing days rather than hiding ambiguity behind a single total.
+- id: future-client-ready
+  statement: Product rules, access control and calculations live in the backend so a future iPhone client can reuse the same protected API.
 non_goals:
-- No cross-user data access
-- no social feed
-- no grade-scale conversion
-- no subscription system
-- no inferred public production claim.
+- Social feeds, public profiles, cross-user comparisons, sponsors portals, subscriptions, coaching recommendations, route discovery and safety advice.
+- Native iPhone delivery in V1; V1 provides a responsive web client and reusable API only.
+- Grade-scale conversion, universal grade equivalence or Fontainebleau/bouldering-grade analytics in V1.
+- An unsupported claim that the application is publicly deployed, that password recovery exists, or that Railway secrets/backups are configured.
 assumptions:
-- No additional product assumptions were declared in the idea interview.
+- The owner delegated ordinary implementation choices after confirming the public/private, French-grade, web-first, PostgreSQL and Railway direction.
+- V1 uses an explicit French sport-grade catalog from 3a through 9c and retains the selected label; bouldering-grade analytics are deferred.
+- V1 uses email/password accounts, server sessions, password hashing, CSRF protection and rate limiting. Password change is available to an authenticated user; email verification and self-service email recovery are not V1 claims.
+- A user's data is retained until that user deletes it; the delivery plan will provide a private export path and a clear account-deletion confirmation rather than silently retaining data.
+- English is the V1 product language and metric units are used for route length and training duration.
 risks:
-- Delivery, adoption, and safety risks have not been declared in the idea interview.
+- Public self-registration magnifies authentication, session, rate-limit and privacy mistakes.
+- Grade-based charts are misleading if route grade ordering or send semantics are not centralized and tested.
+- Low-friction entry can be lost if the route and attempt model requires duplicate manual maintenance.
+- Railway readiness is not a deployed service, operational backup proof or a public-launch approval.
 unanswered_decisions:
-- Decide email verification, password recovery and account deletion before public-launch
-  approval.
-- Confirm exact supported French grade catalog and bouldering handling before production
-  analytics.
-- Decide privacy notice, data retention and export policy before public-launch approval.
-- Assign the Railway project, production database, secrets and public domain before
-  a live deployment claim.
+- Railway project, production Postgres service, secret owner and public domain must be assigned before a live deployment is claimed.
+- Email verification and self-service password recovery remain deferred; a public-launch decision must explicitly accept or extend that posture.

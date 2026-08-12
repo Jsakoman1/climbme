@@ -1,0 +1,22 @@
+kind: work
+version: 1
+id: climbme-v1-06-dashboard-metrics
+title: Deliver deterministic performance metrics
+status: draft
+baseline: b0dd60ce44aafb2750b313cb05027edc1ca4c819
+strict_verification: true
+serial_task_execution: true
+master_plan: docs/work/climbme-v1-master.yaml
+execution_inventory: docs/work/climbme-v1-execution-inventory.yaml
+tasks:
+- id: deliver-deterministic-performance-metrics
+  title: Calculate private KPIs and chart-ready performance series
+  type: implementation
+  status: pending
+  inventory_item: dashboard-metrics
+  observable_outcome: A protected backend produces documented per-user KPIs and series for grade progression, sends by grade, style distribution, attempts-to-send, location send rate and monthly volume.
+  dependencies: [training-log]
+  paths: [backend/src/main/java/com/climbme/app/dashboard/DashboardController.java, backend/src/main/java/com/climbme/app/dashboard/DashboardService.java, backend/src/main/java/com/climbme/app/dashboard/DashboardResponse.java, backend/src/main/java/com/climbme/app/dashboard/AchievementService.java, backend/src/test/java/com/climbme/app/dashboard/DashboardIntegrationTest.java]
+  required_paths: [backend/src/main/java/com/climbme/app/dashboard/DashboardController.java, backend/src/main/java/com/climbme/app/dashboard/DashboardService.java, backend/src/main/java/com/climbme/app/dashboard/DashboardResponse.java, backend/src/main/java/com/climbme/app/dashboard/AchievementService.java, backend/src/test/java/com/climbme/app/dashboard/DashboardIntegrationTest.java]
+  validation: mvn -q -f backend/pom.xml test -Dtest=DashboardIntegrationTest
+  evidence_boundary: [Formula, ordering and account-isolation evidence only; no chart presentation or claims of coaching recommendation.]

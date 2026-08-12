@@ -1,0 +1,22 @@
+kind: work
+version: 1
+id: climbme-v1-02-climbing-attempt-api
+title: Deliver private climbing attempt API
+status: draft
+baseline: b0dd60ce44aafb2750b313cb05027edc1ca4c819
+strict_verification: true
+serial_task_execution: true
+master_plan: docs/work/climbme-v1-master.yaml
+execution_inventory: docs/work/climbme-v1-execution-inventory.yaml
+tasks:
+- id: deliver-private-climbing-attempt-api
+  title: Persist valid private French-grade climbing attempts
+  type: implementation
+  status: pending
+  inventory_item: climbing-attempt-api
+  observable_outcome: An authenticated climber can create, list, correct and delete only their own validated French-grade attempts through a protected API.
+  dependencies: [auth-private-data]
+  paths: [backend/src/main/java/com/climbme/app/climbing/ClimbingAttempt.java, backend/src/main/java/com/climbme/app/climbing/ClimbingAttemptController.java, backend/src/main/java/com/climbme/app/climbing/ClimbingAttemptRepository.java, backend/src/main/java/com/climbme/app/climbing/ClimbingAttemptService.java, backend/src/main/java/com/climbme/app/climbing/ClimbingAttemptRequest.java, backend/src/main/java/com/climbme/app/climbing/ClimbingAttemptResponse.java, backend/src/main/java/com/climbme/app/climbing/FrenchGrade.java, backend/src/main/resources/db/migration/V2__climbing_attempts.sql, backend/src/test/java/com/climbme/app/climbing/ClimbingAttemptIntegrationTest.java]
+  required_paths: [backend/src/main/java/com/climbme/app/climbing/ClimbingAttempt.java, backend/src/main/java/com/climbme/app/climbing/ClimbingAttemptController.java, backend/src/main/java/com/climbme/app/climbing/ClimbingAttemptRepository.java, backend/src/main/java/com/climbme/app/climbing/ClimbingAttemptService.java, backend/src/main/java/com/climbme/app/climbing/ClimbingAttemptRequest.java, backend/src/main/java/com/climbme/app/climbing/ClimbingAttemptResponse.java, backend/src/main/java/com/climbme/app/climbing/FrenchGrade.java, backend/src/main/resources/db/migration/V2__climbing_attempts.sql, backend/src/test/java/com/climbme/app/climbing/ClimbingAttemptIntegrationTest.java]
+  validation: mvn -q -f backend/pom.xml test -Dtest=ClimbingAttemptIntegrationTest
+  evidence_boundary: [Private climbing-attempt API and grade/field validation only; no dashboard calculation or public route catalogue.]

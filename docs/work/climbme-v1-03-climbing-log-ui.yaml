@@ -1,0 +1,22 @@
+kind: work
+version: 1
+id: climbme-v1-03-climbing-log-ui
+title: Deliver low-friction climbing log UI
+status: draft
+baseline: b0dd60ce44aafb2750b313cb05027edc1ca4c819
+strict_verification: true
+serial_task_execution: true
+master_plan: docs/work/climbme-v1-master.yaml
+execution_inventory: docs/work/climbme-v1-execution-inventory.yaml
+tasks:
+- id: deliver-low-friction-climbing-log-ui
+  title: Let a signed-in climber enter and review attempts without duplicate route forms
+  type: implementation
+  status: pending
+  inventory_item: climbing-log-ui
+  observable_outcome: The responsive English web UI provides a clear attempt form and chronological private log with edit/delete feedback.
+  dependencies: [climbing-attempt-api]
+  paths: [frontend/src/main.js, frontend/src/main.test.js, frontend/src/styles.css, frontend/index.html]
+  required_paths: [frontend/src/main.js, frontend/src/main.test.js, frontend/src/styles.css, frontend/index.html]
+  validation: npm --prefix frontend run test && npm --prefix frontend run build
+  evidence_boundary: [Client form/list behavior only; no dashboard, training or Railway proof.]

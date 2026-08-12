@@ -2,24 +2,202 @@ kind: work
 version: 1
 id: first-work
 title: Establish the ClimbMe V1 product and delivery baseline
-status: draft
-baseline: pending_git_baseline
+status: verified
+baseline: b0dd60ce44aafb2750b313cb05027edc1ca4c819
 strict_verification: true
 serial_task_execution: true
 execution_inventory: docs/work/execution-inventory.yaml
 tasks:
 - id: establish-climbme-v1-baseline
   title: Establish the ClimbMe V1 product and delivery baseline
+  type: docs-only
   observable_outcome: The project records the owner-confirmed full V1 scope, authority
-    boundaries, unresolved public-launch policies and one serial delivery shape without
-    implementing product behavior.
+    boundaries, product/domain decisions, IDC advisory baseline, learning record and
+    one serial delivery shape without implementing product behavior.
   required_paths:
+  - docs/product-brief.yaml
+  - docs/domain-library.yaml
+  - docs/decision-log.yaml
+  - docs/implementation-backlog.md
   - docs/research/idc-climbme-product-baseline.md
+  - docs/implementation-control.md
+  - docs/ai-delivery-learning.md
+  - docs/project-memory.yaml
   - docs/work/climbme-v1-master.yaml
-  validation: "./bin/dora doctor .dora/project.yaml"
+  - docs/work/climbme-v1-execution-inventory.yaml
+  - docs/work/climbme-v1-00-plan-hardening.yaml
+  - docs/work/climbme-v1-01-auth-private-data.yaml
+  - docs/work/climbme-v1-02-climbing-attempt-api.yaml
+  - docs/work/climbme-v1-03-climbing-log-ui.yaml
+  - docs/work/climbme-v1-04-route-database.yaml
+  - docs/work/climbme-v1-05-training-log.yaml
+  - docs/work/climbme-v1-06-dashboard-metrics.yaml
+  - docs/work/climbme-v1-07-dashboard-achievements-ui.yaml
+  - docs/work/climbme-v1-08-responsive-runtime-evidence.yaml
+  - docs/work/climbme-v1-09-railway-readiness.yaml
+  - docs/work/climbme-v1-10-owner-closeout.yaml
+  - ".dora/controls/change-routing.yaml"
+  - ".dora/controls/workspace-inventory.yaml"
+  - ".dora/controls/backlog.yaml"
+  paths:
+  - docs/product-brief.yaml
+  - docs/domain-library.yaml
+  - docs/decision-log.yaml
+  - docs/implementation-backlog.md
+  - docs/research/idc-climbme-product-baseline.md
+  - docs/implementation-control.md
+  - docs/ai-delivery-learning.md
+  - docs/project-memory.yaml
+  - docs/work/climbme-v1-master.yaml
+  - docs/work/climbme-v1-execution-inventory.yaml
+  - docs/work/climbme-v1-00-plan-hardening.yaml
+  - docs/work/climbme-v1-01-auth-private-data.yaml
+  - docs/work/climbme-v1-02-climbing-attempt-api.yaml
+  - docs/work/climbme-v1-03-climbing-log-ui.yaml
+  - docs/work/climbme-v1-04-route-database.yaml
+  - docs/work/climbme-v1-05-training-log.yaml
+  - docs/work/climbme-v1-06-dashboard-metrics.yaml
+  - docs/work/climbme-v1-07-dashboard-achievements-ui.yaml
+  - docs/work/climbme-v1-08-responsive-runtime-evidence.yaml
+  - docs/work/climbme-v1-09-railway-readiness.yaml
+  - docs/work/climbme-v1-10-owner-closeout.yaml
+  - ".dora/controls/change-routing.yaml"
+  - ".dora/controls/workspace-inventory.yaml"
+  - ".dora/controls/backlog.yaml"
+  validation: 'ruby -I dora/lib -ryaml -r dora/serial_plan_integrity -r dora/decision_log
+    -e ''Dora::SerialPlanIntegrity.validate!("docs/work/climbme-v1-master.yaml", "docs/work/climbme-v1-execution-inventory.yaml",
+    project_root: Dir.pwd); Dora::DecisionLog.load!("docs/decision-log.yaml"); Dir["docs/work/climbme-v1-*.yaml"].each
+    { |path| plan = YAML.load_file(path); next unless plan["kind"] == "work"; abort("plan
+    contract failed: #{path}") unless system("./bin/dora", "plan-contract", path)
+    }'' && ./bin/dora doctor .dora/project.yaml'
   evidence_boundary:
   - No climbing product schema, authentication behavior, frontend feature, public
     deployment, Railway configuration or release claim is implemented by this preparation
     work.
   inventory_item: establish-climbme-v1-baseline
   dependencies: []
+  status: done
+  started_at: '2026-08-12T14:08:03Z'
+  start_fingerprints:
+    docs/research/idc-climbme-product-baseline.md: __missing__
+    docs/work/climbme-v1-master.yaml: __missing__
+  start_workspace_paths:
+  - docs/work/first-work.yaml
+evidence:
+- task: establish-climbme-v1-baseline
+  command: 'ruby -I dora/lib -ryaml -r dora/serial_plan_integrity -r dora/decision_log
+    -e ''Dora::SerialPlanIntegrity.validate!("docs/work/climbme-v1-master.yaml", "docs/work/climbme-v1-execution-inventory.yaml",
+    project_root: Dir.pwd); Dora::DecisionLog.load!("docs/decision-log.yaml"); Dir["docs/work/climbme-v1-*.yaml"].each
+    { |path| plan = YAML.load_file(path); next unless plan["kind"] == "work"; abort("plan
+    contract failed: #{path}") unless system("./bin/dora", "plan-contract", path)
+    }'' && ./bin/dora doctor .dora/project.yaml'
+  ranAt: '2026-08-12T14:20:10Z'
+  revision: b0dd60ce44aafb2750b313cb05027edc1ca4c819
+  exitCode: 0
+  result: passed
+  timedOut: false
+  timeoutSeconds: 300
+  changedFiles:
+  - ".dora/controls/backlog.yaml"
+  - ".dora/controls/change-routing.yaml"
+  - ".dora/controls/workspace-inventory.yaml"
+  - docs/domain-library.yaml
+  - docs/product-brief.yaml
+  - docs/project-memory.yaml
+  - docs/ai-delivery-learning.md
+  - docs/decision-log.yaml
+  - docs/implementation-backlog.md
+  - docs/implementation-control.md
+  - docs/research/idc-climbme-product-baseline.md
+  - docs/work/climbme-v1-00-plan-hardening.yaml
+  - docs/work/climbme-v1-01-auth-private-data.yaml
+  - docs/work/climbme-v1-02-climbing-attempt-api.yaml
+  - docs/work/climbme-v1-03-climbing-log-ui.yaml
+  - docs/work/climbme-v1-04-route-database.yaml
+  - docs/work/climbme-v1-05-training-log.yaml
+  - docs/work/climbme-v1-06-dashboard-metrics.yaml
+  - docs/work/climbme-v1-07-dashboard-achievements-ui.yaml
+  - docs/work/climbme-v1-08-responsive-runtime-evidence.yaml
+  - docs/work/climbme-v1-09-railway-readiness.yaml
+  - docs/work/climbme-v1-10-owner-closeout.yaml
+  - docs/work/climbme-v1-execution-inventory.yaml
+  - docs/work/climbme-v1-master.yaml
+  output: |+
+    PASSED adapter: adapter satisfies the Dora schema
+    PASSED path:docs: docs
+    PASSED path:work_plans: docs/work
+    PASSED path:audit_output: docs/audit-output
+    PASSED path:runtime_evidence: docs/runtime-evidence
+    PASSED command:work_start: ./bin/dora is available
+    PASSED command:work_verify: ./bin/dora is available
+    PASSED command:control_check: ./bin/dora is available
+    PASSED project-control: control bundle and declared control files exist
+    PASSED control:tool_catalog: dora_tool_catalog is configured
+    PASSED control:change_routing: dora_change_routing is configured
+    PASSED control:context_search: dora_context_search is configured
+    PASSED control:workspace_inventory: dora_workspace_inventory is configured
+    PASSED control:documentation_evidence: dora_documentation_evidence is configured
+    PASSED control:system_map: dora_system_map is configured
+    PASSED control:artifact_policy: dora_artifact_policy is configured
+    PASSED control:backlog: dora_backlog is configured
+    PASSED control:capability_inventory: adopted capability documentation controls are configured
+    PASSED project-knowledge: product brief, domain library, agent profile, and agent entrypoint are valid
+
+  executionEnvironment:
+    shell: "/bin/zsh"
+    rubyVersion: 2.6.10
+    environmentExported: false
+  requiredPathDigests:
+    docs/product-brief.yaml: dfc3e1d997ac8a6477f98bf630e1ec81c98b33d70905d1286348633585aef834
+    docs/domain-library.yaml: a35e787b5e662c7667a6b06627badcc9e9c1ca99da8ced994772b0b5b85e2748
+    docs/decision-log.yaml: 7e4e0fbe01a9f54cd0a111002a2d27aac297bae543296d717ec1cfc34b3f803d
+    docs/implementation-backlog.md: bc44b398aad67e537bda37c48e676f3f3f9e55e548cf5c482a125bdb01e12cf4
+    docs/research/idc-climbme-product-baseline.md: f6d8c3de0546677cbd7a5a74b75de39ac03d689023207799ec533d5d94c49177
+    docs/implementation-control.md: b59a3be3fe88b743d80d68f678f2e6ac5e81ae4cf9e113bfee6ab33df0a3b63a
+    docs/ai-delivery-learning.md: a611d2eda21958a0ffe00f9264f896ee57b5ed7029d44d0fdb257a6e590ca641
+    docs/project-memory.yaml: 78021a83551dadafad8e81a45ab2792d5f89c3b8dcb227c702fd09daf893e197
+    docs/work/climbme-v1-master.yaml: fba95827145f40bc6bfdf80c10726c3fa7d82b7c8530e1e0dc78d82766b99f19
+    docs/work/climbme-v1-execution-inventory.yaml: 06b426f729f1ee4bcd8aa409675e387cd693a1eadbfffaa0ef38ff6ad390e5ab
+    docs/work/climbme-v1-00-plan-hardening.yaml: eff82445910fcde5edf47b1b340555fd6da9b47bc739d64e23438f41b396be9e
+    docs/work/climbme-v1-01-auth-private-data.yaml: 6c45c0c2652b125e35483264e9eb6bcd7fa963fb56264b9b87f3768fcd524c3b
+    docs/work/climbme-v1-02-climbing-attempt-api.yaml: 51712a99bfd5c3b781342ab353bc6bbe9f6467695380a6fcfa8f022e45fa66f4
+    docs/work/climbme-v1-03-climbing-log-ui.yaml: a81f87ac60fcfc1d978ad81cee0e7d0ff211aa75f68c0681cdd11f294f89eb99
+    docs/work/climbme-v1-04-route-database.yaml: c1fd6c1add7f584149e87e0038fba82c29883eec1360aa6b87522b0ea57b04b4
+    docs/work/climbme-v1-05-training-log.yaml: e37a467ccd3b87b5d719d20f03490a281f2767f28c25243bd1a23302948107b1
+    docs/work/climbme-v1-06-dashboard-metrics.yaml: 486790bab70b70a4b8f50a6e394cde8ba3a8d6f25b925b268fdfe0f53746f590
+    docs/work/climbme-v1-07-dashboard-achievements-ui.yaml: f448d2387698512339bec9128dbf35458f7abb08a0f6101a625ca779d421e542
+    docs/work/climbme-v1-08-responsive-runtime-evidence.yaml: f60ccea6e5fa461512ec261ab9a92417171daa15e147af58b61f300f4770b66c
+    docs/work/climbme-v1-09-railway-readiness.yaml: 881d7a332bfb0d5a37189d049fdeec293350272a8708e03bf06010320a299961
+    docs/work/climbme-v1-10-owner-closeout.yaml: 17a870aaa6e7622e0bc2f8e10d6f363dc0c09fea1723f3b72f066d4ed65ded8c
+    ".dora/controls/change-routing.yaml": ff788329eb50002b7aea31b166568c28c90ad071cd9c816c19708877b6ec3e85
+    ".dora/controls/workspace-inventory.yaml": a9eadf4c8ff2215213a12c76a33c1d2f8b610c3c58371c075d785aae9ef6185d
+    ".dora/controls/backlog.yaml": 4b4cdfe680bf35bee5675fddec43d9a6545d8a5bb2b9fac3a6ce6f3d57ceb1fb
+  requiredPaths: &1
+  - docs/product-brief.yaml
+  - docs/domain-library.yaml
+  - docs/decision-log.yaml
+  - docs/implementation-backlog.md
+  - docs/research/idc-climbme-product-baseline.md
+  - docs/implementation-control.md
+  - docs/ai-delivery-learning.md
+  - docs/project-memory.yaml
+  - docs/work/climbme-v1-master.yaml
+  - docs/work/climbme-v1-execution-inventory.yaml
+  - docs/work/climbme-v1-00-plan-hardening.yaml
+  - docs/work/climbme-v1-01-auth-private-data.yaml
+  - docs/work/climbme-v1-02-climbing-attempt-api.yaml
+  - docs/work/climbme-v1-03-climbing-log-ui.yaml
+  - docs/work/climbme-v1-04-route-database.yaml
+  - docs/work/climbme-v1-05-training-log.yaml
+  - docs/work/climbme-v1-06-dashboard-metrics.yaml
+  - docs/work/climbme-v1-07-dashboard-achievements-ui.yaml
+  - docs/work/climbme-v1-08-responsive-runtime-evidence.yaml
+  - docs/work/climbme-v1-09-railway-readiness.yaml
+  - docs/work/climbme-v1-10-owner-closeout.yaml
+  - ".dora/controls/change-routing.yaml"
+  - ".dora/controls/workspace-inventory.yaml"
+  - ".dora/controls/backlog.yaml"
+  visualEvidencePaths: []
+  runtimeEvidencePaths: []
+  startedAt: '2026-08-12T14:08:03Z'
+  changedAfterStart: *1

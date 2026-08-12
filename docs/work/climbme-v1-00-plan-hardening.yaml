@@ -1,0 +1,23 @@
+kind: work
+version: 1
+id: climbme-v1-00-plan-hardening
+title: Harden the ClimbMe V1 serial delivery plan
+status: draft
+baseline: b0dd60ce44aafb2750b313cb05027edc1ca4c819
+strict_verification: true
+serial_task_execution: true
+master_plan: docs/work/climbme-v1-master.yaml
+execution_inventory: docs/work/climbme-v1-execution-inventory.yaml
+tasks:
+- id: harden-climbme-v1-plan
+  title: Record semantic atomicity review for the full ClimbMe V1 sequence
+  type: docs-only
+  status: pending
+  inventory_item: plan-hardening
+  observable_outcome: An owner-readable review proves every queued ClimbMe task is serial, atomic and bounded without reducing the mandatory V1 product scope.
+  dependencies: []
+  paths: [docs/work/climbme-v1-atomicity-review.md, docs/work/climbme-v1-master.yaml]
+  required_paths: [docs/work/climbme-v1-atomicity-review.md, docs/work/climbme-v1-master.yaml]
+  validation: >-
+    ruby -I dora/lib -ryaml -r dora/serial_plan_integrity -e 'Dora::SerialPlanIntegrity.validate!("docs/work/climbme-v1-master.yaml", "docs/work/climbme-v1-execution-inventory.yaml", project_root: Dir.pwd); Dir["docs/work/climbme-v1-*.yaml"].each { |path| plan = YAML.load_file(path); next unless plan["kind"] == "work"; abort("plan contract failed: #{path}") unless system("./bin/dora", "plan-contract", path) }' && ruby -ryaml -e 'abort("semantic review has not passed") unless YAML.load_file("docs/work/climbme-v1-master.yaml").dig("planning_quality_gate", "semantic_atomicity_review", "status") == "passed"'
+  evidence_boundary: [Plan contract and serial-integrity validation only; no application code, account, data or deployment behavior is created.]

@@ -1,0 +1,22 @@
+kind: work
+version: 1
+id: climbme-v1-04-route-database
+title: Deliver derived Route Database
+status: draft
+baseline: b0dd60ce44aafb2750b313cb05027edc1ca4c819
+strict_verification: true
+serial_task_execution: true
+master_plan: docs/work/climbme-v1-master.yaml
+execution_inventory: docs/work/climbme-v1-execution-inventory.yaml
+tasks:
+- id: deliver-derived-route-database
+  title: Derive each user's route status and attempt history from climbing attempts
+  type: implementation
+  status: pending
+  inventory_item: route-database
+  observable_outcome: A climber sees a private Route Database with first try, send date, total attempts, sent style and Project/Sent/Abandoned status derived from attempts.
+  dependencies: [climbing-log-ui]
+  paths: [backend/src/main/java/com/climbme/app/routes/RouteDatabaseController.java, backend/src/main/java/com/climbme/app/routes/RouteDatabaseService.java, backend/src/main/java/com/climbme/app/routes/RouteSummaryResponse.java, backend/src/test/java/com/climbme/app/routes/RouteDatabaseIntegrationTest.java, frontend/src/main.js, frontend/src/main.test.js, frontend/src/styles.css]
+  required_paths: [backend/src/main/java/com/climbme/app/routes/RouteDatabaseController.java, backend/src/main/java/com/climbme/app/routes/RouteDatabaseService.java, backend/src/main/java/com/climbme/app/routes/RouteSummaryResponse.java, backend/src/test/java/com/climbme/app/routes/RouteDatabaseIntegrationTest.java, frontend/src/main.js, frontend/src/main.test.js, frontend/src/styles.css]
+  validation: mvn -q -f backend/pom.xml test -Dtest=RouteDatabaseIntegrationTest && npm --prefix frontend run test
+  evidence_boundary: [Derived private route projection only; no manual duplicate route entity, analytics dashboard or cross-user read.]

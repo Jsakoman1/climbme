@@ -1,3 +1,15 @@
 kind: dora_change_routing
 version: 1
-rules: []
+rules:
+- id: project-controls-and-docs
+  path_prefixes: [.dora/, docs/, AGENTS.md]
+  commands: ["./bin/dora doctor .dora/project.yaml"]
+- id: backend
+  path_prefixes: [backend/]
+  commands: ["mvn -q -f backend/pom.xml test"]
+- id: frontend
+  path_prefixes: [frontend/]
+  commands: ["npm --prefix frontend run test", "npm --prefix frontend run build"]
+- id: operational-package
+  path_prefixes: [Dockerfile, docker-compose.yml, railway.toml, .env.example]
+  commands: ["docker build -t climbme:local ."]

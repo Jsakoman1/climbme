@@ -7,4 +7,10 @@ items:
   order: 1
   plan: docs/work/first-work.yaml
   task: establish-climbme-v1-baseline
-  status: pending
+  status: verified
+  started_at: '2026-08-12T14:08:03Z'
+  verified_at: '2026-08-12T14:20:12Z'
+  evidence:
+    plan: docs/work/first-work.yaml
+    task: establish-climbme-v1-baseline
+    revision: b0dd60ce44aafb2750b313cb05027edc1ca4c819

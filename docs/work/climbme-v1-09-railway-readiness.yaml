@@ -1,0 +1,22 @@
+kind: work
+version: 1
+id: climbme-v1-09-railway-readiness
+title: Deliver Railway-ready package
+status: draft
+baseline: b0dd60ce44aafb2750b313cb05027edc1ca4c819
+strict_verification: true
+serial_task_execution: true
+master_plan: docs/work/climbme-v1-master.yaml
+execution_inventory: docs/work/climbme-v1-execution-inventory.yaml
+tasks:
+- id: deliver-railway-ready-package
+  title: Package ClimbMe for environment-configured Docker deployment
+  type: implementation
+  status: pending
+  inventory_item: railway-readiness
+  observable_outcome: The repository documents and validates a Docker/health/environment configuration that Railway can deploy with PostgreSQL, without storing production secrets or claiming a live service.
+  dependencies: [responsive-runtime-evidence]
+  paths: [Dockerfile, railway.toml, backend/src/main/resources/application.properties, backend/src/main/java/com/climbme/app/config/OperationalProperties.java, docker-compose.yml, .env.example, docs/operations/railway-deployment.md, docs/operations/launch-gate.md]
+  required_paths: [Dockerfile, railway.toml, backend/src/main/resources/application.properties, backend/src/main/java/com/climbme/app/config/OperationalProperties.java, docker-compose.yml, .env.example, docs/operations/railway-deployment.md, docs/operations/launch-gate.md]
+  validation: docker build -t climbme:local . && docker image inspect climbme:local >/dev/null
+  evidence_boundary: [Container-build and configuration evidence only; no Railway project creation, secret upload, live database, DNS or public-launch assertion.]

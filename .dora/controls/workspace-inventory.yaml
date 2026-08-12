@@ -1,3 +1,11 @@
 kind: dora_workspace_inventory
 version: 1
-categories: []
+categories:
+- id: project-controls-and-docs
+  path_prefixes: [.dora/, docs/, AGENTS.md, README.md]
+- id: backend
+  path_prefixes: [backend/]
+- id: frontend
+  path_prefixes: [frontend/]
+- id: local-and-deployment-operations
+  path_prefixes: [Dockerfile, docker-compose.yml, railway.toml, .env.example]

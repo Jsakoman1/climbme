@@ -1,0 +1,56 @@
+kind: master
+version: 1
+id: climbme-v1
+title: Deliver the complete private climbing performance web application
+status: draft
+baseline: b0dd60ce44aafb2750b313cb05027edc1ca4c819
+authority_boundary: >-
+  This plan owns only ClimbMe product delivery. It cannot change Dora, IDC,
+  AI-system, PC/CPPE, Railway, GitHub policy or another repository except through
+  a separately authorized operation. IDC research remains advisory; DecisionLog,
+  work state and verification evidence remain ClimbMe/Dora-owned.
+serial_execution: true
+strict_verification: true
+serial_task_execution: true
+execution_inventory: docs/work/climbme-v1-execution-inventory.yaml
+scope_control:
+  reused_verified_plans: [Initial Dora technical starter at b0dd60ce44aafb2750b313cb05027edc1ca4c819.]
+  baseline_only_surfaces: [Neutral Spring/Vue/PostgreSQL/Flyway starter wiring and vendored Dora package.]
+  residual_scope:
+  - Owner-confirmed ClimbMe V1 product contract, private identity, performance domain, analytics, UX and Railway-ready operations.
+  - Evidence that each new user-visible capability works without cross-user access.
+  retest_triggers:
+  - Any change to identity, user scoping, grade ordering, attempt semantics, derived formulas, route/training persistence, client data flow or deployment configuration.
+  non_duplication_rule: Starter health is baseline only; no green starter command proves ClimbMe product behavior, privacy, analytics or public-launch readiness.
+planning_quality_gate:
+  semantic_atomicity_review:
+    status: pending
+    artifact: docs/work/climbme-v1-atomicity-review.md
+    rule: Each task has one observable outcome; protocol, implementation, runtime proof and closeout remain separate; a missing external launch dependency is evidence unavailable, never a passing production claim.
+scope:
+  allowed:
+  - ClimbMe source, tests, product/domain docs, local Docker/compose configuration, Railway-ready configuration and GitHub workflow.
+  - Local development/test data only; process-only AI delivery learning records.
+  forbidden:
+  - Cross-user social features, subscriptions, public user data, cross-grade conversion, native iPhone client, AI coaching, production secrets, real user data and automatic changes to Dora/IDC/AI-system.
+success_conditions:
+- A registered user can privately manage complete climbing and training records through a responsive English web app.
+- Route projections, dashboard KPIs/charts and achievements derive accurately from that user's records.
+- Docker/health/configuration/documentation provide Railway deployment readiness without an unsupported live-deployment claim.
+- Every task has recorded passing leaf evidence; the final owner readback identifies remaining external public-launch gates.
+children:
+- docs/work/climbme-v1-00-plan-hardening.yaml
+- docs/work/climbme-v1-01-auth-private-data.yaml
+- docs/work/climbme-v1-02-climbing-attempt-api.yaml
+- docs/work/climbme-v1-03-climbing-log-ui.yaml
+- docs/work/climbme-v1-04-route-database.yaml
+- docs/work/climbme-v1-05-training-log.yaml
+- docs/work/climbme-v1-06-dashboard-metrics.yaml
+- docs/work/climbme-v1-07-dashboard-achievements-ui.yaml
+- docs/work/climbme-v1-08-responsive-runtime-evidence.yaml
+- docs/work/climbme-v1-09-railway-readiness.yaml
+- docs/work/climbme-v1-10-owner-closeout.yaml
+non_goals:
+- Treating build success as proof of public production safety or external deployment.
+- Recording user performance data in AI-system learning artifacts.
+- Modifying a consumer-independent Dora/IDC component from a ClimbMe task.

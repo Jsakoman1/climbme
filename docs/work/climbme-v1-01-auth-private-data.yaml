@@ -1,0 +1,22 @@
+kind: work
+version: 1
+id: climbme-v1-01-auth-private-data
+title: Deliver private account foundation
+status: draft
+baseline: b0dd60ce44aafb2750b313cb05027edc1ca4c819
+strict_verification: true
+serial_task_execution: true
+master_plan: docs/work/climbme-v1-master.yaml
+execution_inventory: docs/work/climbme-v1-execution-inventory.yaml
+tasks:
+- id: deliver-private-account-foundation
+  title: Register, sign in and isolate one account's private records
+  type: implementation
+  status: pending
+  inventory_item: auth-private-data
+  observable_outcome: A visitor can register and sign in through a CSRF-protected local account flow while protected APIs reject anonymous and cross-user access.
+  dependencies: [plan-hardening]
+  paths: [backend/pom.xml, backend/src/main/java/com/climbme/app/ClimbMeApplication.java, backend/src/main/java/com/climbme/app/auth/AuthController.java, backend/src/main/java/com/climbme/app/auth/AuthService.java, backend/src/main/java/com/climbme/app/auth/UserAccount.java, backend/src/main/java/com/climbme/app/auth/UserAccountRepository.java, backend/src/main/java/com/climbme/app/config/SecurityConfig.java, backend/src/main/resources/db/migration/V1__user_accounts.sql, backend/src/test/java/com/climbme/app/auth/AuthIntegrationTest.java, frontend/src/main.js, frontend/src/main.test.js]
+  required_paths: [backend/pom.xml, backend/src/main/java/com/climbme/app/ClimbMeApplication.java, backend/src/main/java/com/climbme/app/auth/AuthController.java, backend/src/main/java/com/climbme/app/auth/AuthService.java, backend/src/main/java/com/climbme/app/auth/UserAccount.java, backend/src/main/java/com/climbme/app/auth/UserAccountRepository.java, backend/src/main/java/com/climbme/app/config/SecurityConfig.java, backend/src/main/resources/db/migration/V1__user_accounts.sql, backend/src/test/java/com/climbme/app/auth/AuthIntegrationTest.java, frontend/src/main.js, frontend/src/main.test.js]
+  validation: mvn -q -f backend/pom.xml test -Dtest=AuthIntegrationTest && npm --prefix frontend run test
+  evidence_boundary: [Authentication, session and private-user isolation tests; no email delivery, recovery, public deployment or social sharing claim.]

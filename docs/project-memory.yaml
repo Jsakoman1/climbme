@@ -13,35 +13,36 @@ canonical_knowledge:
 - id: agent
   path: ".dora/agent-project-profile.yaml"
   purpose: Declared Codex operating constraints and commands.
+- id: decisions
+  path: docs/decision-log.yaml
+  purpose: Owner-confirmed product and delivery direction.
+- id: idc-baseline
+  path: docs/research/idc-climbme-product-baseline.md
+  purpose: Sanitized advisory product/discovery baseline with its source boundaries.
+- id: delivery-control
+  path: docs/implementation-control.md
+  purpose: ClimbMe-specific implementation, evidence and learning-record rules.
 open_decisions:
 - id: open-decision-1
-  statement: Decide email verification, password recovery and account deletion before
-    public-launch approval.
-  source: docs/product-brief.yaml
-- id: open-decision-2
-  statement: Confirm exact supported French grade catalog and bouldering handling
-    before production analytics.
-  source: docs/product-brief.yaml
-- id: open-decision-3
-  statement: Decide privacy notice, data retention and export policy before public-launch
-    approval.
-  source: docs/product-brief.yaml
-- id: open-decision-4
   statement: Assign the Railway project, production database, secrets and public domain
     before a live deployment claim.
   source: docs/product-brief.yaml
+- id: open-decision-2
+  statement: Before a public launch, explicitly accept or extend the V1 posture that has no email verification or self-service password recovery.
+  source: docs/product-brief.yaml
 capability_intent:
-- id: establish-climbme-v1-baseline
-  intended_outcome: The project records the owner-confirmed full V1 scope, authority
-    boundaries, unresolved public-launch policies and one serial delivery shape without
-    implementing product behavior.
+- id: deliver-climbme-v1
+  intended_outcome: Deliver the owner-confirmed private climbing performance application through the strict serial ClimbMe V1 master plan.
   knowledge_references:
   - product
   - domain
   - agent
+  - decisions
+  - idc-baseline
+  - delivery-control
 current_work:
-  plan: docs/work/first-work.yaml
-  task: establish-climbme-v1-baseline
+  plan: docs/work/climbme-v1-00-plan-hardening.yaml
+  task: harden-climbme-v1-plan
   state: planned
 completion_boundary: Project memory is declared navigation context only and does not
   prove implementation, runtime acceptance, or release readiness.

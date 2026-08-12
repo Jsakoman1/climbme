@@ -1,0 +1,33 @@
+kind: dora_decision_log
+version: 1
+entries:
+- id: public-registration-private-performance
+  decision: ClimbMe is publicly reachable with self-registration, but all climbing, training, partner and analytics data remains private to its authenticated owner.
+  status: accepted
+  domain_references: [docs/domain-library.yaml#private-user-isolation]
+  plan_references: [docs/work/climbme-v1-master.yaml#auth-and-private-data]
+  evidence_references: [docs/idea-interview.yaml, docs/research/idc-climbme-product-baseline.md]
+- id: complete-performance-v1
+  decision: V1 includes Climbing Log, derived Route Database, Training Log, Dashboard, Achievements and annual summary; these are not optional later features.
+  status: accepted
+  domain_references: [docs/domain-library.yaml#attempt-primary-record]
+  plan_references: [docs/work/climbme-v1-master.yaml]
+  evidence_references: [docs/idea-interview.yaml, docs/research/idc-climbme-product-baseline.md]
+- id: web-postgres-railway-direction
+  decision: V1 is English, web-first and responsive, uses PostgreSQL, and is packaged for Railway; a future iPhone client reuses protected backend behavior but is not V1 delivery.
+  status: accepted
+  domain_references: [docs/domain-library.yaml#private-user-isolation]
+  plan_references: [docs/work/climbme-v1-master.yaml#railway-readiness]
+  evidence_references: [docs/research/idc-climbme-product-baseline.md]
+- id: french-sport-grade-v1
+  decision: V1 uses an explicit French sport-grade catalog from 3a through 9c, retains selected grade labels, and excludes grade conversion and bouldering-grade analytics.
+  status: accepted
+  domain_references: [docs/domain-library.yaml#explicit-grade-order]
+  plan_references: [docs/work/climbme-v1-master.yaml#climbing-log]
+  evidence_references: [docs/research/idc-climbme-product-baseline.md]
+- id: delegated-simple-auth-and-data-defaults
+  decision: Under owner-delegated simple implementation choices, V1 uses local email/password accounts, protected server sessions, private data until owner deletion, private export, and no self-service email verification or recovery claim.
+  status: accepted
+  domain_references: [docs/domain-library.yaml#private-user-isolation]
+  plan_references: [docs/work/climbme-v1-master.yaml#auth-and-private-data]
+  evidence_references: [docs/product-brief.yaml]
