@@ -5,16 +5,68 @@ master_plan: docs/work/climbme-v1-master.yaml
 state: draft
 execution_mode: strict_serial
 owner_authorization_required_before_start: false
-owner_authorization_record: Owner authorized the complete ClimbMe V1 implementation, commits and pushes on 2026-08-12; external live deployment remains a separately visible operation.
+owner_authorization_record: Owner authorized the complete ClimbMe V1 implementation,
+  commits and pushes on 2026-08-12; external live deployment remains a separately
+  visible operation.
 items:
-- {id: plan-hardening, sequence: 1, plan: docs/work/climbme-v1-00-plan-hardening.yaml, task: harden-climbme-v1-plan, status: pending}
-- {id: auth-private-data, sequence: 2, plan: docs/work/climbme-v1-01-auth-private-data.yaml, task: deliver-private-account-foundation, status: pending}
-- {id: climbing-attempt-api, sequence: 3, plan: docs/work/climbme-v1-02-climbing-attempt-api.yaml, task: deliver-private-climbing-attempt-api, status: pending}
-- {id: climbing-log-ui, sequence: 4, plan: docs/work/climbme-v1-03-climbing-log-ui.yaml, task: deliver-low-friction-climbing-log-ui, status: pending}
-- {id: route-database, sequence: 5, plan: docs/work/climbme-v1-04-route-database.yaml, task: deliver-derived-route-database, status: pending}
-- {id: training-log, sequence: 6, plan: docs/work/climbme-v1-05-training-log.yaml, task: deliver-private-training-log, status: pending}
-- {id: dashboard-metrics, sequence: 7, plan: docs/work/climbme-v1-06-dashboard-metrics.yaml, task: deliver-deterministic-performance-metrics, status: pending}
-- {id: dashboard-achievements-ui, sequence: 8, plan: docs/work/climbme-v1-07-dashboard-achievements-ui.yaml, task: deliver-dashboard-and-achievement-ui, status: pending}
-- {id: responsive-runtime-evidence, sequence: 9, plan: docs/work/climbme-v1-08-responsive-runtime-evidence.yaml, task: prove-responsive-core-journeys, status: pending}
-- {id: railway-readiness, sequence: 10, plan: docs/work/climbme-v1-09-railway-readiness.yaml, task: deliver-railway-ready-package, status: pending}
-- {id: owner-closeout, sequence: 11, plan: docs/work/climbme-v1-10-owner-closeout.yaml, task: prepare-climbme-v1-owner-closeout, status: pending}
+- id: plan-hardening
+  sequence: 1
+  plan: docs/work/climbme-v1-00-plan-hardening.yaml
+  task: harden-climbme-v1-plan
+  status: verified
+  started_at: '2026-08-12T14:20:55Z'
+  verified_at: '2026-08-12T14:21:59Z'
+  evidence:
+    plan: docs/work/climbme-v1-00-plan-hardening.yaml
+    task: harden-climbme-v1-plan
+    revision: 50c2e1fb7fa4474e09ad70cd8a946a37a462ab9c
+- id: auth-private-data
+  sequence: 2
+  plan: docs/work/climbme-v1-01-auth-private-data.yaml
+  task: deliver-private-account-foundation
+  status: pending
+- id: climbing-attempt-api
+  sequence: 3
+  plan: docs/work/climbme-v1-02-climbing-attempt-api.yaml
+  task: deliver-private-climbing-attempt-api
+  status: pending
+- id: climbing-log-ui
+  sequence: 4
+  plan: docs/work/climbme-v1-03-climbing-log-ui.yaml
+  task: deliver-low-friction-climbing-log-ui
+  status: pending
+- id: route-database
+  sequence: 5
+  plan: docs/work/climbme-v1-04-route-database.yaml
+  task: deliver-derived-route-database
+  status: pending
+- id: training-log
+  sequence: 6
+  plan: docs/work/climbme-v1-05-training-log.yaml
+  task: deliver-private-training-log
+  status: pending
+- id: dashboard-metrics
+  sequence: 7
+  plan: docs/work/climbme-v1-06-dashboard-metrics.yaml
+  task: deliver-deterministic-performance-metrics
+  status: pending
+- id: dashboard-achievements-ui
+  sequence: 8
+  plan: docs/work/climbme-v1-07-dashboard-achievements-ui.yaml
+  task: deliver-dashboard-and-achievement-ui
+  status: pending
+- id: responsive-runtime-evidence
+  sequence: 9
+  plan: docs/work/climbme-v1-08-responsive-runtime-evidence.yaml
+  task: prove-responsive-core-journeys
+  status: pending
+- id: railway-readiness
+  sequence: 10
+  plan: docs/work/climbme-v1-09-railway-readiness.yaml
+  task: deliver-railway-ready-package
+  status: pending
+- id: owner-closeout
+  sequence: 11
+  plan: docs/work/climbme-v1-10-owner-closeout.yaml
+  task: prepare-climbme-v1-owner-closeout
+  status: pending

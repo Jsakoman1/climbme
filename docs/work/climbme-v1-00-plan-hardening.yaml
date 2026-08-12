@@ -2,7 +2,7 @@ kind: work
 version: 1
 id: climbme-v1-00-plan-hardening
 title: Harden the ClimbMe V1 serial delivery plan
-status: draft
+status: verified
 baseline: b0dd60ce44aafb2750b313cb05027edc1ca4c819
 strict_verification: true
 serial_task_execution: true
@@ -12,12 +12,99 @@ tasks:
 - id: harden-climbme-v1-plan
   title: Record semantic atomicity review for the full ClimbMe V1 sequence
   type: docs-only
-  status: pending
+  status: done
   inventory_item: plan-hardening
-  observable_outcome: An owner-readable review proves every queued ClimbMe task is serial, atomic and bounded without reducing the mandatory V1 product scope.
+  observable_outcome: An owner-readable review proves every queued ClimbMe task is
+    serial, atomic and bounded without reducing the mandatory V1 product scope.
   dependencies: []
-  paths: [docs/work/climbme-v1-atomicity-review.md, docs/work/climbme-v1-master.yaml]
-  required_paths: [docs/work/climbme-v1-atomicity-review.md, docs/work/climbme-v1-master.yaml]
-  validation: >-
-    ruby -I dora/lib -ryaml -r dora/serial_plan_integrity -e 'Dora::SerialPlanIntegrity.validate!("docs/work/climbme-v1-master.yaml", "docs/work/climbme-v1-execution-inventory.yaml", project_root: Dir.pwd); Dir["docs/work/climbme-v1-*.yaml"].each { |path| plan = YAML.load_file(path); next unless plan["kind"] == "work"; abort("plan contract failed: #{path}") unless system("./bin/dora", "plan-contract", path) }' && ruby -ryaml -e 'abort("semantic review has not passed") unless YAML.load_file("docs/work/climbme-v1-master.yaml").dig("planning_quality_gate", "semantic_atomicity_review", "status") == "passed"'
-  evidence_boundary: [Plan contract and serial-integrity validation only; no application code, account, data or deployment behavior is created.]
+  paths:
+  - docs/work/climbme-v1-atomicity-review.md
+  - docs/work/climbme-v1-master.yaml
+  required_paths:
+  - docs/work/climbme-v1-atomicity-review.md
+  - docs/work/climbme-v1-master.yaml
+  validation: 'ruby -I dora/lib -ryaml -r dora/serial_plan_integrity -e ''Dora::SerialPlanIntegrity.validate!("docs/work/climbme-v1-master.yaml",
+    "docs/work/climbme-v1-execution-inventory.yaml", project_root: Dir.pwd); Dir["docs/work/climbme-v1-*.yaml"].each
+    { |path| plan = YAML.load_file(path); next unless plan["kind"] == "work"; abort("plan
+    contract failed: #{path}") unless system("./bin/dora", "plan-contract", path)
+    }'' && ruby -ryaml -e ''abort("semantic review has not passed") unless YAML.load_file("docs/work/climbme-v1-master.yaml").dig("planning_quality_gate",
+    "semantic_atomicity_review", "status") == "passed"'''
+  evidence_boundary:
+  - Plan contract and serial-integrity validation only; no application code
+  - account
+  - data or deployment behavior is created.
+  started_at: '2026-08-12T14:20:55Z'
+  start_fingerprints:
+    docs/work/climbme-v1-atomicity-review.md: __missing__
+    docs/work/climbme-v1-master.yaml: fba95827145f40bc6bfdf80c10726c3fa7d82b7c8530e1e0dc78d82766b99f19
+  start_workspace_paths:
+  - ".dora/controls/backlog.yaml"
+  - ".dora/controls/change-routing.yaml"
+  - ".dora/controls/workspace-inventory.yaml"
+  - docs/ai-delivery-learning.md
+  - docs/decision-log.yaml
+  - docs/domain-library.yaml
+  - docs/implementation-backlog.md
+  - docs/implementation-control.md
+  - docs/product-brief.yaml
+  - docs/project-memory.yaml
+  - docs/research/idc-climbme-product-baseline.md
+  - docs/work/climbme-v1-00-plan-hardening.yaml
+  - docs/work/climbme-v1-01-auth-private-data.yaml
+  - docs/work/climbme-v1-02-climbing-attempt-api.yaml
+  - docs/work/climbme-v1-03-climbing-log-ui.yaml
+  - docs/work/climbme-v1-04-route-database.yaml
+  - docs/work/climbme-v1-05-training-log.yaml
+  - docs/work/climbme-v1-06-dashboard-metrics.yaml
+  - docs/work/climbme-v1-07-dashboard-achievements-ui.yaml
+  - docs/work/climbme-v1-08-responsive-runtime-evidence.yaml
+  - docs/work/climbme-v1-09-railway-readiness.yaml
+  - docs/work/climbme-v1-10-owner-closeout.yaml
+  - docs/work/climbme-v1-execution-inventory.yaml
+  - docs/work/climbme-v1-master.yaml
+  - docs/work/execution-inventory.yaml
+  - docs/work/first-work.yaml
+evidence:
+- task: harden-climbme-v1-plan
+  command: 'ruby -I dora/lib -ryaml -r dora/serial_plan_integrity -e ''Dora::SerialPlanIntegrity.validate!("docs/work/climbme-v1-master.yaml",
+    "docs/work/climbme-v1-execution-inventory.yaml", project_root: Dir.pwd); Dir["docs/work/climbme-v1-*.yaml"].each
+    { |path| plan = YAML.load_file(path); next unless plan["kind"] == "work"; abort("plan
+    contract failed: #{path}") unless system("./bin/dora", "plan-contract", path)
+    }'' && ruby -ryaml -e ''abort("semantic review has not passed") unless YAML.load_file("docs/work/climbme-v1-master.yaml").dig("planning_quality_gate",
+    "semantic_atomicity_review", "status") == "passed"'''
+  ranAt: '2026-08-12T14:21:57Z'
+  revision: 50c2e1fb7fa4474e09ad70cd8a946a37a462ab9c
+  exitCode: 0
+  result: passed
+  timedOut: false
+  timeoutSeconds: 300
+  changedFiles:
+  - docs/work/climbme-v1-master.yaml
+  - docs/work/climbme-v1-atomicity-review.md
+  output: |+
+    Dora atomic plan contract valid: climbme-v1-03-climbing-log-ui (1 tasks).
+    Dora atomic plan contract valid: climbme-v1-07-dashboard-achievements-ui (1 tasks).
+    Dora atomic plan contract valid: climbme-v1-06-dashboard-metrics (1 tasks).
+    Dora atomic plan contract valid: climbme-v1-08-responsive-runtime-evidence (1 tasks).
+    Dora atomic plan contract valid: climbme-v1-02-climbing-attempt-api (1 tasks).
+    Dora atomic plan contract valid: climbme-v1-09-railway-readiness (1 tasks).
+    Dora atomic plan contract valid: climbme-v1-00-plan-hardening (1 tasks).
+    Dora atomic plan contract valid: climbme-v1-01-auth-private-data (1 tasks).
+    Dora atomic plan contract valid: climbme-v1-10-owner-closeout (1 tasks).
+    Dora atomic plan contract valid: climbme-v1-05-training-log (1 tasks).
+    Dora atomic plan contract valid: climbme-v1-04-route-database (1 tasks).
+
+  executionEnvironment:
+    shell: "/bin/zsh"
+    rubyVersion: 2.6.10
+    environmentExported: false
+  requiredPathDigests:
+    docs/work/climbme-v1-atomicity-review.md: 975399a9223922f6c45780d31a28c909fdab6a8f17e28ba218a7b394e7247f05
+    docs/work/climbme-v1-master.yaml: 66c191d4940544bc88b201bbb89e530c41e77f407ab097510853aa20e264e649
+  requiredPaths: &1
+  - docs/work/climbme-v1-atomicity-review.md
+  - docs/work/climbme-v1-master.yaml
+  visualEvidencePaths: []
+  runtimeEvidencePaths: []
+  startedAt: '2026-08-12T14:20:55Z'
+  changedAfterStart: *1

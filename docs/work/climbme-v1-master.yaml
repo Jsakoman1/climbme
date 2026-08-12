@@ -24,7 +24,7 @@ scope_control:
   non_duplication_rule: Starter health is baseline only; no green starter command proves ClimbMe product behavior, privacy, analytics or public-launch readiness.
 planning_quality_gate:
   semantic_atomicity_review:
-    status: pending
+    status: passed
     artifact: docs/work/climbme-v1-atomicity-review.md
     rule: Each task has one observable outcome; protocol, implementation, runtime proof and closeout remain separate; a missing external launch dependency is evidence unavailable, never a passing production claim.
 scope:
