@@ -1,0 +1,8 @@
+.git
+.idea
+dora
+frontend/node_modules
+frontend/test-results
+frontend/dist
+backend/target
+.env

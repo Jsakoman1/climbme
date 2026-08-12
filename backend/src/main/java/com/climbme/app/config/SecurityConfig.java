@@ -18,10 +18,16 @@ import org.springframework.security.web.context.HttpSessionSecurityContextReposi
 import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
+import org.springframework.boot.web.servlet.ServletContextInitializer;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+    @Bean
+    ServletContextInitializer sessionCookieSecurity(OperationalProperties operations) {
+        return servletContext -> servletContext.getSessionCookieConfig().setSecure(operations.isSecureCookies());
+    }
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http, SecurityContextRepository repository) throws Exception {
         CookieCsrfTokenRepository csrf = CookieCsrfTokenRepository.withHttpOnlyFalse();
