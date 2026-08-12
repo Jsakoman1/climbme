@@ -37,6 +37,8 @@ invariants:
   description: Grade ordering uses the declared French catalog, never lexical string comparison or inferred cross-scale mapping.
 - id: send-semantics
   description: Send outcome is explicit. PROJECT records an unsuccessful working attempt; a successful later ascent records its actual sent style such as REDPOINT.
+- id: attempt-number-default
+  description: When a climber does not enter an attempt number, the backend assigns the next number only among that owner's matching location, sector and route name; it never derives it from another account.
 - id: private-partner-data
   description: Partner text is private contextual data and is never exposed to another user or used for public analytics.
 - id: derived-achievement-safety

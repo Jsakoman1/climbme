@@ -24,3 +24,9 @@ No implementation slice has been verified yet.
 - Intended outcome: local private accounts before any climbing-domain persistence.
 - Process signal: the greenfield baseline separated owner-confirmed product direction from delegated implementation choices, so auth could remain one atomic task.
 - Candidate reusable lesson: make account/privacy behavior testable before adding the data domain; record only the process lesson, never account or session values.
+
+### 2026-08-12 — primary-record API (pending verification)
+
+- Intended outcome: one private climbing attempt is the only manual source record for later route and dashboard views.
+- Process signal: the plan isolated data ownership, grade ordering and sent-state validation before any visual analytics work.
+- Candidate reusable lesson: put user scoping and derived-data invariants in the API slice, then let later views consume verified records instead of reimplementing rules in the browser.
