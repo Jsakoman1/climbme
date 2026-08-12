@@ -1,0 +1,58 @@
+kind: dora_domain_library
+version: 1
+vocabulary:
+- id: concept-1
+  description: user account
+- id: concept-2
+  description: climbing attempt
+- id: concept-3
+  description: route
+- id: concept-4
+  description: French grade
+- id: concept-5
+  description: training session
+- id: concept-6
+  description: dashboard metric
+- id: concept-7
+  description: achievement
+entities:
+- id: entity-1
+  description: user account
+- id: entity-2
+  description: climbing attempt
+- id: entity-3
+  description: route
+- id: entity-4
+  description: French grade
+- id: entity-5
+  description: training session
+- id: entity-6
+  description: dashboard metric
+- id: entity-7
+  description: achievement
+invariants:
+- id: declared-permission-intent
+  description: Each authenticated climber can create, view, correct and delete only
+    their own climbing and training data.
+permission_rules:
+- id: declared-permission
+  actor: Registered climbers who want private performance tracking.
+  action: Each authenticated climber can create, view, correct and delete only their
+    own climbing and training data.
+  boundary: Permission details require explicit review before implementation.
+workflows:
+- id: declared-workflow
+  initial_state: not-declared
+  transitions:
+  - from: not-declared
+    to: review-required
+    action: A visitor registers and signs in, then records a private attempt and sees
+      it persist in their own chronological log.
+acceptance_scenarios:
+- id: first-capability-intent
+  given: Climbers need a fast, private way to retain attempt history and see performance
+    progression without a paid or confusing logbook.
+  when: Record and review one private climbing attempt
+  then: The project records the owner-confirmed full V1 scope, authority boundaries,
+    unresolved public-launch policies and one serial delivery shape without implementing
+    product behavior.

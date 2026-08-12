@@ -1,0 +1,25 @@
+kind: work
+version: 1
+id: first-work
+title: Establish the ClimbMe V1 product and delivery baseline
+status: draft
+baseline: pending_git_baseline
+strict_verification: true
+serial_task_execution: true
+execution_inventory: docs/work/execution-inventory.yaml
+tasks:
+- id: establish-climbme-v1-baseline
+  title: Establish the ClimbMe V1 product and delivery baseline
+  observable_outcome: The project records the owner-confirmed full V1 scope, authority
+    boundaries, unresolved public-launch policies and one serial delivery shape without
+    implementing product behavior.
+  required_paths:
+  - docs/research/idc-climbme-product-baseline.md
+  - docs/work/climbme-v1-master.yaml
+  validation: "./bin/dora doctor .dora/project.yaml"
+  evidence_boundary:
+  - No climbing product schema, authentication behavior, frontend feature, public
+    deployment, Railway configuration or release claim is implemented by this preparation
+    work.
+  inventory_item: establish-climbme-v1-baseline
+  dependencies: []

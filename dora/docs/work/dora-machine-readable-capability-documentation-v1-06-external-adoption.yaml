@@ -1,0 +1,143 @@
+kind: work
+version: 1
+id: dora-machine-readable-capability-documentation-v1-06-external-adoption
+title: Publish a repository-local adoption contract without consumer mutation
+status: verified
+baseline: 3ed902b
+strict_verification: true
+serial_task_execution: true
+master_plan: docs/work/dora-machine-readable-capability-documentation-v1-master.yaml
+execution_inventory: docs/work/dora-machine-readable-capability-documentation-v1-execution-inventory.yaml
+scope_control:
+  standard: docs/plan-scope-control-standard.yaml
+  reused_verified_plans:
+  - docs/work/dora-release-lifecycle-v1-master.yaml
+  baseline_only_surfaces:
+  - External repository source
+  - product documentation
+  - decisions
+  - work lifecycle and runtime evidence.
+  residual_scope:
+  - One Dora-owned adoption guide and project-local plan template for owner-approved
+    future consumer rollout.
+  retest_triggers:
+  - Portable contract
+  - consumer release guidance or adoption-template changes.
+  non_duplication_rule: A migration guide or template neither adopts a consumer nor
+    verifies a consumer capability.
+tasks:
+- id: publish-external-adoption-contract-without-consumer-mutation
+  title: Publish external adoption guidance with explicit project authority boundaries
+  type: documentation
+  status: done
+  inventory_item: external-adoption-contract
+  observable_outcome: A Dora-owned guide and template prescribe how a separate project
+    can adopt the standard after its owner approves a local plan.
+  dependencies:
+  - capability-documentation-release
+  paths:
+  - docs/capability-documentation-adoption.md
+  - templates/capability-documentation-adoption-plan.yaml
+  - test/capability_inventory_test.rb
+  - test/documentation_control_test.rb
+  required_paths:
+  - docs/capability-documentation-adoption.md
+  - templates/capability-documentation-adoption-plan.yaml
+  - test/capability_inventory_test.rb
+  - test/documentation_control_test.rb
+  validation: ruby test/capability_inventory_test.rb && ruby test/documentation_control_test.rb
+  evidence_boundary:
+  - No external repository is read, modified, staged, committed, tagged, pushed or
+    marked adopted by this Dora task.
+  - Every external adoption remains a project-local owner-approved plan with its own
+    evidence and rollback.
+  started_at: '2026-08-12T11:53:47Z'
+  start_fingerprints:
+    docs/capability-documentation-adoption.md: __missing__
+    templates/capability-documentation-adoption-plan.yaml: __missing__
+    test/capability_inventory_test.rb: da19872279e1f296ebb737e527c9a718a548101d57054e1a5a2bf2387f2dfa4f
+    test/documentation_control_test.rb: 84f0c4dd09770833625f2c31647a5e5f236593984f1381435cf704a21af61bab
+  start_workspace_paths:
+  - ".dora/controls/change-routing.yaml"
+  - ".dora/controls/documentation-evidence.yaml"
+  - ".dora/controls/system-map.yaml"
+  - ".dora/controls/workspace-inventory.yaml"
+  - ".dora/project-control.yaml"
+  - capability-inventory.schema.yaml
+  - docs/agent-request-routing-policy.yaml
+  - docs/capability-inventory.yaml
+  - docs/codex-accelerated-route.md
+  - docs/current-capabilities.md
+  - docs/dora-consumer-release-registry.yaml
+  - docs/dora-release-operations.md
+  - docs/implementation-control.md
+  - docs/releases/v1.12.0.yaml
+  - docs/work/dora-machine-readable-capability-documentation-v1-00-hardening.yaml
+  - docs/work/dora-machine-readable-capability-documentation-v1-01-contract.yaml
+  - docs/work/dora-machine-readable-capability-documentation-v1-02-controls.yaml
+  - docs/work/dora-machine-readable-capability-documentation-v1-03-scaffold.yaml
+  - docs/work/dora-machine-readable-capability-documentation-v1-04-dora-idc.yaml
+  - docs/work/dora-machine-readable-capability-documentation-v1-05-release.yaml
+  - docs/work/dora-machine-readable-capability-documentation-v1-05a-request-routing.yaml
+  - docs/work/dora-machine-readable-capability-documentation-v1-06-external-adoption.yaml
+  - docs/work/dora-machine-readable-capability-documentation-v1-07-closeout.yaml
+  - docs/work/dora-machine-readable-capability-documentation-v1-analysis.md
+  - docs/work/dora-machine-readable-capability-documentation-v1-execution-inventory.yaml
+  - docs/work/dora-machine-readable-capability-documentation-v1-hardening-review.md
+  - docs/work/dora-machine-readable-capability-documentation-v1-master.yaml
+  - idc/README.md
+  - lib/dora/capability_inventory.rb
+  - lib/dora/control_contracts.rb
+  - lib/dora/documentation_control.rb
+  - lib/dora/project_control.rb
+  - lib/dora/project_doctor.rb
+  - lib/dora/project_initializer.rb
+  - project-control.schema.yaml
+  - templates/capability-inventory.yaml
+  - templates/documentation-evidence.yaml
+  - templates/init-manifest.yaml
+  - templates/project-control.yaml
+  - templates/system-map.yaml
+  - test/agent_request_routing_policy_test.rb
+  - test/capability_inventory_test.rb
+  - test/documentation_control_test.rb
+  - test/idc_triage_test.rb
+  - test/project_control_test.rb
+  - test/project_doctor_test.rb
+  - test/project_initializer_test.rb
+evidence:
+- task: publish-external-adoption-contract-without-consumer-mutation
+  command: ruby test/capability_inventory_test.rb && ruby test/documentation_control_test.rb
+  ranAt: '2026-08-12T11:55:32Z'
+  revision: f6657b4ffd32cf825ddb669c6b8f861264ebe4d4
+  exitCode: 0
+  result: passed
+  timedOut: false
+  timeoutSeconds: 300
+  changedFiles:
+  - test/capability_inventory_test.rb
+  - test/documentation_control_test.rb
+  - docs/capability-documentation-adoption.md
+  - templates/capability-documentation-adoption-plan.yaml
+  output: |+
+    Dora capability inventory test passed (explicit status and verified-evidence boundary).
+    Dora documentation control test passed (explicit map endpoints and claim references).
+
+  executionEnvironment:
+    shell: "/bin/zsh"
+    rubyVersion: 2.6.10
+    environmentExported: false
+  requiredPathDigests:
+    docs/capability-documentation-adoption.md: b21269262e2cca1ee35ce62f50de2e7c685638d98e523eedf94e9bfe0542814f
+    templates/capability-documentation-adoption-plan.yaml: ee4ce939294d18d9a14e244235bd236f14f8ce028872ca1131b687cbb7cb300c
+    test/capability_inventory_test.rb: 62737ac54c9bea22fd183a0307967fffb33f8b35330330eeb485ea7987874651
+    test/documentation_control_test.rb: 5ccabb348b055200d1f81abda648cb546543d35cdb39f97cfa0ec21885d7e87e
+  requiredPaths: &1
+  - docs/capability-documentation-adoption.md
+  - templates/capability-documentation-adoption-plan.yaml
+  - test/capability_inventory_test.rb
+  - test/documentation_control_test.rb
+  visualEvidencePaths: []
+  runtimeEvidencePaths: []
+  startedAt: '2026-08-12T11:53:47Z'
+  changedAfterStart: *1

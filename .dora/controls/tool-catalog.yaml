@@ -1,0 +1,9 @@
+kind: dora_tool_catalog
+version: 1
+commands:
+- id: control-check
+  target: control-check
+  purpose: Run project-defined control checks.
+  preconditions:
+  - project setup complete
+  expected_cost: short

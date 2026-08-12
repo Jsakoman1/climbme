@@ -1,0 +1,27 @@
+kind: dora_product_brief
+version: 1
+product: climbme
+user_problem: Climbers need a fast, private way to retain attempt history and see
+  performance progression without a paid or confusing logbook.
+primary_users:
+- Registered climbers who want private performance tracking.
+intended_outcomes:
+- Record and review one private climbing attempt
+non_goals:
+- No cross-user data access
+- no social feed
+- no grade-scale conversion
+- no subscription system
+- no inferred public production claim.
+assumptions:
+- No additional product assumptions were declared in the idea interview.
+risks:
+- Delivery, adoption, and safety risks have not been declared in the idea interview.
+unanswered_decisions:
+- Decide email verification, password recovery and account deletion before public-launch
+  approval.
+- Confirm exact supported French grade catalog and bouldering handling before production
+  analytics.
+- Decide privacy notice, data retention and export policy before public-launch approval.
+- Assign the Railway project, production database, secrets and public domain before
+  a live deployment claim.

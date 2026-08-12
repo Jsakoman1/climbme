@@ -1,0 +1,10 @@
+kind: execution_inventory
+version: 1
+id: first-work
+master_plan: docs/work/first-work.yaml
+items:
+- id: establish-climbme-v1-baseline
+  order: 1
+  plan: docs/work/first-work.yaml
+  task: establish-climbme-v1-baseline
+  status: pending

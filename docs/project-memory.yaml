@@ -1,0 +1,47 @@
+kind: dora_project_memory
+version: 1
+project_intent:
+  product_brief: docs/product-brief.yaml
+  domain_library: docs/domain-library.yaml
+canonical_knowledge:
+- id: product
+  path: docs/product-brief.yaml
+  purpose: Declared product intent and unresolved decisions.
+- id: domain
+  path: docs/domain-library.yaml
+  purpose: Declared domain rules and workflows.
+- id: agent
+  path: ".dora/agent-project-profile.yaml"
+  purpose: Declared Codex operating constraints and commands.
+open_decisions:
+- id: open-decision-1
+  statement: Decide email verification, password recovery and account deletion before
+    public-launch approval.
+  source: docs/product-brief.yaml
+- id: open-decision-2
+  statement: Confirm exact supported French grade catalog and bouldering handling
+    before production analytics.
+  source: docs/product-brief.yaml
+- id: open-decision-3
+  statement: Decide privacy notice, data retention and export policy before public-launch
+    approval.
+  source: docs/product-brief.yaml
+- id: open-decision-4
+  statement: Assign the Railway project, production database, secrets and public domain
+    before a live deployment claim.
+  source: docs/product-brief.yaml
+capability_intent:
+- id: establish-climbme-v1-baseline
+  intended_outcome: The project records the owner-confirmed full V1 scope, authority
+    boundaries, unresolved public-launch policies and one serial delivery shape without
+    implementing product behavior.
+  knowledge_references:
+  - product
+  - domain
+  - agent
+current_work:
+  plan: docs/work/first-work.yaml
+  task: establish-climbme-v1-baseline
+  state: planned
+completion_boundary: Project memory is declared navigation context only and does not
+  prove implementation, runtime acceptance, or release readiness.

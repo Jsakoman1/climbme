@@ -1,0 +1,9 @@
+kind: dora_project_commands
+version: 1
+commands:
+  setup: npm --prefix frontend install --ignore-scripts
+  database: docker compose --env-file .env up -d postgres
+  run_backend: set -a && . ./.env && set +a && mvn -q -f backend/pom.xml spring-boot:run
+  test: mvn -q -f backend/pom.xml test && npm --prefix frontend run test
+  build: mvn -q -f backend/pom.xml package && npm --prefix frontend run build
+  health: curl --fail http://localhost:${SERVER_PORT:-8080}/actuator/health

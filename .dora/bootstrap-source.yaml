@@ -1,0 +1,15 @@
+kind: dora_bootstrap_record
+version: 1
+source:
+  kind: dora_bootstrap_source
+  version: 1
+  source:
+    path: "/Users/jsakoman/Desktop/ai-system/dora"
+    ref: e05b8bd8483951792a874da489722e8de9a4d143
+    checksum: 8191f9c79fe72c2a64878f9e13d2077673c0d734adc1750ef4ece16b38cb5c76
+    integrity: verified
+  review:
+    id: owner-reviewed-dora-e05
+    reviewed_by: owner
+    reviewed_at: '2026-08-12'
+package_path: dora

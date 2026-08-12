@@ -1,0 +1,49 @@
+kind: dora_capability_package
+version: 1
+id: record-private-attempt
+title: Record and review one private climbing attempt
+intent:
+  problem: Climbers need a fast, private way to retain attempt history and see performance
+    progression without a paid or confusing logbook.
+  capability: Record and review one private climbing attempt
+  source_reference: docs/idea-interview.yaml
+domain:
+  entity_ids:
+  - entity-1
+  invariant_ids:
+  - declared-permission-intent
+  permission_rule_ids:
+  - declared-permission
+  workflow_id: declared-workflow
+api:
+  service_owner: unassigned
+  operations:
+  - id: record-private-attempt
+    purpose: Record and review one private climbing attempt
+tests:
+  scenarios:
+  - id: first-capability-test
+    action: Run a declared validation for Record and review one private climbing attempt.
+    expected: The project records the owner-confirmed full V1 scope, authority boundaries,
+      unresolved public-launch policies and one serial delivery shape without implementing
+      product behavior.
+    status: declared
+runtime:
+  scenarios:
+  - id: first-capability-runtime
+    action: Run the declared capability in a local runtime.
+    expected: The project records the owner-confirmed full V1 scope, authority boundaries,
+      unresolved public-launch policies and one serial delivery shape without implementing
+      product behavior.
+    status: unresolved
+work:
+  plan: docs/work/first-work.yaml
+  task: establish-climbme-v1-baseline
+unresolved:
+- id: first-capability-test
+  reason: No validation evidence has been recorded.
+- id: first-capability-runtime
+  reason: No runtime evidence has been recorded.
+invention: none
+completion_boundary: A capability package declares implementation inputs and evidence
+  intent only; it does not prove implementation, runtime acceptance, or release readiness.

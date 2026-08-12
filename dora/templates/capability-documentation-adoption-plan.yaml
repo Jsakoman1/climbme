@@ -1,0 +1,28 @@
+kind: work
+version: 1
+id: replace-with-project-capability-documentation-adoption
+title: Adopt Dora capability documentation controls in one project
+status: draft
+baseline: replace-with-reviewed-project-commit
+strict_verification: true
+serial_task_execution: true
+scope_control:
+  reused_verified_plans: []
+  baseline_only_surfaces: [Existing product behavior, decisions, work lifecycle and runtime evidence.]
+  residual_scope: [One owner-approved current capability inventory and control adoption.]
+  retest_triggers: [Capability inventory, system-map, documentation-evidence or project-control changes.]
+  non_duplication_rule: Inventory references are not new delivery verification evidence.
+tasks:
+- id: adopt-capability-documentation-controls
+  title: Add the project-owned capability documentation controls
+  type: documentation
+  status: planned
+  inventory_item: capability-documentation-adoption
+  observable_outcome: The project declares current capabilities and cited documentation controls without changing product behavior or delivery authority.
+  dependencies: []
+  paths: [docs/capability-inventory.yaml, .dora/project-control.yaml, .dora/controls/system-map.yaml, .dora/controls/documentation-evidence.yaml]
+  required_paths: [docs/capability-inventory.yaml, .dora/project-control.yaml, .dora/controls/system-map.yaml, .dora/controls/documentation-evidence.yaml]
+  validation: replace-with-project-doctor-and-leaf-checks
+  evidence_boundary:
+  - No consumer product implementation, owner decision, work lifecycle, evidence or verified status is created by this inventory adoption.
+  - The owner approves any later Dora upgrade, IDC use, release or rollback separately.

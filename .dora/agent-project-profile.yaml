@@ -1,0 +1,32 @@
+kind: dora_agent_project_profile
+version: 1
+entrypoints:
+- id: agent-guide
+  path: AGENTS.md
+  purpose: Read project-specific working boundaries before changing the project.
+canonical_knowledge:
+- id: product-brief
+  path: docs/product-brief.yaml
+  purpose: Declared product intent and open decisions.
+- id: domain-library
+  path: docs/domain-library.yaml
+  purpose: Declared domain terms, permissions, workflow intent, and acceptance intent.
+stack_commands:
+- id: control-check
+  command: "./bin/dora doctor .dora/project.yaml"
+  purpose: Validate declared Dora project controls.
+authority_limits:
+- id: external-changes
+  rule: Do not publish, deploy, or change external state without explicit approval.
+evidence_requirements:
+- id: implementation
+  rule: Record a passing leaf validation before marking a work item verified.
+implementation_order:
+- id: understand
+  rule: Read canonical product and domain knowledge before planning a change.
+- id: plan
+  rule: Define one bounded observable work item before implementation.
+- id: implement
+  rule: Make the smallest change that satisfies the bounded item.
+- id: verify
+  rule: Run declared validation and retain its evidence.

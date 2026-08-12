@@ -1,0 +1,61 @@
+kind: dora_idea_interview
+version: 1
+project_id: climbme
+answers:
+- id: target_users
+  value:
+  - Registered climbers who want private performance tracking.
+  source: user_confirmed
+- id: first_problem
+  value: Climbers need a fast, private way to retain attempt history and see performance
+    progression without a paid or confusing logbook.
+  source: user_confirmed
+- id: first_capability
+  value: Record and review one private climbing attempt.
+  source: user_confirmed
+- id: domain_concepts
+  value:
+  - user account
+  - climbing attempt
+  - route
+  - French grade
+  - training session
+  - dashboard metric
+  - achievement
+  source: user_confirmed
+- id: permission_intent
+  value: Each authenticated climber can create, view, correct and delete only their
+    own climbing and training data.
+  source: user_confirmed
+- id: workflow_intent
+  value: A visitor registers and signs in, then records a private attempt and sees
+    it persist in their own chronological log.
+  source: user_confirmed
+- id: forbidden_outcomes
+  value:
+  - No cross-user data access
+  - no social feed
+  - no grade-scale conversion
+  - no subscription system
+  - no inferred public production claim.
+  source: user_confirmed
+unanswered_decisions:
+- id: account-recovery-policy
+  question: Decide email verification, password recovery and account deletion before
+    public-launch approval.
+  source: user_confirmed
+- id: french-grade-catalog
+  question: Confirm exact supported French grade catalog and bouldering handling before
+    production analytics.
+  source: user_confirmed
+- id: privacy-retention-export
+  question: Decide privacy notice, data retention and export policy before public-launch
+    approval.
+  source: user_confirmed
+- id: railway-production-ownership
+  question: Assign the Railway project, production database, secrets and public domain
+    before a live deployment claim.
+  source: user_confirmed
+invention: none
+completion_boundary: An interview records user-provided intent only; it does not prove
+  product design, implementation, runtime acceptance, or release readiness.

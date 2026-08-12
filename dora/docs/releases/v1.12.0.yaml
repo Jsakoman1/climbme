@@ -1,0 +1,25 @@
+kind: dora_release_manifest
+version: 1
+release:
+  version: v1.12.0
+  source_commit: 922dbf5e0f9d32d52e546ccdd6145c592b1ab01a
+  release_type: minor
+  prepared_at: '2026-08-12T12:00:00Z'
+  publication_status: owner-approved-local-contract-only
+scope:
+  changed_capabilities:
+  - Dora provides an opt-in machine-readable capability inventory and validates its declared topology and documentation references.
+  - New Dora projects scaffold neutral documentation controls; legacy projects remain valid until an owner explicitly adopts the optional inventory control.
+  - Dora and IDC publish current capability boundaries and a deterministic owner-gated request-routing policy.
+  idc_impact: IDC remains bundled, local and advisory-only; routing can recommend IDC but cannot render it without current-request owner authorization.
+  compatibility_posture: Existing consumers need a reviewed package upgrade only if they choose to adopt the new control; an existing adapter remains compatible without it.
+consumer_requirements:
+  package_update: explicit-owner-selection-only
+  adapter_change_required: false
+  adoption_review: A selected consumer may add capability_inventory to its project control only through its own owner-approved plan and must run Doctor plus its declared controls.
+  required_validations: [dora_doctor, git_diff_check, release_pinned_consumer_checks]
+  rollback: Revert the isolated consumer release commit or restore the recorded local backup before commit.
+boundaries:
+  - This local manifest is not a tag, push, publication, consumer update, compatibility result, deployment or verification claim.
+  - IDC remains opt-in; a Dora package update does not start IDC or create a Dora write path.
+  - The release process does not discover consumer repositories or modify one without explicit owner approval.
