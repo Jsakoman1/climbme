@@ -2,8 +2,8 @@ kind: work
 version: 1
 id: climbme-v1-07-dashboard-achievements-ui
 title: Deliver dashboard and achievements UI
-status: draft
-baseline: b0dd60ce44aafb2750b313cb05027edc1ca4c819
+status: verified
+baseline: 6553904329ad3d0461dee7c4484aa9bda113e739
 strict_verification: true
 serial_task_execution: true
 master_plan: docs/work/climbme-v1-master.yaml
@@ -12,11 +12,83 @@ tasks:
 - id: deliver-dashboard-and-achievement-ui
   title: Present required KPIs, charts, achievements and annual summary clearly
   type: implementation
-  status: pending
+  status: done
   inventory_item: dashboard-achievements-ui
-  observable_outcome: A climber can understand their private performance KPIs, all owner-required chart types, achievements and annual summary from responsive English dashboard surfaces.
-  dependencies: [dashboard-metrics]
-  paths: [frontend/src/main.js, frontend/src/main.test.js, frontend/src/styles.css, frontend/index.html]
-  required_paths: [frontend/src/main.js, frontend/src/main.test.js, frontend/src/styles.css, frontend/index.html]
+  observable_outcome: A climber can understand their private performance KPIs, all
+    owner-required chart types, achievements and annual summary from responsive English
+    dashboard surfaces.
+  dependencies:
+  - dashboard-metrics
+  paths:
+  - frontend/src/main.js
+  - frontend/src/dashboard.js
+  - frontend/src/main.test.js
+  - frontend/index.html
+  required_paths:
+  - frontend/src/main.js
+  - frontend/src/dashboard.js
+  - frontend/src/main.test.js
+  - frontend/index.html
   validation: npm --prefix frontend run test && npm --prefix frontend run build
-  evidence_boundary: [Presentation of already-tested private metrics only; no public profile, sponsor portal or native mobile client.]
+  evidence_boundary:
+  - Presentation of already-tested private metrics only; no public profile
+  - sponsor portal or native mobile client.
+  started_at: '2026-08-12T15:09:16Z'
+  start_fingerprints:
+    frontend/src/main.js: 61363e7c3f103d76608054941cdf01accb346140df335411adb0b18113f8091a
+    frontend/src/main.test.js: 7766cdc3c1030d4c9b05fe7e66e1f9d135b28a810cc56602b435f391658e552b
+    frontend/src/styles.css: 4c315c995fbd244dcec1c76914958e800a55053ca04cdacee076d57dd94a5862
+    frontend/index.html: 7a3b31708fbb540044c3508b086cde0aeecd8f008619a047c9694340ad9052b9
+  start_workspace_paths:
+  - docs/work/climbme-v1-07-dashboard-achievements-ui.yaml
+evidence:
+- task: deliver-dashboard-and-achievement-ui
+  command: npm --prefix frontend run test && npm --prefix frontend run build
+  ranAt: '2026-08-12T15:12:22Z'
+  revision: 6553904329ad3d0461dee7c4484aa9bda113e739
+  exitCode: 0
+  result: passed
+  timedOut: false
+  timeoutSeconds: 300
+  changedFiles:
+  - frontend/index.html
+  - frontend/src/main.js
+  - frontend/src/main.test.js
+  - frontend/src/dashboard.js
+  output: |2+
+
+    > dora-vue-postgres-starter@0.0.1 test
+    > node --test src/*.test.js
+
+    ✔ client helpers preserve CSRF, normalize email and render climbing choices (0.835458ms)
+    ℹ tests 1
+    ℹ suites 0
+    ℹ pass 1
+    ℹ fail 0
+    ℹ cancelled 0
+    ℹ skipped 0
+    ℹ todo 0
+    ℹ duration_ms 52.015917
+
+    > dora-vue-postgres-starter@0.0.1 build
+    > node scripts/build.mjs
+
+
+  executionEnvironment:
+    shell: "/bin/zsh"
+    rubyVersion: 2.6.10
+    environmentExported: false
+  requiredPathDigests:
+    frontend/src/main.js: d8b32699ffb4fa483ab2c9616c0986b0fe6db188ce9cf361d94f724780880b50
+    frontend/src/dashboard.js: 3d4fd0c9b269954101e3dffda3d76a00103fdb444ebbb8a760cd8b1f47f397ef
+    frontend/src/main.test.js: 5af82d03fd53adb83da237097afad12eee113e0406bad715154572d1b384b791
+    frontend/index.html: f489398f4685c625ec68756fcaa3bdda8a3cf09079cd74de33b43ae7947ad6bb
+  requiredPaths: &1
+  - frontend/src/main.js
+  - frontend/src/dashboard.js
+  - frontend/src/main.test.js
+  - frontend/index.html
+  visualEvidencePaths: []
+  runtimeEvidencePaths: []
+  startedAt: '2026-08-12T15:09:16Z'
+  changedAfterStart: *1

@@ -90,7 +90,13 @@ items:
   sequence: 8
   plan: docs/work/climbme-v1-07-dashboard-achievements-ui.yaml
   task: deliver-dashboard-and-achievement-ui
-  status: pending
+  status: verified
+  started_at: '2026-08-12T15:09:16Z'
+  verified_at: '2026-08-12T15:12:22Z'
+  evidence:
+    plan: docs/work/climbme-v1-07-dashboard-achievements-ui.yaml
+    task: deliver-dashboard-and-achievement-ui
+    revision: 6553904329ad3d0461dee7c4484aa9bda113e739
 - id: responsive-runtime-evidence
   sequence: 9
   plan: docs/work/climbme-v1-08-responsive-runtime-evidence.yaml
