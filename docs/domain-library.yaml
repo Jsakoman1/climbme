@@ -58,6 +58,10 @@ permission_rules:
   actor: Authenticated climber
   action: Create, read, update, delete and export only their own attempts and training sessions; read only their own derived analytics.
   boundary: Another account's identifiers, route names, partner text and analytic aggregates are never readable or mutable.
+- id: account-data-rights
+  actor: Authenticated climber
+  action: Download their own JSON export or permanently delete their account after confirming its current password.
+  boundary: Export includes only records owned by that account; deletion removes only that account's attempts, training sessions and route-status corrections, then invalidates its session.
 workflows:
 - id: climbing-attempt-lifecycle
   initial_state: absent

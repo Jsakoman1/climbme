@@ -134,7 +134,13 @@ items:
   sequence: 12
   plan: docs/work/climbme-v1-11-private-data-rights.yaml
   task: deliver-owner-data-export-and-account-deletion
-  status: pending
+  status: verified
+  started_at: '2026-08-12T15:48:58Z'
+  verified_at: '2026-08-12T15:55:25Z'
+  evidence:
+    plan: docs/work/climbme-v1-11-private-data-rights.yaml
+    task: deliver-owner-data-export-and-account-deletion
+    revision: f84111ad1d4bbd27683b0b3ec19b182d35932857
 - id: visual-analytics
   sequence: 13
   plan: docs/work/climbme-v1-12-visual-analytics.yaml

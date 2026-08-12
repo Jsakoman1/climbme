@@ -8,4 +8,5 @@ public interface ClimbingAttemptRepository extends JpaRepository<ClimbingAttempt
     List<ClimbingAttempt> findByUserIdOrderByClimbedOnDescIdDesc(Long userId);
     Optional<ClimbingAttempt> findByIdAndUserId(Long id, Long userId);
     long countByUserIdAndLocationIgnoreCaseAndSectorIgnoreCaseAndRouteNameIgnoreCase(Long userId, String location, String sector, String routeName);
+    void deleteByUserId(Long userId);
 }

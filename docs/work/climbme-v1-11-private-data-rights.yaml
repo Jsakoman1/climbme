@@ -2,8 +2,8 @@ kind: work
 version: 1
 id: climbme-v1-11-private-data-rights
 title: Deliver owner-controlled private data rights
-status: draft
-baseline: bd93626ddbcdb0094a6528ce9320b8eea9b2ceff
+status: verified
+baseline: f84111ad1d4bbd27683b0b3ec19b182d35932857
 strict_verification: true
 serial_task_execution: true
 master_plan: docs/work/climbme-v1-master.yaml
@@ -12,11 +12,129 @@ tasks:
 - id: deliver-owner-data-export-and-account-deletion
   title: Let an authenticated owner export or irreversibly delete only their own data
   type: implementation
-  status: pending
+  status: done
   inventory_item: private-data-rights
-  observable_outcome: A signed-in climber can download a JSON export of their own account, attempts and training sessions, or confirm their current password to irreversibly delete their account and owned records; no other account's data is included or changed.
-  dependencies: [auth-guard-evidence]
-  paths: [backend/src/main/java/com/climbme/app/auth/AuthController.java, backend/src/main/java/com/climbme/app/auth/AuthService.java, backend/src/main/java/com/climbme/app/auth/UserAccountRepository.java, backend/src/main/java/com/climbme/app/climbing/ClimbingAttemptRepository.java, backend/src/main/java/com/climbme/app/routes/RouteStatusOverrideRepository.java, backend/src/main/java/com/climbme/app/training/TrainingSessionRepository.java, backend/src/test/java/com/climbme/app/auth/AccountDataRightsIntegrationTest.java, frontend/src/main.js, frontend/src/styles.css, docs/product-brief.yaml, docs/domain-library.yaml]
-  required_paths: [backend/src/main/java/com/climbme/app/auth/AuthController.java, backend/src/main/java/com/climbme/app/auth/AuthService.java, backend/src/main/java/com/climbme/app/auth/UserAccountRepository.java, backend/src/main/java/com/climbme/app/climbing/ClimbingAttemptRepository.java, backend/src/main/java/com/climbme/app/routes/RouteStatusOverrideRepository.java, backend/src/main/java/com/climbme/app/training/TrainingSessionRepository.java, backend/src/test/java/com/climbme/app/auth/AccountDataRightsIntegrationTest.java, frontend/src/main.js, frontend/src/styles.css, docs/product-brief.yaml, docs/domain-library.yaml]
-  validation: mvn -q -f backend/pom.xml test && npm --prefix frontend run test && npm --prefix frontend run build
-  evidence_boundary: [Synthetic local account data only; account deletion is irreversible only for the test or future owner-confirmed account, never a Dora, IDC, GitHub, Railway or another project mutation.]
+  observable_outcome: A signed-in climber can download a JSON export of their own
+    account, attempts and training sessions, or confirm their current password to
+    irreversibly delete their account and owned records; no other account's data is
+    included or changed.
+  dependencies:
+  - auth-guard-evidence
+  paths:
+  - backend/src/main/java/com/climbme/app/auth/AuthController.java
+  - backend/src/main/java/com/climbme/app/auth/AuthService.java
+  - backend/src/main/java/com/climbme/app/climbing/ClimbingAttemptRepository.java
+  - backend/src/main/java/com/climbme/app/routes/RouteStatusOverrideRepository.java
+  - backend/src/main/java/com/climbme/app/training/TrainingSessionRepository.java
+  - backend/src/test/java/com/climbme/app/auth/AccountDataRightsIntegrationTest.java
+  - frontend/src/main.js
+  - frontend/src/styles.css
+  - docs/product-brief.yaml
+  - docs/domain-library.yaml
+  required_paths:
+  - backend/src/main/java/com/climbme/app/auth/AuthController.java
+  - backend/src/main/java/com/climbme/app/auth/AuthService.java
+  - backend/src/main/java/com/climbme/app/climbing/ClimbingAttemptRepository.java
+  - backend/src/main/java/com/climbme/app/routes/RouteStatusOverrideRepository.java
+  - backend/src/main/java/com/climbme/app/training/TrainingSessionRepository.java
+  - backend/src/test/java/com/climbme/app/auth/AccountDataRightsIntegrationTest.java
+  - frontend/src/main.js
+  - frontend/src/styles.css
+  - docs/product-brief.yaml
+  - docs/domain-library.yaml
+  validation: mvn -q -f backend/pom.xml test && npm --prefix frontend run test &&
+    npm --prefix frontend run build
+  evidence_boundary:
+  - Synthetic local account data only; account deletion is irreversible only for the
+    test or future owner-confirmed account
+  - never a Dora
+  - IDC
+  - GitHub
+  - Railway or another project mutation.
+  started_at: '2026-08-12T15:48:58Z'
+  start_fingerprints:
+    backend/src/main/java/com/climbme/app/auth/AuthController.java: 2cf595f8b9701bb5efaae09dbb3f39aa2e997c4d6e47421ea9f2bf40b3bad50a
+    backend/src/main/java/com/climbme/app/auth/AuthService.java: 8c1309c91a2c6db99279e9d1a2931fb9c96bd2df44ded97bb3b95d7a79c729b3
+    backend/src/main/java/com/climbme/app/auth/UserAccountRepository.java: 3a391e7940d2f1c7264d6ef01d542292c5fcd9061503e57146771e5c5208333a
+    backend/src/main/java/com/climbme/app/climbing/ClimbingAttemptRepository.java: e85f406c89eae50f9caa68f0cf80cda0cbf68e1f57d5c684ef5cac38d7377601
+    backend/src/main/java/com/climbme/app/routes/RouteStatusOverrideRepository.java: c9e4f0e4b0e8cee9cfa0209ee013145a5e16ccfa50aa26da70d80e2b84a5ae75
+    backend/src/main/java/com/climbme/app/training/TrainingSessionRepository.java: 55b3c852a16e4b25ed15bb5d47a49e06a0c427b4a165853abcc07d5869d11b85
+    backend/src/test/java/com/climbme/app/auth/AccountDataRightsIntegrationTest.java: __missing__
+    frontend/src/main.js: d8b32699ffb4fa483ab2c9616c0986b0fe6db188ce9cf361d94f724780880b50
+    frontend/src/styles.css: 4c315c995fbd244dcec1c76914958e800a55053ca04cdacee076d57dd94a5862
+    docs/product-brief.yaml: 5d5f8ca6ed690b53aa13a715e30f0458026f7fdf2ad7d0ebe0ecd3e3fa1f0799
+    docs/domain-library.yaml: bb7d3440929a8c8d1e21b97d4668e9b02e073e4b027fb86a50530c2c1d4c3ae4
+  start_workspace_paths:
+  - docs/work/climbme-v1-11-private-data-rights.yaml
+evidence:
+- task: deliver-owner-data-export-and-account-deletion
+  command: mvn -q -f backend/pom.xml test && npm --prefix frontend run test && npm
+    --prefix frontend run build
+  ranAt: '2026-08-12T15:55:13Z'
+  revision: f84111ad1d4bbd27683b0b3ec19b182d35932857
+  exitCode: 0
+  result: passed
+  timedOut: false
+  timeoutSeconds: 300
+  changedFiles:
+  - backend/src/main/java/com/climbme/app/auth/AuthController.java
+  - backend/src/main/java/com/climbme/app/auth/AuthService.java
+  - backend/src/main/java/com/climbme/app/climbing/ClimbingAttemptRepository.java
+  - backend/src/main/java/com/climbme/app/routes/RouteStatusOverrideRepository.java
+  - backend/src/main/java/com/climbme/app/training/TrainingSessionRepository.java
+  - docs/domain-library.yaml
+  - docs/product-brief.yaml
+  - frontend/src/main.js
+  - frontend/src/styles.css
+  - backend/src/test/java/com/climbme/app/auth/AccountDataRightsIntegrationTest.java
+  output: |
+    ℹ fail 0
+    ℹ cancelled 0
+    ℹ skipped 0
+    ℹ todo 0
+    ℹ duration_ms 50.6805
+
+    > climbme@0.0.1 build
+    > node scripts/build.mjs
+
+
+    WARNING: A restricted method in java.lang.System has been called
+    WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (file:/Users/jsakoman/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.31/tomcat-embed-core-10.1.31.jar)
+    WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+    WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+    OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+    WARNING: A Java agent has been loaded dynamically (/Users/jsakoman/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.19/byte-buddy-agent-1.14.19.jar)
+    WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+    WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+    WARNING: Dynamic loading of agents will be disallowed by default in a future release
+  executionEnvironment:
+    shell: "/bin/zsh"
+    rubyVersion: 2.6.10
+    environmentExported: false
+  requiredPathDigests:
+    backend/src/main/java/com/climbme/app/auth/AuthController.java: 68b0aeafe76ceba065f4a6b94ba8ea2d0e995271b555e5afa2322d8c336899bf
+    backend/src/main/java/com/climbme/app/auth/AuthService.java: 94ec35e3e9c76871dcf4b4b136297c9cc6255b9caa32783b81fd59a0d69ea868
+    backend/src/main/java/com/climbme/app/climbing/ClimbingAttemptRepository.java: 9448cab456efebafea6bc18bf77400b63c686dc8e50c669f4f8dad077e3df8eb
+    backend/src/main/java/com/climbme/app/routes/RouteStatusOverrideRepository.java: 4d4eddf8b2ff409468ae01165d17ff2f41359004e0f7bf2128a47de1f79bac9b
+    backend/src/main/java/com/climbme/app/training/TrainingSessionRepository.java: f732019ef877cfc481e1284c88ddd10e8d3953be5878349560e1a54a5d62f997
+    backend/src/test/java/com/climbme/app/auth/AccountDataRightsIntegrationTest.java: e0a473abcbbd2df7f47f1f8ac6827a3c0527933374897577f90cab028f73b7bc
+    frontend/src/main.js: 5915227ceb08c462248d63c227088f685982a123c6309bed5a03ae8d166ce070
+    frontend/src/styles.css: a561151500df73e85de8685a95548f5fb46fe654bac2ba54a980202d7e7e2750
+    docs/product-brief.yaml: cefe41f7feea3c1fbd123bb2012c79080d4dc58b103cfeea0280b3efe3c5d41e
+    docs/domain-library.yaml: 58d3af6d1a4c23cb12650d1d5224e5b6bebf8a9946b9bb776b3fc3b2a6af8c47
+  requiredPaths: &1
+  - backend/src/main/java/com/climbme/app/auth/AuthController.java
+  - backend/src/main/java/com/climbme/app/auth/AuthService.java
+  - backend/src/main/java/com/climbme/app/climbing/ClimbingAttemptRepository.java
+  - backend/src/main/java/com/climbme/app/routes/RouteStatusOverrideRepository.java
+  - backend/src/main/java/com/climbme/app/training/TrainingSessionRepository.java
+  - backend/src/test/java/com/climbme/app/auth/AccountDataRightsIntegrationTest.java
+  - frontend/src/main.js
+  - frontend/src/styles.css
+  - docs/product-brief.yaml
+  - docs/domain-library.yaml
+  visualEvidencePaths: []
+  runtimeEvidencePaths: []
+  startedAt: '2026-08-12T15:48:58Z'
+  changedAfterStart: *1
