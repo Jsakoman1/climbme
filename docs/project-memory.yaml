@@ -41,8 +41,8 @@ capability_intent:
   - idc-baseline
   - delivery-control
 current_work:
-  plan: docs/work/climbme-v1-05-training-log.yaml
-  task: deliver-private-training-log
-  state: active
+  plan: docs/work/climbme-v1-master.yaml
+  task: complete-private-climbing-performance-v1
+  state: verified
 completion_boundary: Project memory is declared navigation context only and does not
   prove implementation, runtime acceptance, or release readiness.

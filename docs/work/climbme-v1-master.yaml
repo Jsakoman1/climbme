@@ -2,7 +2,7 @@ kind: master
 version: 1
 id: climbme-v1
 title: Deliver the complete private climbing performance web application
-status: active
+status: verified
 baseline: b0dd60ce44aafb2750b313cb05027edc1ca4c819
 authority_boundary: >-
   This plan owns only ClimbMe product delivery. It cannot change Dora, IDC,

@@ -2,21 +2,75 @@ kind: work
 version: 1
 id: climbme-v1-13-owner-closeout
 title: Prepare ClimbMe V1 owner closeout
-status: draft
-baseline: bd93626ddbcdb0094a6528ce9320b8eea9b2ceff
+status: verified
+baseline: 52f438e6fdd0a8844eefac6e9d31b594b7d7730a
 strict_verification: true
 serial_task_execution: true
 master_plan: docs/work/climbme-v1-master.yaml
 execution_inventory: docs/work/climbme-v1-execution-inventory.yaml
 tasks:
 - id: prepare-climbme-v1-owner-closeout
-  title: Summarize verified product behavior, delivery evidence and external launch gates
+  title: Summarize verified product behavior, delivery evidence and external launch
+    gates
   type: docs-only
-  status: pending
+  status: done
   inventory_item: owner-closeout
-  observable_outcome: An owner-readable closeout separates verified local product capability, Railway readiness and remaining external public-launch decisions.
-  dependencies: [visual-analytics]
-  paths: [docs/release/climbme-v1-owner-readback.md, docs/ai-delivery-learning.md, docs/project-memory.yaml, docs/work/climbme-v1-master.yaml, docs/work/climbme-v1-execution-inventory.yaml]
-  required_paths: [docs/release/climbme-v1-owner-readback.md, docs/ai-delivery-learning.md, docs/project-memory.yaml, docs/work/climbme-v1-master.yaml, docs/work/climbme-v1-execution-inventory.yaml]
-  validation: ruby -e 'report = File.read("docs/release/climbme-v1-owner-readback.md"); abort unless report.include?("Verified local capability") && report.include?("External launch gates")'
-  evidence_boundary: [Owner-readable local closeout only; no external deployment, release publication or public-launch approval.]
+  observable_outcome: An owner-readable closeout separates verified local product
+    capability, Railway readiness and remaining external public-launch decisions.
+  dependencies:
+  - visual-analytics
+  paths:
+  - docs/release/climbme-v1-owner-readback.md
+  - docs/ai-delivery-learning.md
+  - docs/project-memory.yaml
+  required_paths:
+  - docs/release/climbme-v1-owner-readback.md
+  - docs/ai-delivery-learning.md
+  - docs/project-memory.yaml
+  validation: ruby -e 'report = File.read("docs/release/climbme-v1-owner-readback.md");
+    abort unless report.include?("Verified local capability") && report.include?("External
+    launch gates")'
+  evidence_boundary:
+  - Owner-readable local closeout only; no external deployment
+  - release publication or public-launch approval.
+  started_at: '2026-08-12T16:02:56Z'
+  start_fingerprints:
+    docs/release/climbme-v1-owner-readback.md: __missing__
+    docs/ai-delivery-learning.md: 992c4d781b005487d8d102b0a146d8870a7da11470505f827a7b3523cfe21180
+    docs/project-memory.yaml: ec4d419e15409acd50a1d45e1cac41405a50c5b4a9cb0c751c73cec8f9047302
+    docs/work/climbme-v1-master.yaml: ae89b72b0ee0376a082ebcdecf8a4ef1b986e4d859b28f7d043ceb97fb3d549c
+    docs/work/climbme-v1-execution-inventory.yaml: 8ad406d19b8f55fcb5f4eaf3b537c5cb60fe29b87217e144e8f57b10b1208aa6
+  start_workspace_paths:
+  - docs/work/climbme-v1-13-owner-closeout.yaml
+evidence:
+- task: prepare-climbme-v1-owner-closeout
+  command: ruby -e 'report = File.read("docs/release/climbme-v1-owner-readback.md");
+    abort unless report.include?("Verified local capability") && report.include?("External
+    launch gates")'
+  ranAt: '2026-08-12T16:04:57Z'
+  revision: 52f438e6fdd0a8844eefac6e9d31b594b7d7730a
+  exitCode: 0
+  result: passed
+  timedOut: false
+  timeoutSeconds: 300
+  changedFiles:
+  - docs/ai-delivery-learning.md
+  - docs/project-memory.yaml
+  - docs/release/climbme-v1-owner-readback.md
+  output: "\n"
+  executionEnvironment:
+    shell: "/bin/zsh"
+    rubyVersion: 2.6.10
+    environmentExported: false
+  requiredPathDigests:
+    docs/release/climbme-v1-owner-readback.md: 7d1a3138602bdfe2eabfcc525cd0520cb6db959861bb84e0927e23172cf3128f
+    docs/ai-delivery-learning.md: e27f5db28a990bc7769ebe2c3be03359b7ac06c61bc1cfa7529a5d96452ba402
+    docs/project-memory.yaml: 0cc29dbd6209dd71f054c22ee22d624642a569f2449bce9553670449469c0cf9
+  requiredPaths: &1
+  - docs/release/climbme-v1-owner-readback.md
+  - docs/ai-delivery-learning.md
+  - docs/project-memory.yaml
+  visualEvidencePaths: []
+  runtimeEvidencePaths: []
+  startedAt: '2026-08-12T16:02:56Z'
+  changedAfterStart: *1

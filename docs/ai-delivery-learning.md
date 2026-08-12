@@ -51,3 +51,25 @@ decision. Do not pause merely because an intermediate slice is verified.
 - Signal: stopping after a verified intermediate slice created unnecessary owner friction despite complete master authorization.
 - Correction: preserve serial verification, but treat it as the eligibility signal for the next safe task rather than a request to pause.
 - Reusable lesson: a future idea-to-deploy workflow needs a visible external-deployment gate, not an artificial pause after each local commit.
+
+### 2026-08-12 — runtime evidence isolation (verified)
+
+- Process signal: an initial browser check reached a different local application
+  because both used a conventional port.
+- Correction: use an application-specific temporary Compose project, database
+  volume and port for runtime proof; verify the expected health response before
+  treating browser output as ClimbMe evidence.
+- Candidate reusable lesson: a future Dora starter should document isolated
+  local runtime names/ports as an evidence convention. This needs a separately
+  approved Dora plan before changing Dora itself.
+
+### 2026-08-12 — closeout audit (verified)
+
+- Process signal: the pre-closeout comparison of owner intent, canonical docs
+  and running product found that visual “charts” were only textual rows and
+  that declared export/account-deletion rights lacked an implementation.
+- Correction: split the missing proof, data lifecycle and visual rendering into
+  separate atomic tasks rather than calling the existing master complete.
+- Candidate reusable lesson: every greenfield closeout should compare each
+  owner-visible noun in the baseline against code, UI and evidence—not only
+  the original task inventory.
