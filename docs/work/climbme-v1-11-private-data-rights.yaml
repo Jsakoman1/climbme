@@ -1,0 +1,22 @@
+kind: work
+version: 1
+id: climbme-v1-11-private-data-rights
+title: Deliver owner-controlled private data rights
+status: draft
+baseline: bd93626ddbcdb0094a6528ce9320b8eea9b2ceff
+strict_verification: true
+serial_task_execution: true
+master_plan: docs/work/climbme-v1-master.yaml
+execution_inventory: docs/work/climbme-v1-execution-inventory.yaml
+tasks:
+- id: deliver-owner-data-export-and-account-deletion
+  title: Let an authenticated owner export or irreversibly delete only their own data
+  type: implementation
+  status: pending
+  inventory_item: private-data-rights
+  observable_outcome: A signed-in climber can download a JSON export of their own account, attempts and training sessions, or confirm their current password to irreversibly delete their account and owned records; no other account's data is included or changed.
+  dependencies: [auth-guard-evidence]
+  paths: [backend/src/main/java/com/climbme/app/auth/AuthController.java, backend/src/main/java/com/climbme/app/auth/AuthService.java, backend/src/main/java/com/climbme/app/auth/UserAccountRepository.java, backend/src/main/java/com/climbme/app/climbing/ClimbingAttemptRepository.java, backend/src/main/java/com/climbme/app/routes/RouteStatusOverrideRepository.java, backend/src/main/java/com/climbme/app/training/TrainingSessionRepository.java, backend/src/test/java/com/climbme/app/auth/AccountDataRightsIntegrationTest.java, frontend/src/main.js, frontend/src/styles.css, docs/product-brief.yaml, docs/domain-library.yaml]
+  required_paths: [backend/src/main/java/com/climbme/app/auth/AuthController.java, backend/src/main/java/com/climbme/app/auth/AuthService.java, backend/src/main/java/com/climbme/app/auth/UserAccountRepository.java, backend/src/main/java/com/climbme/app/climbing/ClimbingAttemptRepository.java, backend/src/main/java/com/climbme/app/routes/RouteStatusOverrideRepository.java, backend/src/main/java/com/climbme/app/training/TrainingSessionRepository.java, backend/src/test/java/com/climbme/app/auth/AccountDataRightsIntegrationTest.java, frontend/src/main.js, frontend/src/styles.css, docs/product-brief.yaml, docs/domain-library.yaml]
+  validation: mvn -q -f backend/pom.xml test && npm --prefix frontend run test && npm --prefix frontend run build
+  evidence_boundary: [Synthetic local account data only; account deletion is irreversible only for the test or future owner-confirmed account, never a Dora, IDC, GitHub, Railway or another project mutation.]

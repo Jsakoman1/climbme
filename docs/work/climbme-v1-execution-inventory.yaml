@@ -119,8 +119,23 @@ items:
     plan: docs/work/climbme-v1-09-railway-readiness.yaml
     task: deliver-railway-ready-package
     revision: ea05f9b52b3478c44e34b6575c452bf05ac1c58e
-- id: owner-closeout
+- id: auth-guard-evidence
   sequence: 11
-  plan: docs/work/climbme-v1-10-owner-closeout.yaml
+  plan: docs/work/climbme-v1-10-auth-guard-evidence.yaml
+  task: prove-public-auth-guard
+  status: pending
+- id: private-data-rights
+  sequence: 12
+  plan: docs/work/climbme-v1-11-private-data-rights.yaml
+  task: deliver-owner-data-export-and-account-deletion
+  status: pending
+- id: visual-analytics
+  sequence: 13
+  plan: docs/work/climbme-v1-12-visual-analytics.yaml
+  task: render-accessible-dashboard-charts
+  status: pending
+- id: owner-closeout
+  sequence: 14
+  plan: docs/work/climbme-v1-13-owner-closeout.yaml
   task: prepare-climbme-v1-owner-closeout
   status: pending

@@ -2,7 +2,7 @@ kind: master
 version: 1
 id: climbme-v1
 title: Deliver the complete private climbing performance web application
-status: draft
+status: active
 baseline: b0dd60ce44aafb2750b313cb05027edc1ca4c819
 authority_boundary: >-
   This plan owns only ClimbMe product delivery. It cannot change Dora, IDC,
@@ -49,7 +49,10 @@ children:
 - docs/work/climbme-v1-07-dashboard-achievements-ui.yaml
 - docs/work/climbme-v1-08-responsive-runtime-evidence.yaml
 - docs/work/climbme-v1-09-railway-readiness.yaml
-- docs/work/climbme-v1-10-owner-closeout.yaml
+- docs/work/climbme-v1-10-auth-guard-evidence.yaml
+- docs/work/climbme-v1-11-private-data-rights.yaml
+- docs/work/climbme-v1-12-visual-analytics.yaml
+- docs/work/climbme-v1-13-owner-closeout.yaml
 non_goals:
 - Treating build success as proof of public production safety or external deployment.
 - Recording user performance data in AI-system learning artifacts.

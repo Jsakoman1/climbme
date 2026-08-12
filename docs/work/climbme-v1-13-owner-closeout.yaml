@@ -1,0 +1,22 @@
+kind: work
+version: 1
+id: climbme-v1-13-owner-closeout
+title: Prepare ClimbMe V1 owner closeout
+status: draft
+baseline: bd93626ddbcdb0094a6528ce9320b8eea9b2ceff
+strict_verification: true
+serial_task_execution: true
+master_plan: docs/work/climbme-v1-master.yaml
+execution_inventory: docs/work/climbme-v1-execution-inventory.yaml
+tasks:
+- id: prepare-climbme-v1-owner-closeout
+  title: Summarize verified product behavior, delivery evidence and external launch gates
+  type: docs-only
+  status: pending
+  inventory_item: owner-closeout
+  observable_outcome: An owner-readable closeout separates verified local product capability, Railway readiness and remaining external public-launch decisions.
+  dependencies: [visual-analytics]
+  paths: [docs/release/climbme-v1-owner-readback.md, docs/ai-delivery-learning.md, docs/project-memory.yaml, docs/work/climbme-v1-master.yaml, docs/work/climbme-v1-execution-inventory.yaml]
+  required_paths: [docs/release/climbme-v1-owner-readback.md, docs/ai-delivery-learning.md, docs/project-memory.yaml, docs/work/climbme-v1-master.yaml, docs/work/climbme-v1-execution-inventory.yaml]
+  validation: ruby -e 'report = File.read("docs/release/climbme-v1-owner-readback.md"); abort unless report.include?("Verified local capability") && report.include?("External launch gates")'
+  evidence_boundary: [Owner-readable local closeout only; no external deployment, release publication or public-launch approval.]

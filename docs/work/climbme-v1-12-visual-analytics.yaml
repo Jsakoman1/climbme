@@ -1,0 +1,22 @@
+kind: work
+version: 1
+id: climbme-v1-12-visual-analytics
+title: Render accessible visual dashboard analytics
+status: draft
+baseline: bd93626ddbcdb0094a6528ce9320b8eea9b2ceff
+strict_verification: true
+serial_task_execution: true
+master_plan: docs/work/climbme-v1-master.yaml
+execution_inventory: docs/work/climbme-v1-execution-inventory.yaml
+tasks:
+- id: render-accessible-dashboard-charts
+  title: Render visual charts from the verified private dashboard response
+  type: implementation
+  status: pending
+  inventory_item: visual-analytics
+  observable_outcome: The dashboard turns the existing private metric point series into responsive, labelled bar or trend visualizations with retained text values and no client-side metric recalculation.
+  dependencies: [private-data-rights]
+  paths: [frontend/src/dashboard.js, frontend/src/styles.css, frontend/src/dashboard.test.js, frontend/e2e/climbme-core.spec.js, docs/domain-library.yaml]
+  required_paths: [frontend/src/dashboard.js, frontend/src/styles.css, frontend/src/dashboard.test.js, frontend/e2e/climbme-core.spec.js, docs/domain-library.yaml]
+  validation: npm --prefix frontend run test && npm --prefix frontend run build && npm --prefix frontend run test:runtime
+  evidence_boundary: [Synthetic local browser evidence only; visual presentation consumes the existing private API response and cannot add coaching, cross-user comparison, grade conversion or new metric formulas.]

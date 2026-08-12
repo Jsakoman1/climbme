@@ -1,0 +1,22 @@
+kind: work
+version: 1
+id: climbme-v1-10-auth-guard-evidence
+title: Prove the bounded public authentication guard
+status: draft
+baseline: bd93626ddbcdb0094a6528ce9320b8eea9b2ceff
+strict_verification: true
+serial_task_execution: true
+master_plan: docs/work/climbme-v1-master.yaml
+execution_inventory: docs/work/climbme-v1-execution-inventory.yaml
+tasks:
+- id: prove-public-auth-guard
+  title: Prove repeated failed authentication is temporarily limited per client address
+  type: verification
+  status: pending
+  inventory_item: auth-guard-evidence
+  observable_outcome: A deterministic integration test proves the existing public auth guard returns 429 only after five failed attempts from one isolated client address, without affecting a different address.
+  dependencies: [railway-readiness]
+  paths: [backend/src/test/java/com/climbme/app/auth/AuthIntegrationTest.java]
+  required_paths: [backend/src/test/java/com/climbme/app/auth/AuthIntegrationTest.java]
+  validation: mvn -q -f backend/pom.xml test
+  evidence_boundary: [Local H2 integration evidence only; no real client IPs, user accounts, production sessions or security-policy changes.]
