@@ -17,6 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -26,7 +27,9 @@ public class SecurityConfig {
         CookieCsrfTokenRepository csrf = CookieCsrfTokenRepository.withHttpOnlyFalse();
         csrf.setCookiePath("/");
         return http
-                .csrf(configurer -> configurer.csrfTokenRepository(csrf))
+                .csrf(configurer -> configurer
+                        .csrfTokenRepository(csrf)
+                        .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler()))
                 .securityContext(configurer -> configurer.securityContextRepository(repository))
                 .sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .authorizeHttpRequests(authorize -> authorize

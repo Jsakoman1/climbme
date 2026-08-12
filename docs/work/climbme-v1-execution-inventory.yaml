@@ -101,7 +101,13 @@ items:
   sequence: 9
   plan: docs/work/climbme-v1-08-responsive-runtime-evidence.yaml
   task: prove-responsive-core-journeys
-  status: pending
+  status: verified
+  started_at: '2026-08-12T15:13:07Z'
+  verified_at: '2026-08-12T15:24:40Z'
+  evidence:
+    plan: docs/work/climbme-v1-08-responsive-runtime-evidence.yaml
+    task: prove-responsive-core-journeys
+    revision: 3d4e7e38eda0d17fe58d713f3d89ceb4650a8e07
 - id: railway-readiness
   sequence: 10
   plan: docs/work/climbme-v1-09-railway-readiness.yaml
