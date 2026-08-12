@@ -2,8 +2,8 @@ kind: work
 version: 1
 id: climbme-v1-05-training-log
 title: Deliver private Training Log
-status: draft
-baseline: b0dd60ce44aafb2750b313cb05027edc1ca4c819
+status: verified
+baseline: 53ebcac3ca755a76a5acd4a6fe6bf8f3107b3501
 strict_verification: true
 serial_task_execution: true
 master_plan: docs/work/climbme-v1-master.yaml
@@ -12,11 +12,125 @@ tasks:
 - id: deliver-private-training-log
   title: Let a climber manage private climbing and off-wall sessions
   type: implementation
-  status: pending
+  status: done
   inventory_item: training-log
-  observable_outcome: A climber can record, edit and remove a private dated training session with session type, duration, optional strength/endurance/mobility scores and notes.
-  dependencies: [route-database]
-  paths: [backend/src/main/java/com/climbme/app/training/TrainingSession.java, backend/src/main/java/com/climbme/app/training/TrainingController.java, backend/src/main/java/com/climbme/app/training/TrainingService.java, backend/src/main/java/com/climbme/app/training/TrainingSessionRepository.java, backend/src/main/resources/db/migration/V3__training_sessions.sql, backend/src/test/java/com/climbme/app/training/TrainingIntegrationTest.java, frontend/src/main.js, frontend/src/main.test.js, frontend/src/styles.css]
-  required_paths: [backend/src/main/java/com/climbme/app/training/TrainingSession.java, backend/src/main/java/com/climbme/app/training/TrainingController.java, backend/src/main/java/com/climbme/app/training/TrainingService.java, backend/src/main/java/com/climbme/app/training/TrainingSessionRepository.java, backend/src/main/resources/db/migration/V3__training_sessions.sql, backend/src/test/java/com/climbme/app/training/TrainingIntegrationTest.java, frontend/src/main.js, frontend/src/main.test.js, frontend/src/styles.css]
-  validation: mvn -q -f backend/pom.xml test -Dtest=TrainingIntegrationTest && npm --prefix frontend run test
-  evidence_boundary: [Private training log only; it does not infer coaching advice or alter climbing attempt history.]
+  observable_outcome: A climber can record, edit and remove a private dated training
+    session with session type, duration, optional strength/endurance/mobility scores
+    and notes.
+  dependencies:
+  - route-database
+  paths:
+  - backend/src/main/java/com/climbme/app/training/TrainingSession.java
+  - backend/src/main/java/com/climbme/app/training/TrainingController.java
+  - backend/src/main/java/com/climbme/app/training/TrainingService.java
+  - backend/src/main/java/com/climbme/app/training/TrainingSessionRepository.java
+  - backend/src/main/resources/db/migration/V4__training_sessions.sql
+  - backend/src/test/java/com/climbme/app/training/TrainingIntegrationTest.java
+  - frontend/src/main.js
+  - frontend/src/main.test.js
+  - docs/domain-library.yaml
+  - docs/project-memory.yaml
+  required_paths:
+  - backend/src/main/java/com/climbme/app/training/TrainingSession.java
+  - backend/src/main/java/com/climbme/app/training/TrainingController.java
+  - backend/src/main/java/com/climbme/app/training/TrainingService.java
+  - backend/src/main/java/com/climbme/app/training/TrainingSessionRepository.java
+  - backend/src/main/resources/db/migration/V4__training_sessions.sql
+  - backend/src/test/java/com/climbme/app/training/TrainingIntegrationTest.java
+  - frontend/src/main.js
+  - frontend/src/main.test.js
+  - docs/domain-library.yaml
+  - docs/project-memory.yaml
+  validation: mvn -q -f backend/pom.xml test -Dtest=TrainingIntegrationTest && npm
+    --prefix frontend run test
+  evidence_boundary:
+  - Private training log only; it does not infer coaching advice or alter climbing
+    attempt history.
+  started_at: '2026-08-12T14:57:52Z'
+  start_fingerprints:
+    backend/src/main/java/com/climbme/app/training/TrainingSession.java: __missing__
+    backend/src/main/java/com/climbme/app/training/TrainingController.java: __missing__
+    backend/src/main/java/com/climbme/app/training/TrainingService.java: __missing__
+    backend/src/main/java/com/climbme/app/training/TrainingSessionRepository.java: __missing__
+    backend/src/main/resources/db/migration/V4__training_sessions.sql: __missing__
+    backend/src/test/java/com/climbme/app/training/TrainingIntegrationTest.java: __missing__
+    frontend/src/main.js: 65a4296c979f44d8ea9c071e36d4190cce73bc2ae6a86767b02ef73d228f7512
+    frontend/src/main.test.js: e234c1572cf284ba5e78b292ed1f0c106f2295f03aab3d099d4e193c512e19af
+    docs/domain-library.yaml: aa97c6d11c402c0503fcac4b5a8e9e0e24bdf8289597ce3a184ad36e235d1413
+    docs/ai-delivery-learning.md: 992c4d781b005487d8d102b0a146d8870a7da11470505f827a7b3523cfe21180
+    docs/project-memory.yaml: fc9c0856be35b68ff820ba4e1360eb4b045d2a54475f6125a75596fa0b902070
+  start_workspace_paths:
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-v1-05-training-log.yaml
+evidence:
+- task: deliver-private-training-log
+  command: mvn -q -f backend/pom.xml test -Dtest=TrainingIntegrationTest && npm --prefix
+    frontend run test
+  ranAt: '2026-08-12T15:05:20Z'
+  revision: 53ebcac3ca755a76a5acd4a6fe6bf8f3107b3501
+  exitCode: 0
+  result: passed
+  timedOut: false
+  timeoutSeconds: 300
+  changedFiles:
+  - docs/domain-library.yaml
+  - docs/project-memory.yaml
+  - frontend/src/main.js
+  - frontend/src/main.test.js
+  - backend/src/main/java/com/climbme/app/training/TrainingController.java
+  - backend/src/main/java/com/climbme/app/training/TrainingService.java
+  - backend/src/main/java/com/climbme/app/training/TrainingSession.java
+  - backend/src/main/java/com/climbme/app/training/TrainingSessionRepository.java
+  - backend/src/main/resources/db/migration/V4__training_sessions.sql
+  - backend/src/test/java/com/climbme/app/training/TrainingIntegrationTest.java
+  output: |
+    ✔ client helpers preserve CSRF, normalize email and render climbing choices (0.776167ms)
+    ℹ tests 1
+    ℹ suites 0
+    ℹ pass 1
+    ℹ fail 0
+    ℹ cancelled 0
+    ℹ skipped 0
+    ℹ todo 0
+    ℹ duration_ms 44.784
+
+    WARNING: A restricted method in java.lang.System has been called
+    WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (file:/Users/jsakoman/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.31/tomcat-embed-core-10.1.31.jar)
+    WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+    WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+    OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+    WARNING: A Java agent has been loaded dynamically (/Users/jsakoman/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.19/byte-buddy-agent-1.14.19.jar)
+    WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+    WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+    WARNING: Dynamic loading of agents will be disallowed by default in a future release
+  executionEnvironment:
+    shell: "/bin/zsh"
+    rubyVersion: 2.6.10
+    environmentExported: false
+  requiredPathDigests:
+    backend/src/main/java/com/climbme/app/training/TrainingSession.java: ba6c98ea655169f609f5a026934a278002f727ac924d04068d36facc3fde6387
+    backend/src/main/java/com/climbme/app/training/TrainingController.java: 3ed202088a90e3a5ded6173b4063c9d939074259bedaae8e327cb2ae8a1ff63e
+    backend/src/main/java/com/climbme/app/training/TrainingService.java: e1e416ee572ed7fe872f0a0a2f5a295d188e70e1e8ac520c0b6833e0f4df1525
+    backend/src/main/java/com/climbme/app/training/TrainingSessionRepository.java: 55b3c852a16e4b25ed15bb5d47a49e06a0c427b4a165853abcc07d5869d11b85
+    backend/src/main/resources/db/migration/V4__training_sessions.sql: 475b226a4d5379f23c545e4640ad6230cb00bc855e41bd0a1974e090be00a1cd
+    backend/src/test/java/com/climbme/app/training/TrainingIntegrationTest.java: 3ca6f81137bd5173e2aa640b54bc5b7be534b49fb1a8cad5abd7257720129210
+    frontend/src/main.js: 61363e7c3f103d76608054941cdf01accb346140df335411adb0b18113f8091a
+    frontend/src/main.test.js: 7766cdc3c1030d4c9b05fe7e66e1f9d135b28a810cc56602b435f391658e552b
+    docs/domain-library.yaml: bb7d3440929a8c8d1e21b97d4668e9b02e073e4b027fb86a50530c2c1d4c3ae4
+    docs/project-memory.yaml: ec4d419e15409acd50a1d45e1cac41405a50c5b4a9cb0c751c73cec8f9047302
+  requiredPaths: &1
+  - backend/src/main/java/com/climbme/app/training/TrainingSession.java
+  - backend/src/main/java/com/climbme/app/training/TrainingController.java
+  - backend/src/main/java/com/climbme/app/training/TrainingService.java
+  - backend/src/main/java/com/climbme/app/training/TrainingSessionRepository.java
+  - backend/src/main/resources/db/migration/V4__training_sessions.sql
+  - backend/src/test/java/com/climbme/app/training/TrainingIntegrationTest.java
+  - frontend/src/main.js
+  - frontend/src/main.test.js
+  - docs/domain-library.yaml
+  - docs/project-memory.yaml
+  visualEvidencePaths: []
+  runtimeEvidencePaths: []
+  startedAt: '2026-08-12T14:57:52Z'
+  changedAfterStart: *1

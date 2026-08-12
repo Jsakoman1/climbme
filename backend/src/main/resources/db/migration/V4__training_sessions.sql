@@ -1,0 +1,2 @@
+create table training_sessions (id bigserial primary key, user_id bigint not null references user_accounts(id) on delete cascade, trained_on date not null, session_type varchar(20) not null, duration_minutes integer not null, strength integer, endurance integer, mobility integer, notes varchar(2000));
+create index idx_training_sessions_owner_date on training_sessions(user_id, trained_on desc, id desc);

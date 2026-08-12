@@ -45,6 +45,8 @@ invariants:
   description: When a climber does not enter an attempt number, the backend assigns the next number only among that owner's matching location, sector and route name; it never derives it from another account.
 - id: private-partner-data
   description: Partner text is private contextual data and is never exposed to another user or used for public analytics.
+- id: private-training-isolation
+  description: Training sessions belong only to their authenticated owner and are never used to alter climbing-attempt history.
 - id: derived-achievement-safety
   description: Achievements derive from a user's own eligible sent attempts and do not mutate the source attempt.
 permission_rules:

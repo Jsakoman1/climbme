@@ -1,0 +1,8 @@
+package com.climbme.app.training;
+import com.climbme.app.auth.UserAccount;
+import java.util.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
+@Service public class TrainingService { private final TrainingSessionRepository sessions; public TrainingService(TrainingSessionRepository sessions){this.sessions=sessions;} @Transactional public View create(UserAccount user, TrainingSession.Request request){return View.from(sessions.save(new TrainingSession(user,request)));} @Transactional(readOnly=true) public List<View> list(UserAccount user){return sessions.findByUserIdOrderByTrainedOnDescIdDesc(user.getId()).stream().map(View::from).toList();} @Transactional public View update(UserAccount user,Long id,TrainingSession.Request request){TrainingSession session=owned(user,id);session.apply(request);return View.from(session);} @Transactional public void delete(UserAccount user,Long id){sessions.delete(owned(user,id));} private TrainingSession owned(UserAccount user,Long id){return sessions.findByIdAndUserId(id,user.getId()).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"Training session not found."));} public record View(Long id,java.time.LocalDate trainedOn,TrainingSession.Type sessionType,int durationMinutes,Integer strength,Integer endurance,Integer mobility,String notes){static View from(TrainingSession s){return new View(s.getId(),s.getTrainedOn(),s.getSessionType(),s.getDurationMinutes(),s.getStrength(),s.getEndurance(),s.getMobility(),s.getNotes());}} }

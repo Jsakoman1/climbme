@@ -68,7 +68,13 @@ items:
   sequence: 6
   plan: docs/work/climbme-v1-05-training-log.yaml
   task: deliver-private-training-log
-  status: pending
+  status: verified
+  started_at: '2026-08-12T14:57:52Z'
+  verified_at: '2026-08-12T15:05:26Z'
+  evidence:
+    plan: docs/work/climbme-v1-05-training-log.yaml
+    task: deliver-private-training-log
+    revision: 53ebcac3ca755a76a5acd4a6fe6bf8f3107b3501
 - id: dashboard-metrics
   sequence: 7
   plan: docs/work/climbme-v1-06-dashboard-metrics.yaml
