@@ -79,7 +79,13 @@ items:
   sequence: 7
   plan: docs/work/climbme-v1-06-dashboard-metrics.yaml
   task: deliver-deterministic-performance-metrics
-  status: pending
+  status: verified
+  started_at: '2026-08-12T15:06:04Z'
+  verified_at: '2026-08-12T15:08:27Z'
+  evidence:
+    plan: docs/work/climbme-v1-06-dashboard-metrics.yaml
+    task: deliver-deterministic-performance-metrics
+    revision: c7b5e5e9b56397280c3e496b31c1c7906d3f561a
 - id: dashboard-achievements-ui
   sequence: 8
   plan: docs/work/climbme-v1-07-dashboard-achievements-ui.yaml

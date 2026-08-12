@@ -1,0 +1,3 @@
+package com.climbme.app.dashboard;
+import java.util.*;
+public record DashboardResponse(Kpis kpis,List<Point> gradeProgression,List<Point> sendsByGrade,List<Point> styleDistribution,List<Point> attemptsToSend,List<Point> locationSendRate,List<Point> monthlyVolume,List<Achievement> achievements){public record Kpis(long totalAttempts,long totalSends,double sendRate,String hardestGradeSent,String hardestOnsight,String hardestFlash,String hardestRedpoint,long activeProjects,long climbingDays,long locations){} public record Point(String label,double value){} public record Achievement(String date,String title,String grade,String style,String location){} }
