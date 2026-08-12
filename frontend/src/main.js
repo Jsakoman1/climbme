@@ -1,11 +1,11 @@
-const grades = ["3a", "3b", "3c", "4a", "4b", "4c", "5a", "5b", "5c", "6a", "6a+", "6b", "6b+", "6c", "6c+", "7a", "7a+", "7b", "7b+", "7c", "7c+", "8a", "8a+", "8b", "8b+", "8c", "8c+", "9a", "9a+", "9b", "9b+", "9c"];
+import { frenchGrades } from "./grade-catalog.js";
 const styles = ["ONSIGHT", "FLASH", "REDPOINT", "PINKPOINT", "TOPROPE", "PROJECT"];
 
 export function csrfTokenFromCookie(cookie = "") { const match = cookie.match(/(?:^|;\s*)XSRF-TOKEN=([^;]+)/); return match ? decodeURIComponent(match[1]) : null; }
 export function normalizedEmail(email) { return email.trim().toLowerCase(); }
 export function authRequestOptions(method, payload, csrfToken) { return { method, credentials: "same-origin", headers: { "Content-Type": "application/json", "X-XSRF-TOKEN": csrfToken || "" }, body: payload ? JSON.stringify(payload) : undefined }; }
 export function styleLabel(style) { return style.toLowerCase().replaceAll("_", " ").replace(/\b\w/g, character => character.toUpperCase()); }
-export function gradeOptions(selected = "6a") { return grades.map(grade => `<option value="${grade}" ${grade === selected ? "selected" : ""}>${grade}</option>`).join(""); }
+export function gradeOptions(selected = "6a") { return frenchGrades.map(grade => `<option value="${grade}" ${grade === selected ? "selected" : ""}>${grade}</option>`).join(""); }
 
 async function ensureCsrf() { await fetch("/api/auth/csrf", { credentials: "same-origin" }); return csrfTokenFromCookie(document.cookie); }
 async function api(path, method = "GET", payload) { const options = method === "GET" ? { credentials: "same-origin" } : authRequestOptions(method, payload, await ensureCsrf()); const response = await fetch(path, options); if (!response.ok) throw new Error((await response.text()).replace(/^\{.*?"detail":"?([^"}]+).*$/, "$1") || "Unable to complete that request."); return response.status === 204 ? null : response.json(); }

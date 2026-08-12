@@ -97,3 +97,7 @@ acceptance_scenarios:
   given: A climber has attempts and sends across grades and dates.
   when: They view Dashboard.
   then: It separately reports attempt volume, sends, unique routes, climbing days and configured grade-based aggregates.
+- id: analytics-visual-and-readable
+  given: A climber has private dashboard values.
+  when: They view the responsive Dashboard.
+  then: Each chart retains its visible labels and values while showing a proportional visual bar derived only from the protected dashboard response.

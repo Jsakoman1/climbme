@@ -16,5 +16,6 @@ for (const [name, viewport] of [["desktop", { width: 1280, height: 900 }], ["mob
     await page.getByLabel("Duration (min)").fill("30");
     await page.getByRole("button", { name: "Add training" }).click();
     await expect(page.getByRole("heading", { name: "Dashboard" })).toBeVisible();
+    await expect(page.getByRole("list", { name: "Volume through the year" })).toBeVisible();
   });
 }

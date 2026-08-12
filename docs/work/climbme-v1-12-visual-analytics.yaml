@@ -2,8 +2,8 @@ kind: work
 version: 1
 id: climbme-v1-12-visual-analytics
 title: Render accessible visual dashboard analytics
-status: draft
-baseline: bd93626ddbcdb0094a6528ce9320b8eea9b2ceff
+status: verified
+baseline: 817a432745f813046cc24f56085183b29ac2fdb7
 strict_verification: true
 serial_task_execution: true
 master_plan: docs/work/climbme-v1-master.yaml
@@ -12,11 +12,107 @@ tasks:
 - id: render-accessible-dashboard-charts
   title: Render visual charts from the verified private dashboard response
   type: implementation
-  status: pending
+  status: done
   inventory_item: visual-analytics
-  observable_outcome: The dashboard turns the existing private metric point series into responsive, labelled bar or trend visualizations with retained text values and no client-side metric recalculation.
-  dependencies: [private-data-rights]
-  paths: [frontend/src/dashboard.js, frontend/src/styles.css, frontend/src/dashboard.test.js, frontend/e2e/climbme-core.spec.js, docs/domain-library.yaml]
-  required_paths: [frontend/src/dashboard.js, frontend/src/styles.css, frontend/src/dashboard.test.js, frontend/e2e/climbme-core.spec.js, docs/domain-library.yaml]
-  validation: npm --prefix frontend run test && npm --prefix frontend run build && npm --prefix frontend run test:runtime
-  evidence_boundary: [Synthetic local browser evidence only; visual presentation consumes the existing private API response and cannot add coaching, cross-user comparison, grade conversion or new metric formulas.]
+  observable_outcome: The dashboard turns the existing private metric point series
+    into responsive, labelled bar or trend visualizations with retained text values
+    and no client-side metric recalculation.
+  dependencies:
+  - private-data-rights
+  paths:
+  - frontend/src/grade-catalog.js
+  - frontend/src/main.js
+  - frontend/src/dashboard.js
+  - frontend/src/styles.css
+  - frontend/src/dashboard.test.js
+  - frontend/e2e/climbme-core.spec.js
+  - docs/domain-library.yaml
+  required_paths:
+  - frontend/src/grade-catalog.js
+  - frontend/src/main.js
+  - frontend/src/dashboard.js
+  - frontend/src/styles.css
+  - frontend/src/dashboard.test.js
+  - frontend/e2e/climbme-core.spec.js
+  - docs/domain-library.yaml
+  validation: npm --prefix frontend run test && npm --prefix frontend run build &&
+    npm --prefix frontend run test:runtime
+  evidence_boundary:
+  - Synthetic local browser evidence only; visual presentation consumes the existing
+    private API response and cannot add coaching
+  - cross-user comparison
+  - grade conversion or new metric formulas.
+  started_at: '2026-08-12T15:56:27Z'
+  start_fingerprints:
+    frontend/src/grade-catalog.js: __missing__
+    frontend/src/main.js: 5915227ceb08c462248d63c227088f685982a123c6309bed5a03ae8d166ce070
+    frontend/src/dashboard.js: 3d4fd0c9b269954101e3dffda3d76a00103fdb444ebbb8a760cd8b1f47f397ef
+    frontend/src/styles.css: a561151500df73e85de8685a95548f5fb46fe654bac2ba54a980202d7e7e2750
+    frontend/src/dashboard.test.js: __missing__
+    frontend/e2e/climbme-core.spec.js: 2c9ff3a379af73bd3f3843f9ba431b5e8615f4b187b6944df8436403e14956f4
+    docs/domain-library.yaml: 58d3af6d1a4c23cb12650d1d5224e5b6bebf8a9946b9bb776b3fc3b2a6af8c47
+  start_workspace_paths:
+  - docs/work/climbme-v1-12-visual-analytics.yaml
+evidence:
+- task: render-accessible-dashboard-charts
+  command: npm --prefix frontend run test && npm --prefix frontend run build && npm
+    --prefix frontend run test:runtime
+  ranAt: '2026-08-12T16:01:59Z'
+  revision: 817a432745f813046cc24f56085183b29ac2fdb7
+  exitCode: 0
+  result: passed
+  timedOut: false
+  timeoutSeconds: 300
+  changedFiles:
+  - docs/domain-library.yaml
+  - frontend/e2e/climbme-core.spec.js
+  - frontend/src/dashboard.js
+  - frontend/src/main.js
+  - frontend/src/styles.css
+  - frontend/src/dashboard.test.js
+  - frontend/src/grade-catalog.js
+  output: |
+    ℹ todo 0
+    ℹ duration_ms 56.966292
+
+    > climbme@0.0.1 build
+    > node scripts/build.mjs
+
+
+    > climbme@0.0.1 test:runtime
+    > playwright test
+
+
+    Running 2 tests using 1 worker
+
+      ✓  1 e2e/climbme-core.spec.js:4:3 › desktop core (1.6s)
+      ✓  2 e2e/climbme-core.spec.js:4:3 › mobile core (664ms)
+
+      2 passed (2.9s)
+
+    (node:36504) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+    (Use `node --trace-warnings ...` to show where the warning was created)
+  executionEnvironment:
+    shell: "/bin/zsh"
+    rubyVersion: 2.6.10
+    environmentExported: false
+  requiredPathDigests:
+    frontend/src/grade-catalog.js: 7b0dbe4b009e63cf50542dfcd13f1717ea4323b1b98963b034dfdfaecb8d7b8f
+    frontend/src/main.js: dcebacd37eba55d6877298dd2cd88a9c57aa2ad19a6e4072d8b32cc9f4723841
+    frontend/src/dashboard.js: 83ca392fff39256a3fdb48533c69d1581d43670d414c7b8e4f0f024a5beeb277
+    frontend/src/styles.css: d9f9fac9b5cdd6b8b71242a1ff38e9863178b0158afdf0f8dcea72ffcf84172d
+    frontend/src/dashboard.test.js: 483e18773f15a5a481d102b03476176c2eca3fa75ec759879096c08bb3f02bf6
+    frontend/e2e/climbme-core.spec.js: ef084d4ce516070e473645d9f285fbbe878dad5d562d020c9be71a7afde12b78
+    docs/domain-library.yaml: fe731bcc550db10fc0fb868bd6767e00de1055f4788f917ba8373f208b43b71b
+  requiredPaths: &1
+  - frontend/src/grade-catalog.js
+  - frontend/src/main.js
+  - frontend/src/dashboard.js
+  - frontend/src/styles.css
+  - frontend/src/dashboard.test.js
+  - frontend/e2e/climbme-core.spec.js
+  - docs/domain-library.yaml
+  visualEvidencePaths: []
+  runtimeEvidencePaths: []
+  startedAt: '2026-08-12T15:56:27Z'
+  changedAfterStart: *1
