@@ -41,8 +41,8 @@ capability_intent:
   - idc-baseline
   - delivery-control
 current_work:
-  plan: docs/work/climbme-v1-02-climbing-attempt-api.yaml
-  task: deliver-private-climbing-attempt-api
+  plan: docs/work/climbme-v1-03-climbing-log-ui.yaml
+  task: deliver-low-friction-climbing-log-ui
   state: active
 completion_boundary: Project memory is declared navigation context only and does not
   prove implementation, runtime acceptance, or release readiness.

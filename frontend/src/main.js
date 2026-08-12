@@ -1,75 +1,20 @@
-export function csrfTokenFromCookie(cookie = "") {
-  const match = cookie.match(/(?:^|;\s*)XSRF-TOKEN=([^;]+)/);
-  return match ? decodeURIComponent(match[1]) : null;
-}
+const grades = ["3a", "3b", "3c", "4a", "4b", "4c", "5a", "5b", "5c", "6a", "6a+", "6b", "6b+", "6c", "6c+", "7a", "7a+", "7b", "7b+", "7c", "7c+", "8a", "8a+", "8b", "8b+", "8c", "8c+", "9a", "9a+", "9b", "9b+", "9c"];
+const styles = ["ONSIGHT", "FLASH", "REDPOINT", "PINKPOINT", "TOPROPE", "PROJECT"];
 
-export function normalizedEmail(email) {
-  return email.trim().toLowerCase();
-}
+export function csrfTokenFromCookie(cookie = "") { const match = cookie.match(/(?:^|;\s*)XSRF-TOKEN=([^;]+)/); return match ? decodeURIComponent(match[1]) : null; }
+export function normalizedEmail(email) { return email.trim().toLowerCase(); }
+export function authRequestOptions(method, payload, csrfToken) { return { method, credentials: "same-origin", headers: { "Content-Type": "application/json", "X-XSRF-TOKEN": csrfToken || "" }, body: payload ? JSON.stringify(payload) : undefined }; }
+export function styleLabel(style) { return style.toLowerCase().replaceAll("_", " ").replace(/\b\w/g, character => character.toUpperCase()); }
+export function gradeOptions(selected = "6a") { return grades.map(grade => `<option value="${grade}" ${grade === selected ? "selected" : ""}>${grade}</option>`).join(""); }
 
-export function authRequestOptions(method, payload, csrfToken) {
-  return {
-    method,
-    credentials: "same-origin",
-    headers: { "Content-Type": "application/json", "X-XSRF-TOKEN": csrfToken || "" },
-    body: payload ? JSON.stringify(payload) : undefined
-  };
-}
+async function ensureCsrf() { await fetch("/api/auth/csrf", { credentials: "same-origin" }); return csrfTokenFromCookie(document.cookie); }
+async function api(path, method = "GET", payload) { const options = method === "GET" ? { credentials: "same-origin" } : authRequestOptions(method, payload, await ensureCsrf()); const response = await fetch(path, options); if (!response.ok) throw new Error((await response.text()).replace(/^\{.*?"detail":"?([^"}]+).*$/, "$1") || "Unable to complete that request."); return response.status === 204 ? null : response.json(); }
 
-async function ensureCsrf() {
-  await fetch("/api/auth/csrf", { credentials: "same-origin" });
-  return csrfTokenFromCookie(document.cookie);
-}
-
-async function api(path, method = "GET", payload) {
-  const csrfToken = method === "GET" ? null : await ensureCsrf();
-  const options = method === "GET" ? { credentials: "same-origin" } : authRequestOptions(method, payload, csrfToken);
-  const response = await fetch(path, options);
-  if (!response.ok) throw new Error((await response.text()) || "Unable to complete that request.");
-  return response.status === 204 ? null : response.json();
-}
-
-function authMarkup(mode, message = "") {
-  const register = mode === "register";
-  return `<main class="auth-shell"><section class="auth-card" aria-labelledby="app-title">
-    <p class="eyebrow">CLIMBING PERFORMANCE LOG</p><h1 id="app-title">ClimbMe</h1>
-    <p>${register ? "Create a private logbook for your climbs and training." : "Sign in to your private climbing log."}</p>
-    <form id="auth-form"><label>Email<input name="email" type="email" autocomplete="email" required></label>
-    <label>Password<input name="password" type="password" autocomplete="${register ? "new-password" : "current-password"}" minlength="12" required></label>
-    <button type="submit">${register ? "Create account" : "Sign in"}</button></form>
-    <p class="auth-message" role="status">${message}</p>
-    <button class="text-button" id="switch-auth" type="button">${register ? "Already have an account? Sign in" : "New here? Create an account"}</button>
-  </section></main>`;
-}
-
-function signedInMarkup(account) {
-  return `<main class="auth-shell"><section class="auth-card"><p class="eyebrow">PRIVATE ACCOUNT</p>
-    <h1>Welcome, ${account.email}</h1><p>Your climbing workspace is ready. The log, route database, training and dashboard arrive through the next verified delivery slices.</p>
-    <button id="sign-out" type="button">Sign out</button></section></main>`;
-}
-
-function mountAuth(mode = "login", message = "") {
-  const root = document.querySelector("#app");
-  root.innerHTML = authMarkup(mode, message);
-  root.querySelector("#switch-auth").addEventListener("click", () => mountAuth(mode === "login" ? "register" : "login"));
-  root.querySelector("#auth-form").addEventListener("submit", async (event) => {
-    event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    try {
-      const account = await api(`/api/auth/${mode === "register" ? "register" : "login"}`, "POST", {
-        email: normalizedEmail(form.get("email")), password: form.get("password")
-      });
-      mountSignedIn(account);
-    } catch (error) { mountAuth(mode, error.message); }
-  });
-}
-
-function mountSignedIn(account) {
-  const root = document.querySelector("#app");
-  root.innerHTML = signedInMarkup(account);
-  root.querySelector("#sign-out").addEventListener("click", async () => { await api("/api/auth/logout", "POST"); mountAuth(); });
-}
-
-if (typeof document !== "undefined") {
-  api("/api/auth/me").then(mountSignedIn).catch(() => mountAuth());
-}
+function authMarkup(mode, message = "") { const registering = mode === "register"; return `<main class="auth-shell"><section class="auth-card" aria-labelledby="app-title"><span class="mark">⌁</span><p class="eyebrow">PRIVATE CLIMBING LOG</p><h1 id="app-title">ClimbMe</h1><p>${registering ? "A simple home for every try, send and training session." : "Welcome back to your private climbing log."}</p><form id="auth-form"><label>Email<input name="email" type="email" autocomplete="email" required></label><label>Password<input name="password" type="password" autocomplete="${registering ? "new-password" : "current-password"}" minlength="12" required></label><button type="submit">${registering ? "Create account" : "Sign in"}</button></form><p class="form-message" role="status">${message}</p><button class="text-button" id="switch-auth" type="button">${registering ? "Already have an account? Sign in" : "New here? Create an account"}</button></section></main>`; }
+function appMarkup(account, attempts, editing, message = "") { const current = editing || { climbedOn: new Date().toISOString().slice(0, 10), grade: "6a", style: "REDPOINT", sent: true, attemptNumber: "", location: "", sector: "", routeName: "", lengthMeters: "", timeOnRouteMinutes: "", rpe: "", conditions: "", partner: "", notes: "" }; const rows = attempts.length ? attempts.map(item => `<tr><td>${item.climbedOn}</td><td><strong>${item.routeName}</strong><span>${item.location} · ${item.sector}</span></td><td><b>${item.grade}</b><span>${styleLabel(item.style)}</span></td><td><span class="status ${item.sent ? "sent" : "working"}">${item.sent ? "Sent" : "Working"}</span></td><td><button class="table-button" data-edit="${item.id}">Edit</button><button class="table-button danger" data-delete="${item.id}">Delete</button></td></tr>`).join("") : `<tr><td colspan="5" class="empty-state">No attempts yet. Add your first climb above.</td></tr>`; return `<div class="app-shell"><header class="topbar"><a class="brand" href="#">ClimbMe</a><nav><a class="active" href="#log">Log</a><a aria-disabled="true">Routes</a><a aria-disabled="true">Training</a><a aria-disabled="true">Dashboard</a></nav><div class="account-menu"><span>${account.email}</span><button class="text-button" id="sign-out">Sign out</button></div></header><main class="page"><section class="hero"><p class="eyebrow">CLIMBING LOG</p><h1>${editing ? "Correct an attempt" : "Log a climb"}</h1><p>One row is one real attempt. Keep it simple now; your route and dashboard views will build from these same records.</p></section><section class="entry-card"><form id="attempt-form"><input type="hidden" name="id" value="${current.id || ""}"><div class="form-grid primary-fields"><label>Date<input name="climbedOn" type="date" value="${current.climbedOn}" required></label><label>Location<input name="location" value="${current.location}" placeholder="e.g. Paklenica" required></label><label>Sector<input name="sector" value="${current.sector}" placeholder="e.g. Klanci" required></label><label>Route name<input name="routeName" value="${current.routeName}" placeholder="e.g. La Testa" required></label><label>Grade<select name="grade">${gradeOptions(current.grade)}</select></label><label>Style<select name="style">${styles.map(style => `<option value="${style}" ${style === current.style ? "selected" : ""}>${styleLabel(style)}</option>`).join("")}</select></label><label class="toggle-label"><input name="sent" type="checkbox" ${current.sent ? "checked" : ""}> <span>Sent</span></label></div><details><summary>Optional details</summary><div class="form-grid optional-fields"><label>Length (m)<input name="lengthMeters" type="number" min="1" value="${current.lengthMeters ?? ""}"></label><label>Attempt #<input name="attemptNumber" type="number" min="1" value="${current.attemptNumber ?? ""}" placeholder="Auto"></label><label>Time on route (min)<input name="timeOnRouteMinutes" type="number" min="1" value="${current.timeOnRouteMinutes ?? ""}"></label><label>RPE (1–10)<input name="rpe" type="number" min="1" max="10" value="${current.rpe ?? ""}"></label><label>Conditions<input name="conditions" value="${current.conditions ?? ""}" placeholder="e.g. Perfect"></label><label>Partner<input name="partner" value="${current.partner ?? ""}" placeholder="Optional"></label><label class="wide">Notes<textarea name="notes" rows="2" placeholder="What mattered?">${current.notes ?? ""}</textarea></label></div></details><div class="form-actions"><button type="submit">${editing ? "Save changes" : "Add attempt"}</button>${editing ? '<button class="secondary" id="cancel-edit" type="button">Cancel</button>' : ""}<p class="form-message" role="status">${message}</p></div></form></section><section class="log-section" id="log"><div class="section-heading"><div><p class="eyebrow">YOUR SEASON</p><h2>Recent attempts</h2></div><p>${attempts.length} ${attempts.length === 1 ? "attempt" : "attempts"}</p></div><div class="table-wrap"><table><thead><tr><th>Date</th><th>Route</th><th>Grade & style</th><th>Result</th><th><span class="sr-only">Actions</span></th></tr></thead><tbody>${rows}</tbody></table></div></section></main></div>`; }
+function value(form, name) { const current = form.get(name); return current === "" ? null : current; }
+function number(form, name) { const current = value(form, name); return current === null ? null : Number(current); }
+function payload(form) { return { climbedOn: form.get("climbedOn"), location: form.get("location"), sector: form.get("sector"), routeName: form.get("routeName"), grade: form.get("grade"), style: form.get("style"), sent: form.get("sent") === "on", lengthMeters: number(form, "lengthMeters"), attemptNumber: number(form, "attemptNumber"), timeOnRouteMinutes: number(form, "timeOnRouteMinutes"), rpe: number(form, "rpe"), conditions: value(form, "conditions"), partner: value(form, "partner"), notes: value(form, "notes") }; }
+async function mountApp(account, editing = null, message = "") { try { const attempts = await api("/api/attempts"); const root = document.querySelector("#app"); root.innerHTML = appMarkup(account, attempts, editing, message); root.querySelector("#sign-out").addEventListener("click", async () => { await api("/api/auth/logout", "POST"); mountAuth(); }); root.querySelector("#attempt-form").addEventListener("submit", async event => { event.preventDefault(); const form = new FormData(event.currentTarget); const id = form.get("id"); try { await api(id ? `/api/attempts/${id}` : "/api/attempts", id ? "PUT" : "POST", payload(form)); await mountApp(account, null, id ? "Attempt updated." : "Attempt added."); } catch (error) { mountApp(account, editing, error.message); } }); root.querySelector("#cancel-edit")?.addEventListener("click", () => mountApp(account)); root.querySelectorAll("[data-edit]").forEach(button => button.addEventListener("click", () => mountApp(account, attempts.find(item => item.id === Number(button.dataset.edit))))); root.querySelectorAll("[data-delete]").forEach(button => button.addEventListener("click", async () => { if (confirm("Delete this attempt? This cannot be undone.")) await api(`/api/attempts/${button.dataset.delete}`, "DELETE"); await mountApp(account); })); } catch (error) { mountAuth("login", error.message); } }
+function mountAuth(mode = "login", message = "") { const root = document.querySelector("#app"); root.innerHTML = authMarkup(mode, message); root.querySelector("#switch-auth").addEventListener("click", () => mountAuth(mode === "login" ? "register" : "login")); root.querySelector("#auth-form").addEventListener("submit", async event => { event.preventDefault(); const form = new FormData(event.currentTarget); try { await mountApp(await api(`/api/auth/${mode === "register" ? "register" : "login"}`, "POST", { email: normalizedEmail(form.get("email")), password: form.get("password") })); } catch (error) { mountAuth(mode, error.message); } }); }
+if (typeof document !== "undefined") api("/api/auth/me").then(account => mountApp(account)).catch(() => mountAuth());
