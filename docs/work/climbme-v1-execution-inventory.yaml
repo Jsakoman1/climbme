@@ -57,7 +57,13 @@ items:
   sequence: 5
   plan: docs/work/climbme-v1-04-route-database.yaml
   task: deliver-derived-route-database
-  status: pending
+  status: verified
+  started_at: '2026-08-12T14:47:54Z'
+  verified_at: '2026-08-12T14:52:35Z'
+  evidence:
+    plan: docs/work/climbme-v1-04-route-database.yaml
+    task: deliver-derived-route-database
+    revision: 86b389a0258cde007d629d430f7fc2e6b8cd4f6a
 - id: training-log
   sequence: 6
   plan: docs/work/climbme-v1-05-training-log.yaml

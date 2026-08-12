@@ -33,6 +33,8 @@ invariants:
   description: A climbing-log row is one attempt, not one route or one session. Route views and dashboard totals derive from attempts.
 - id: no-route-duplication
   description: A user creates an attempt; Route Database fields derive from the same private attempts and do not require a duplicate route-maintenance form.
+- id: bounded-route-correction
+  description: A route's normal status is derived from attempts. The only V1 manual correction is an owner-scoped ABANDONED marker keyed to that owner's existing route identity; it does not create a separate route record.
 - id: explicit-grade-order
   description: Grade ordering uses the declared French catalog, never lexical string comparison or inferred cross-scale mapping.
 - id: send-semantics

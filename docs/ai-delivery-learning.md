@@ -30,6 +30,11 @@ No implementation slice has been verified yet.
 - Intended outcome: one mobile-friendly primary form, then a chronological private record with corrective actions.
 - Candidate reusable lesson: retain one API-owned data model and make optional fields progressively disclosed to preserve low-friction entry.
 
+### 2026-08-12 — derived route database (pending verification)
+
+- Intended outcome: reuse attempt records for route history instead of asking the climber to maintain another table.
+- Candidate reusable lesson: when a derived view needs one human correction, persist only that bounded override and keep every other displayed field derivable.
+
 ### 2026-08-12 — primary-record API (pending verification)
 
 - Intended outcome: one private climbing attempt is the only manual source record for later route and dashboard views.
