@@ -24,7 +24,13 @@ items:
   sequence: 2
   plan: docs/work/climbme-v1-01-auth-private-data.yaml
   task: deliver-private-account-foundation
-  status: pending
+  status: verified
+  started_at: '2026-08-12T14:24:01Z'
+  verified_at: '2026-08-12T14:32:38Z'
+  evidence:
+    plan: docs/work/climbme-v1-01-auth-private-data.yaml
+    task: deliver-private-account-foundation
+    revision: 18a0e69483655d16dd49c90bcb959206426885c4
 - id: climbing-attempt-api
   sequence: 3
   plan: docs/work/climbme-v1-02-climbing-attempt-api.yaml

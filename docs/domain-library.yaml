@@ -27,6 +27,8 @@ entities:
 invariants:
 - id: private-user-isolation
   description: Every service query and mutation scopes records to the authenticated user; client-provided user identifiers never grant access.
+- id: local-account-security
+  description: Passwords are stored only as BCrypt hashes. Browser mutations require a CSRF token, sessions are server-side, and repeated failed local account attempts are temporarily limited per client address.
 - id: attempt-primary-record
   description: A climbing-log row is one attempt, not one route or one session. Route views and dashboard totals derive from attempts.
 - id: no-route-duplication

@@ -41,6 +41,7 @@ assumptions:
 - V1 uses email/password accounts, server sessions, password hashing, CSRF protection and rate limiting. Password change is available to an authenticated user; email verification and self-service email recovery are not V1 claims.
 - A user's data is retained until that user deletes it; the delivery plan will provide a private export path and a clear account-deletion confirmation rather than silently retaining data.
 - English is the V1 product language and metric units are used for route length and training duration.
+- Registration creates a local private account only after a valid CSRF-protected request; every future performance endpoint requires that authenticated account.
 risks:
 - Public self-registration magnifies authentication, session, rate-limit and privacy mistakes.
 - Grade-based charts are misleading if route grade ordering or send semantics are not centralized and tested.

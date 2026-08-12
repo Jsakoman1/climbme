@@ -18,3 +18,9 @@ session values, analytics, secrets or raw terminal output here.
 ## Entries
 
 No implementation slice has been verified yet.
+
+### 2026-08-12 — account foundation (pending verification)
+
+- Intended outcome: local private accounts before any climbing-domain persistence.
+- Process signal: the greenfield baseline separated owner-confirmed product direction from delegated implementation choices, so auth could remain one atomic task.
+- Candidate reusable lesson: make account/privacy behavior testable before adding the data domain; record only the process lesson, never account or session values.
