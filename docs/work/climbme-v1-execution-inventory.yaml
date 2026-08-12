@@ -123,7 +123,13 @@ items:
   sequence: 11
   plan: docs/work/climbme-v1-10-auth-guard-evidence.yaml
   task: prove-public-auth-guard
-  status: pending
+  status: verified
+  started_at: '2026-08-12T15:47:04Z'
+  verified_at: '2026-08-12T15:48:01Z'
+  evidence:
+    plan: docs/work/climbme-v1-10-auth-guard-evidence.yaml
+    task: prove-public-auth-guard
+    revision: 1f00d20444222d7074b146d12032b2ff91ebd7e2
 - id: private-data-rights
   sequence: 12
   plan: docs/work/climbme-v1-11-private-data-rights.yaml

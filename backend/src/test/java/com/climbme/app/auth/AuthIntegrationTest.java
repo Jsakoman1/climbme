@@ -60,4 +60,31 @@ class AuthIntegrationTest {
                 .andExpect(status().isConflict())
                 .andExpect(status().reason(containsString("account already exists")));
     }
+
+    @Test
+    void failedAuthenticationIsTemporarilyLimitedPerClientAddress() throws Exception {
+        String blockedAddress = "198.51.100.41";
+        for (int attempt = 0; attempt < 5; attempt++) {
+            mvc.perform(post("/api/auth/login")
+                            .with(request -> { request.setRemoteAddr(blockedAddress); return request; })
+                            .with(csrf())
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content("{\"email\":\"missing@example.com\",\"password\":\"safe-password-123\"}"))
+                    .andExpect(status().isUnauthorized());
+        }
+
+        mvc.perform(post("/api/auth/login")
+                        .with(request -> { request.setRemoteAddr(blockedAddress); return request; })
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"email\":\"missing@example.com\",\"password\":\"safe-password-123\"}"))
+                .andExpect(status().isTooManyRequests());
+
+        mvc.perform(post("/api/auth/register")
+                        .with(request -> { request.setRemoteAddr("198.51.100.42"); return request; })
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"email\":\"different-client@example.com\",\"password\":\"safe-password-123\"}"))
+                .andExpect(status().isCreated());
+    }
 }
