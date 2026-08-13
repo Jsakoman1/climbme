@@ -1,0 +1,83 @@
+kind: work
+version: 1
+id: climbme-physical-iphone-safari-closeout-v1
+title: Record owner-observed physical iPhone Safari verification
+status: verified
+baseline: ea163590424e86aab07787e9e8d804f23016ebed
+strict_verification: true
+serial_task_execution: true
+execution_inventory: docs/work/climbme-physical-iphone-safari-closeout-v1-execution-inventory.yaml
+tasks:
+- id: close-physical-iphone-safari-gate
+  title: Record the owner-observed physical mobile browser result
+  type: external_evidence_closeout
+  status: done
+  inventory_item: physical-iphone-safari-closeout
+  observable_outcome: Owner-observed physical iPhone Safari evidence closes CLIMBME-MOB-001
+    for the existing mobile tabs and views without claiming native-client coverage
+    or changing product behavior.
+  dependencies: []
+  paths:
+  - docs/runtime-evidence/climbme-physical-iphone-safari.md
+  - docs/implementation-backlog.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-physical-iphone-safari-closeout-v1.yaml
+  - docs/work/climbme-physical-iphone-safari-closeout-v1-execution-inventory.yaml
+  required_paths:
+  - docs/runtime-evidence/climbme-physical-iphone-safari.md
+  - docs/implementation-backlog.md
+  - docs/ai-delivery-learning.md
+  validation: ruby -e 'text=File.read("docs/runtime-evidence/climbme-physical-iphone-safari.md");
+    abort unless text.include?("owner-observed") && text.include?("Safari") && text.include?("not
+    native")'
+  evidence_boundary:
+  - Owner-observed mobile browser evidence only; no account, route, training, analytics,
+    browser address, credential or raw device output is retained.
+  - The result does not claim native-app, accessibility-audit or universal-device
+    coverage.
+  observation_disposition: required_aggregate_only
+  started_at: '2026-08-13T10:11:32Z'
+  start_fingerprints:
+    docs/runtime-evidence/climbme-physical-iphone-safari.md: __missing__
+    docs/implementation-backlog.md: 873c7cb047717ecbc9ecefb3c4e59c772728c4accacd607426eaad1a685284bb
+    docs/ai-delivery-learning.md: a7c9d16cd706f4d4b293d9fd065f5e488060be95720e344fb4a29e05a0ecca0f
+  start_workspace_paths:
+  - docs/work/climbme-physical-iphone-safari-closeout-v1-execution-inventory.yaml
+  - docs/work/climbme-physical-iphone-safari-closeout-v1.yaml
+  start_workspace_fingerprints:
+    docs/work/climbme-physical-iphone-safari-closeout-v1-execution-inventory.yaml: accdaf42f4b04be82043f4f2bc1a648b3410baee98cd4589e7b08d91546b199e
+    docs/work/climbme-physical-iphone-safari-closeout-v1.yaml: d1de025dd9c97474f98f6b83eebb3250f7c065cc8dfe1d16202a15213ba78090
+evidence:
+- task: close-physical-iphone-safari-gate
+  command: ruby -e 'text=File.read("docs/runtime-evidence/climbme-physical-iphone-safari.md");
+    abort unless text.include?("owner-observed") && text.include?("Safari") && text.include?("not
+    native")'
+  ranAt: '2026-08-13T10:11:53Z'
+  revision: ea163590424e86aab07787e9e8d804f23016ebed
+  exitCode: 0
+  result: passed
+  timedOut: false
+  timeoutSeconds: 300
+  changedFiles:
+  - docs/ai-delivery-learning.md
+  - docs/implementation-backlog.md
+  - docs/runtime-evidence/climbme-physical-iphone-safari.md
+  - docs/work/climbme-physical-iphone-safari-closeout-v1-execution-inventory.yaml
+  - docs/work/climbme-physical-iphone-safari-closeout-v1.yaml
+  output: "\n"
+  executionEnvironment:
+    shell: "/bin/zsh"
+    rubyVersion: 2.6.10
+    environmentExported: false
+  requiredPathDigests:
+    docs/runtime-evidence/climbme-physical-iphone-safari.md: 4868cf04995c6844f68e5d7a4ad00b6ff46beb4f40c696e3e354d63b7dab6fbf
+    docs/implementation-backlog.md: 100fa78b4f4da316dd6724d88b410ef22513f2d1118a747cc6abedb23b7f2bbf
+    docs/ai-delivery-learning.md: c5aacf85c13f4b4619c6e41a0d7be1f4a49a92472ece1c9c4ba600fae46c399f
+  requiredPaths: &1
+  - docs/runtime-evidence/climbme-physical-iphone-safari.md
+  - docs/implementation-backlog.md
+  - docs/ai-delivery-learning.md
+  visualEvidencePaths: []
+  runtimeEvidencePaths: []
+  startedAt: '2026-08-13T10:11:32Z'
+  changedAfterStart: *1

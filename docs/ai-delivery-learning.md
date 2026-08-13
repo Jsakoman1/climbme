@@ -37,7 +37,7 @@ decision. Do not pause merely because an intermediate slice is verified.
   feature or a context-system capability claim.
 - Evidence coverage: client unit/build checks, backend regression tests and one
   isolated 390px synthetic browser journey passed. The remaining physical
-  iPhone/Safari gate remains unchanged.
+  iPhone/Safari gate was subsequently owner-observed as usable and closed.
 
 ### 2026-08-13 — mobile-first UX telemetry boundary (verified)
 

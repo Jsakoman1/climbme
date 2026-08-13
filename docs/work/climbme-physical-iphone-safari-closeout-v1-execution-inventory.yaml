@@ -1,0 +1,22 @@
+kind: execution_inventory
+version: 1
+id: climbme-physical-iphone-safari-closeout-v1
+master_plan: docs/work/climbme-physical-iphone-safari-closeout-v1.yaml
+state: proposed
+execution_mode: strict_serial
+owner_authorization_required_before_start: true
+owner_authorization_record: Owner reported the physical iPhone Safari check as okay
+  and authorized closeout on 2026-08-13.
+items:
+- id: physical-iphone-safari-closeout
+  sequence: 1
+  order: 1
+  plan: docs/work/climbme-physical-iphone-safari-closeout-v1.yaml
+  task: close-physical-iphone-safari-gate
+  status: verified
+  started_at: '2026-08-13T10:11:32Z'
+  verified_at: '2026-08-13T10:11:53Z'
+  evidence:
+    plan: docs/work/climbme-physical-iphone-safari-closeout-v1.yaml
+    task: close-physical-iphone-safari-gate
+    revision: ea163590424e86aab07787e9e8d804f23016ebed
