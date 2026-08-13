@@ -1,0 +1,20 @@
+kind: master
+version: 1
+id: climbme-dora-locked-cli-pilot-v1
+title: Pilot the exact locked Dora CLI without removing ClimbMe's vendored package
+status: superseded
+baseline: eaa52f9
+strict_verification: true
+serial_task_execution: true
+execution_inventory: docs/work/climbme-dora-locked-cli-pilot-v1-execution-inventory.yaml
+owner_authorization: owner-confirmed-2026-08-13-goal-pursuit-locked-cli-distribution-and-candidate-capture
+authority_boundary: >-
+  This pilot changes only ClimbMe's Dora launcher, lock and tooling documentation.
+  It keeps the vendored dora package as rollback, does not touch application code,
+  data, database, provider state, deployment or Git publishing, and fails closed
+  if the exact local Dora release is unavailable or outside the speed budget.
+children: [docs/work/climbme-dora-locked-cli-pilot-v1-01-pilot.yaml]
+completion_boundary: >-
+  Verification proves only this local consumer pilot. A later explicit owner decision
+  is required before deleting ClimbMe's vendored Dora package or migrating another consumer.
+superseded_by: docs/work/climbme-dora-locked-cli-pilot-recovery-v1-master.yaml

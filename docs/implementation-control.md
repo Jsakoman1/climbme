@@ -21,3 +21,7 @@ document never replaces either.
   Context OS, PC or CPPE capability.
 - Railway/GitHub/deployment operations require explicit owner authorization even
   when the repository is otherwise on an autonomous delivery path.
+- ClimbMe's Dora launcher may resolve only the exact release named by `dora.lock.yaml`
+  from the private local cache. It has no live-checkout, generic PATH or network fallback.
+  The current vendored `dora/` package remains the explicit rollback path until a separate
+  verified removal plan is approved.

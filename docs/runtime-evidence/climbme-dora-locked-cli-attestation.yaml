@@ -1,0 +1,13 @@
+kind: dora_locked_cli_attestation
+version: 1
+release_version: v1.13.3
+package_checksum: d58c4eb970ba6c9c6259efaf1db59db8d7414e95a7de5969bf0943577dd730c9
+clean_copy: passed
+rollback: not_required
+speed_budget: passed
+median_ms: 221
+p95_ms: 223
+prior_rollback_pilot: passed
+evidence_boundary: >-
+  Local locked-launcher checks only. No product code, data, provider, deployment,
+  network action or vendored-package deletion is represented by this attestation.

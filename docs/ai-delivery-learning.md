@@ -24,6 +24,29 @@ decision. Do not pause merely because an intermediate slice is verified.
 
 ## Entries
 
+### 2026-08-13 — locked Dora CLI compatibility pilot (verified local evidence)
+
+- Intended outcome: prove that the delivery-control CLI can be resolved from one
+  exact local package identity while preserving the existing vendored package as
+  rollback.
+- Process signal: content-hashing a full development checkout added more startup
+  cost than the declared pilot budget allowed. A separate Dora runtime-package
+  follow-up retained full integrity hashing while excluding Dora's own tests,
+  fixtures and documentation from the installed runtime package.
+- Evidence coverage: the exact local lock passed ten bounded control checks within
+  the speed budget; a clean ClimbMe copy without `dora/` also passed; rollback
+  remains present. No application code, database, provider or private data was
+  touched.
+- Candidate reusable lesson: package boundaries and performance limits need to be
+  tested together for local tools. A future Dora release should validate launcher
+  execute permission and its clean-copy pilot harness must fail fast. This is a
+  delivery-tooling candidate, not evidence for Context OS or product behavior.
+- Recovery disposition: a fresh evidence-only leaf is used after the rejected
+  strict retry; it preserves the failed record instead of pretending the existing
+  implementation changed again.
+- Evidence-format disposition: machine checks must use stable structured fields
+  instead of case-sensitive fragments from explanatory prose.
+
 ### 2026-08-13 — mobile navigation history (verified local evidence)
 
 - Intended outcome: make the existing four mobile sections restorable through a

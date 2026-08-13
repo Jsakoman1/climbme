@@ -12,6 +12,11 @@ commands:
   work_start: "./bin/dora work-start .dora/project.yaml plan=<work-plan> task=<task-id>"
   work_verify: "./bin/dora work-verify .dora/project.yaml plan=<work-plan> task=<task-id>"
   control_check: "./bin/dora doctor .dora/project.yaml"
+distribution:
+  method: locked_local_cli
+  lock_file: dora.lock.yaml
+  cache_layout: user_application_support_v1
+  rollback_rule: Keep the existing vendored dora package until a later owner-approved removal plan verifies the ClimbMe pilot and explicit rollback.
 extensions:
 - id: project-documentation
   category: documentation
