@@ -1,0 +1,123 @@
+kind: work
+version: 1
+id: climbme-mobile-first-ux-v1-04-routes-presentation
+title: Deliver mobile route-history presentation
+status: verified
+baseline: 2768c5ce959f605e6f9f919dcd6f25ef213eabd8
+strict_verification: true
+serial_task_execution: true
+master_plan: docs/work/climbme-mobile-first-ux-v1-master.yaml
+execution_inventory: docs/work/climbme-mobile-first-ux-v1-execution-inventory.yaml
+tasks:
+- id: deliver-mobile-route-history-presentation
+  title: Make the derived private Route Database readable and action-safe on a phone
+  type: implementation
+  status: done
+  inventory_item: routes-presentation
+  observable_outcome: The existing derived route history and its bounded Abandon action
+    are readable, discoverable and usable at iPhone width without duplicate route
+    entry.
+  dependencies:
+  - log-flow
+  paths:
+  - frontend/src/main.js
+  - frontend/src/styles.css
+  - frontend/src/main.test.js
+  - docs/domain-library.yaml
+  required_paths:
+  - frontend/src/main.js
+  - frontend/src/styles.css
+  - frontend/src/main.test.js
+  - docs/domain-library.yaml
+  validation: npm --prefix frontend run test && npm --prefix frontend run build
+  evidence_boundary:
+  - Presentation and existing Abandon-action affordance only; no route grouping, status
+    calculation, endpoint or persistence change.
+  - No training or analytics presentation change.
+  started_at: '2026-08-13T05:58:05Z'
+  start_fingerprints:
+    frontend/src/main.js: eca9a922b54d6aacf1ecc010dc2ebb48b3a369a9d49a617a7d2ec6e2207f8e4b
+    frontend/src/styles.css: 73fdbcecd5117fcfc25c8c847f62b49cd855198561f391947e72ba24d3b027df
+    frontend/src/main.test.js: 11c27855c4178452f9bbaf5523acd006bda1d13834a1cb6f50c1f30bb1d2dddb
+    docs/domain-library.yaml: e7654a6d350072589e190c32105747fb9fd6994f68d742a1dc8cb0a0b7e931f0
+  start_workspace_paths:
+  - docs/ai-delivery-learning.md
+  - docs/domain-library.yaml
+  - docs/implementation-control.md
+  - docs/product-brief.yaml
+  - docs/research/climbme-mobile-first-ux-telemetry-case.yaml
+  - docs/research/idc-climbme-mobile-ux-baseline.md
+  - docs/work/climbme-mobile-first-ux-v1-00-plan-hardening.yaml
+  - docs/work/climbme-mobile-first-ux-v1-01-context-telemetry-protocol.yaml
+  - docs/work/climbme-mobile-first-ux-v1-02-navigation-shell.yaml
+  - docs/work/climbme-mobile-first-ux-v1-03-log-flow.yaml
+  - docs/work/climbme-mobile-first-ux-v1-04-routes-presentation.yaml
+  - docs/work/climbme-mobile-first-ux-v1-05-training-presentation.yaml
+  - docs/work/climbme-mobile-first-ux-v1-06-insights-presentation.yaml
+  - docs/work/climbme-mobile-first-ux-v1-07-navigation-log-runtime.yaml
+  - docs/work/climbme-mobile-first-ux-v1-08-routes-training-runtime.yaml
+  - docs/work/climbme-mobile-first-ux-v1-09-insights-runtime.yaml
+  - docs/work/climbme-mobile-first-ux-v1-10-learning-closeout.yaml
+  - docs/work/climbme-mobile-first-ux-v1-atomicity-review.md
+  - docs/work/climbme-mobile-first-ux-v1-execution-inventory.yaml
+  - docs/work/climbme-mobile-first-ux-v1-master.yaml
+  - frontend/index.html
+  - frontend/src/main.js
+  - frontend/src/main.test.js
+  - frontend/src/styles.css
+  - frontend/test-results/.last-run.json
+  - frontend/test-results/climbme-core-desktop-core/error-context.md
+  - frontend/test-results/climbme-core-mobile-core/error-context.md
+evidence:
+- task: deliver-mobile-route-history-presentation
+  command: npm --prefix frontend run test && npm --prefix frontend run build
+  ranAt: '2026-08-13T05:59:22Z'
+  revision: 2768c5ce959f605e6f9f919dcd6f25ef213eabd8
+  exitCode: 0
+  result: passed
+  timedOut: false
+  timeoutSeconds: 300
+  changedFiles:
+  - docs/domain-library.yaml
+  - frontend/src/main.js
+  - frontend/src/main.test.js
+  - frontend/src/styles.css
+  output: |+
+    > node --test src/*.test.js
+
+    ✔ dashboard chart markup retains labels, values and a proportional visual bar (0.479333ms)
+    ✔ client helpers preserve CSRF, normalize email and render climbing choices (0.949291ms)
+    ✔ the app shell exposes exactly the four existing top-level V1 areas (0.095958ms)
+    ✔ the phone-first entry flow preserves every required climbing attempt field (0.063875ms)
+    ✔ the mobile Route Database keeps the complete derived route record visible (0.07725ms)
+    ℹ tests 5
+    ℹ suites 0
+    ℹ pass 5
+    ℹ fail 0
+    ℹ cancelled 0
+    ℹ skipped 0
+    ℹ todo 0
+    ℹ duration_ms 66.519042
+
+    > climbme@0.0.1 build
+    > node scripts/build.mjs
+
+
+  executionEnvironment:
+    shell: "/bin/zsh"
+    rubyVersion: 2.6.10
+    environmentExported: false
+  requiredPathDigests:
+    frontend/src/main.js: 1078788e033879838419cb4883c28aa77d8fc130aeb000e35e04d2fe625a4bc1
+    frontend/src/styles.css: 996ab10150ba06d50956e9b39988f30d5acff9a86282d17fe8b138f11ef18963
+    frontend/src/main.test.js: 7e3c22f44a5a97c1df0b63ea8c514d98b10e4d7279d27930b91ece72a36c910e
+    docs/domain-library.yaml: 1a9dece5aed40c1d0786489c6f86649f078f3ca25bf81ce167386d175162a66a
+  requiredPaths: &1
+  - frontend/src/main.js
+  - frontend/src/styles.css
+  - frontend/src/main.test.js
+  - docs/domain-library.yaml
+  visualEvidencePaths: []
+  runtimeEvidencePaths: []
+  startedAt: '2026-08-13T05:58:05Z'
+  changedAfterStart: *1

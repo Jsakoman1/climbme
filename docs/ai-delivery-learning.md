@@ -24,6 +24,39 @@ decision. Do not pause merely because an intermediate slice is verified.
 
 ## Entries
 
+### 2026-08-13 — mobile-first UX telemetry boundary (verified)
+
+- Intended outcome: define a privacy-safe, aggregate-only observation boundary
+  before the ClimbMe mobile UX implementation begins.
+- Process signal: the earlier historical ClimbMe delivery could not be measured
+  retroactively without reading material that should remain private. This case
+  records a protocol before the work instead of reconstructing it afterward.
+- Candidate reusable lesson: a future context measurement must begin with an
+  explicit source policy and a compact allowed-metric list; it must remain
+  separate from product evidence and cannot by itself justify Context OS, PC or
+  CPPE expansion.
+
+### 2026-08-13 — mobile-first UX closeout (verified local evidence)
+
+- Intended outcome: make the existing private web application easier to use on a
+  phone without changing authentication, API contracts, data persistence or
+  dashboard calculations.
+- Process signal: the owner direction and bounded IDC baseline identified one
+  real problem—one long authenticated page with no usable phone navigation—while
+  retaining explicit non-goals. Separate implementation and runtime-evidence
+  tasks then kept visual work from being mistaken for changed product behavior.
+- Evidence coverage: frontend unit tests and build, plus three isolated 390px
+  synthetic browser journeys for Log/navigation, Routes/Training and Insights.
+  The Routes/Training scenario initially raced the existing asynchronous save;
+  waiting for its existing completion message corrected the test without changing
+  the application.
+- Residual risk: this is not physical iPhone/Safari, assistive-technology or
+  production-user evidence. `CLIMBME-MOB-001` keeps that gate visible.
+- Candidate reusable lesson: a future Dora/IDC context experiment should retain
+  only approved aggregate process measures. The protocol helped distinguish
+  available delivery evidence from unavailable token/compaction evidence; it
+  does not itself justify Context OS, PC or CPPE expansion.
+
 ### 2026-08-12 — account foundation (verified)
 
 - Intended outcome: local private accounts before any climbing-domain persistence.

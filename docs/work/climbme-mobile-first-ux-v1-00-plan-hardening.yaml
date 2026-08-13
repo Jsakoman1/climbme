@@ -1,0 +1,118 @@
+kind: work
+version: 1
+id: climbme-mobile-first-ux-v1-00-plan-hardening
+title: Harden the ClimbMe mobile-first UX modernization plan
+status: verified
+baseline: 2768c5ce959f605e6f9f919dcd6f25ef213eabd8
+strict_verification: true
+serial_task_execution: true
+master_plan: docs/work/climbme-mobile-first-ux-v1-master.yaml
+execution_inventory: docs/work/climbme-mobile-first-ux-v1-execution-inventory.yaml
+tasks:
+- id: harden-mobile-first-ux-plan
+  title: Validate the serial mobile-first UX delivery shape
+  type: docs-only
+  status: done
+  inventory_item: plan-hardening
+  observable_outcome: The modernization master, every child plan and the inventory
+    prove a valid serial, atomic, data-preserving scope before implementation is eligible.
+  dependencies: []
+  paths:
+  - docs/work/climbme-mobile-first-ux-v1-00-plan-hardening.yaml
+  - docs/work/climbme-mobile-first-ux-v1-execution-inventory.yaml
+  required_paths:
+  - docs/work/climbme-mobile-first-ux-v1-00-plan-hardening.yaml
+  - docs/work/climbme-mobile-first-ux-v1-execution-inventory.yaml
+  validation: 'ruby -I dora/lib -ryaml -r dora/serial_plan_integrity -e ''Dora::SerialPlanIntegrity.validate!("docs/work/climbme-mobile-first-ux-v1-master.yaml",
+    "docs/work/climbme-mobile-first-ux-v1-execution-inventory.yaml", project_root:
+    Dir.pwd); Dir["docs/work/climbme-mobile-first-ux-v1-*.yaml"].each { |path| next
+    unless YAML.load_file(path)["kind"] == "work"; abort("plan contract failed: #{path}")
+    unless system("./bin/dora", "plan-contract", path) }'' && ./bin/dora doctor .dora/project.yaml'
+  evidence_boundary:
+  - Planning and control artifacts only; no product source, runtime behavior, telemetry
+    record or deployment changes.
+  - The master remains proposed until the owner approves the owner-readable readback.
+  started_at: '2026-08-13T05:47:59Z'
+  start_fingerprints:
+    docs/research/idc-climbme-mobile-ux-baseline.md: 1ce35071f9ad448a31baca3b520c97bfb31fd612946ebe3b2bd5d1084ee4425e
+    docs/work/climbme-mobile-first-ux-v1-master.yaml: c3b042cc0fe6bbbc8dd6753152b32405efe85d218a22b6aa700a6d60cee63f1b
+    docs/work/climbme-mobile-first-ux-v1-execution-inventory.yaml: fb45caa7407b709ab78d833921393e988a566793a30c7a7cf886cf809fc67c66
+    docs/work/climbme-mobile-first-ux-v1-atomicity-review.md: 7fea5a2635de8ba5269c86a4a77e55b2e6e29dac57e6fba5d87528baf584d5ea
+    docs/work/climbme-mobile-first-ux-v1-00-plan-hardening.yaml: fe6bd5c2137dbf744a5fa626674121a69e18362ce11ff3c56f6c3d439c7448b3
+    docs/work/climbme-mobile-first-ux-v1-01-context-telemetry-protocol.yaml: f6d5f779b1788136b324e9029400e76c365a6b410927bd0d82ab67b1fc771357
+    docs/work/climbme-mobile-first-ux-v1-02-navigation-shell.yaml: 268d28d5f8e0fad8f8e6bfabf795f9c47925d3545c49003ed38f61aeea99ddaa
+    docs/work/climbme-mobile-first-ux-v1-03-log-flow.yaml: 9057e609df8b194c44744d3146d6143b161e48b7e072fdf488f1f725a303fe56
+    docs/work/climbme-mobile-first-ux-v1-04-routes-presentation.yaml: c7851bcf7813429f3c2446482ba4661b48320323e2b26ad92f1fce88473862de
+    docs/work/climbme-mobile-first-ux-v1-05-training-presentation.yaml: 6b1c15b22f614b1333ad2af84b66a62905df36d5f0170e75f71c2b2b28319133
+    docs/work/climbme-mobile-first-ux-v1-06-insights-presentation.yaml: 8b94921d1696071743fc95fb6acae058454ff7ad63b4ad577a430054cc9ac063
+    docs/work/climbme-mobile-first-ux-v1-07-navigation-log-runtime.yaml: c756a182bcad688ff3d1df1a885a46eaa930fbb31c340cf28b80dc22e48cde06
+    docs/work/climbme-mobile-first-ux-v1-08-routes-training-runtime.yaml: 66111e519592bf6f23834c6363411fb19113b0d5cfb24124d2698c56fb5677ad
+    docs/work/climbme-mobile-first-ux-v1-09-insights-runtime.yaml: fe0984cce9760e0e59aeeb50c35fe87c5b8748a2bf1eda19ef8e7989fa361cd2
+    docs/work/climbme-mobile-first-ux-v1-10-learning-closeout.yaml: 44b711029bdd464ad3f603a9d7037a3cf89057850b26e7338bacfd625be3c9e0
+  start_workspace_paths:
+  - docs/research/idc-climbme-mobile-ux-baseline.md
+  - docs/work/climbme-mobile-first-ux-v1-00-plan-hardening.yaml
+  - docs/work/climbme-mobile-first-ux-v1-01-context-telemetry-protocol.yaml
+  - docs/work/climbme-mobile-first-ux-v1-02-navigation-shell.yaml
+  - docs/work/climbme-mobile-first-ux-v1-03-log-flow.yaml
+  - docs/work/climbme-mobile-first-ux-v1-04-routes-presentation.yaml
+  - docs/work/climbme-mobile-first-ux-v1-05-training-presentation.yaml
+  - docs/work/climbme-mobile-first-ux-v1-06-insights-presentation.yaml
+  - docs/work/climbme-mobile-first-ux-v1-07-navigation-log-runtime.yaml
+  - docs/work/climbme-mobile-first-ux-v1-08-routes-training-runtime.yaml
+  - docs/work/climbme-mobile-first-ux-v1-09-insights-runtime.yaml
+  - docs/work/climbme-mobile-first-ux-v1-10-learning-closeout.yaml
+  - docs/work/climbme-mobile-first-ux-v1-atomicity-review.md
+  - docs/work/climbme-mobile-first-ux-v1-execution-inventory.yaml
+  - docs/work/climbme-mobile-first-ux-v1-master.yaml
+evidence:
+- task: harden-mobile-first-ux-plan
+  command: 'ruby -I dora/lib -ryaml -r dora/serial_plan_integrity -e ''Dora::SerialPlanIntegrity.validate!("docs/work/climbme-mobile-first-ux-v1-master.yaml",
+    "docs/work/climbme-mobile-first-ux-v1-execution-inventory.yaml", project_root:
+    Dir.pwd); Dir["docs/work/climbme-mobile-first-ux-v1-*.yaml"].each { |path| next
+    unless YAML.load_file(path)["kind"] == "work"; abort("plan contract failed: #{path}")
+    unless system("./bin/dora", "plan-contract", path) }'' && ./bin/dora doctor .dora/project.yaml'
+  ranAt: '2026-08-13T05:49:14Z'
+  revision: 2768c5ce959f605e6f9f919dcd6f25ef213eabd8
+  exitCode: 0
+  result: passed
+  timedOut: false
+  timeoutSeconds: 300
+  changedFiles:
+  - docs/work/climbme-mobile-first-ux-v1-00-plan-hardening.yaml
+  - docs/work/climbme-mobile-first-ux-v1-execution-inventory.yaml
+  output: |+
+    PASSED adapter: adapter satisfies the Dora schema
+    PASSED path:docs: docs
+    PASSED path:work_plans: docs/work
+    PASSED path:audit_output: docs/audit-output
+    PASSED path:runtime_evidence: docs/runtime-evidence
+    PASSED command:work_start: ./bin/dora is available
+    PASSED command:work_verify: ./bin/dora is available
+    PASSED command:control_check: ./bin/dora is available
+    PASSED project-control: control bundle and declared control files exist
+    PASSED control:tool_catalog: dora_tool_catalog is configured
+    PASSED control:change_routing: dora_change_routing is configured
+    PASSED control:context_search: dora_context_search is configured
+    PASSED control:workspace_inventory: dora_workspace_inventory is configured
+    PASSED control:documentation_evidence: dora_documentation_evidence is configured
+    PASSED control:system_map: dora_system_map is configured
+    PASSED control:artifact_policy: dora_artifact_policy is configured
+    PASSED control:backlog: dora_backlog is configured
+    PASSED control:capability_inventory: adopted capability documentation controls are configured
+    PASSED project-knowledge: product brief, domain library, agent profile, and agent entrypoint are valid
+
+  executionEnvironment:
+    shell: "/bin/zsh"
+    rubyVersion: 2.6.10
+    environmentExported: false
+  requiredPathDigests:
+    docs/work/climbme-mobile-first-ux-v1-00-plan-hardening.yaml: 958600f40af93d8a5452e59480853ab8aa6b056503e4b97cefc555c5e7840828
+    docs/work/climbme-mobile-first-ux-v1-execution-inventory.yaml: 6662cdd330dc9b0522a82c987955de1d817afba9d6cd5af8728728642b345c1e
+  requiredPaths: &1
+  - docs/work/climbme-mobile-first-ux-v1-00-plan-hardening.yaml
+  - docs/work/climbme-mobile-first-ux-v1-execution-inventory.yaml
+  visualEvidencePaths: []
+  runtimeEvidencePaths: []
+  startedAt: '2026-08-13T05:47:59Z'
+  changedAfterStart: *1

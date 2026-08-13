@@ -1,0 +1,49 @@
+kind: climbme_context_telemetry_case
+version: 1
+id: climbme-mobile-first-ux-2026-08-13
+source_policy: Dora CC-01 aggregate-only policy at Dora revision 7538792
+phase: closeout_without_raw_context_retention
+permitted_metrics:
+  - bootstrap_token_estimate
+  - owner_contract_token_estimate
+  - repository_context_token_estimate
+  - tool_definition_token_estimate
+  - tool_output_token_estimate
+  - conversation_history_token_estimate
+  - repeated_context_token_estimate
+  - peak_active_context_token_estimate
+  - compaction_count
+  - rediscovery_count
+  - repeated_action_count
+  - stale_context_incident_count
+  - decision_constraint_recall_assessment
+  - execution_position_recall_assessment
+  - task_outcome_assessment
+prohibited_content:
+  - raw_conversation
+  - raw_owner_message
+  - raw_assistant_message
+  - user_performance_data
+  - user_identity_or_email
+  - partner_or_training_data
+  - source_code_or_repository_excerpt
+  - raw_tool_output
+  - secret_or_credential
+  - complete_url
+  - unredacted_session_identifier
+  - private_context_record
+aggregate_assessment:
+  task_outcome_assessment: verified_local_mobile_ux_delivery_evidence
+  context_measurement_values: evidence_unavailable
+  reason: >-
+    This delivery used the approved aggregate-only protocol, but no separately
+    instrumented session trace was authorized or retained. Browser evidence and
+    delivery learning remain distinct from context telemetry.
+  safe_observations:
+    - An explicit owner direction plus a bounded IDC baseline made the mobile-first
+      scope and non-goals available before implementation.
+    - Strict serial work plans exposed a runtime-test synchronization mistake as
+      test evidence rather than a claim about product behavior.
+    - Three synthetic 390px journeys covered the agreed primary, derived-data and
+      Insights surfaces without reading or retaining production user data.
+status: completed

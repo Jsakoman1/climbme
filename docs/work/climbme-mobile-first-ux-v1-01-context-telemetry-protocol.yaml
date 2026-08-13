@@ -1,0 +1,96 @@
+kind: work
+version: 1
+id: climbme-mobile-first-ux-v1-01-context-telemetry-protocol
+title: Declare the mobile UX context-telemetry boundary
+status: verified
+baseline: 2768c5ce959f605e6f9f919dcd6f25ef213eabd8
+strict_verification: true
+serial_task_execution: true
+master_plan: docs/work/climbme-mobile-first-ux-v1-master.yaml
+execution_inventory: docs/work/climbme-mobile-first-ux-v1-execution-inventory.yaml
+tasks:
+- id: declare-mobile-ux-telemetry-boundary
+  title: Declare one privacy-safe aggregate context case before implementation
+  type: docs-only
+  status: done
+  inventory_item: context-telemetry-protocol
+  observable_outcome: A source-referenced ClimbMe protocol permits only aggregate
+    context and delivery measures for this modernization, never raw owner, user, code
+    or tool content.
+  dependencies:
+  - plan-hardening
+  paths:
+  - docs/research/climbme-mobile-first-ux-telemetry-case.yaml
+  - docs/implementation-control.md
+  - docs/ai-delivery-learning.md
+  required_paths:
+  - docs/research/climbme-mobile-first-ux-telemetry-case.yaml
+  - docs/implementation-control.md
+  - docs/ai-delivery-learning.md
+  validation: ruby -ryaml -e 'record=YAML.load_file("docs/research/climbme-mobile-first-ux-telemetry-case.yaml");
+    abort("wrong kind") unless record["kind"]=="climbme_context_telemetry_case" &&
+    record["version"]==1; allowed=%w[kind version id source_policy phase permitted_metrics
+    prohibited_content status]; abort("unexpected field") unless (record.keys-allowed).empty?;
+    abort("raw content allowed") unless Array(record["prohibited_content"]).include?("raw_conversation")
+    && Array(record["prohibited_content"]).include?("user_performance_data")'
+  evidence_boundary:
+  - Protocol declaration only; it stores no actual interaction, user, code, source
+    or tool-output content.
+  - It cannot claim that Context OS, Private Context, CPPE or telemetry collection
+    has been implemented.
+  started_at: '2026-08-13T05:50:00Z'
+  start_fingerprints:
+    docs/research/climbme-mobile-first-ux-telemetry-case.yaml: __missing__
+    docs/implementation-control.md: b59a3be3fe88b743d80d68f678f2e6ac5e81ae4cf9e113bfee6ab33df0a3b63a
+    docs/ai-delivery-learning.md: e27f5db28a990bc7769ebe2c3be03359b7ac06c61bc1cfa7529a5d96452ba402
+  start_workspace_paths:
+  - docs/research/idc-climbme-mobile-ux-baseline.md
+  - docs/work/climbme-mobile-first-ux-v1-00-plan-hardening.yaml
+  - docs/work/climbme-mobile-first-ux-v1-01-context-telemetry-protocol.yaml
+  - docs/work/climbme-mobile-first-ux-v1-02-navigation-shell.yaml
+  - docs/work/climbme-mobile-first-ux-v1-03-log-flow.yaml
+  - docs/work/climbme-mobile-first-ux-v1-04-routes-presentation.yaml
+  - docs/work/climbme-mobile-first-ux-v1-05-training-presentation.yaml
+  - docs/work/climbme-mobile-first-ux-v1-06-insights-presentation.yaml
+  - docs/work/climbme-mobile-first-ux-v1-07-navigation-log-runtime.yaml
+  - docs/work/climbme-mobile-first-ux-v1-08-routes-training-runtime.yaml
+  - docs/work/climbme-mobile-first-ux-v1-09-insights-runtime.yaml
+  - docs/work/climbme-mobile-first-ux-v1-10-learning-closeout.yaml
+  - docs/work/climbme-mobile-first-ux-v1-atomicity-review.md
+  - docs/work/climbme-mobile-first-ux-v1-execution-inventory.yaml
+  - docs/work/climbme-mobile-first-ux-v1-master.yaml
+evidence:
+- task: declare-mobile-ux-telemetry-boundary
+  command: ruby -ryaml -e 'record=YAML.load_file("docs/research/climbme-mobile-first-ux-telemetry-case.yaml");
+    abort("wrong kind") unless record["kind"]=="climbme_context_telemetry_case" &&
+    record["version"]==1; allowed=%w[kind version id source_policy phase permitted_metrics
+    prohibited_content status]; abort("unexpected field") unless (record.keys-allowed).empty?;
+    abort("raw content allowed") unless Array(record["prohibited_content"]).include?("raw_conversation")
+    && Array(record["prohibited_content"]).include?("user_performance_data")'
+  ranAt: '2026-08-13T05:50:33Z'
+  revision: 2768c5ce959f605e6f9f919dcd6f25ef213eabd8
+  exitCode: 0
+  result: passed
+  timedOut: false
+  timeoutSeconds: 300
+  changedFiles:
+  - docs/ai-delivery-learning.md
+  - docs/implementation-control.md
+  - docs/research/climbme-mobile-first-ux-telemetry-case.yaml
+  output: "\n"
+  executionEnvironment:
+    shell: "/bin/zsh"
+    rubyVersion: 2.6.10
+    environmentExported: false
+  requiredPathDigests:
+    docs/research/climbme-mobile-first-ux-telemetry-case.yaml: efcabb759951a2707bf3076b924073e38e6b6cdbad03599a2228b34fb6f17abc
+    docs/implementation-control.md: 274cc977e9376787bf56ee4161c85e2166eedd0b65987495ee5498047ba26995
+    docs/ai-delivery-learning.md: f24eff3ea12f7a0622a8bc667abb36b0a692a6242905db3605aea646ca64df34
+  requiredPaths: &1
+  - docs/research/climbme-mobile-first-ux-telemetry-case.yaml
+  - docs/implementation-control.md
+  - docs/ai-delivery-learning.md
+  visualEvidencePaths: []
+  runtimeEvidencePaths: []
+  startedAt: '2026-08-13T05:50:00Z'
+  changedAfterStart: *1

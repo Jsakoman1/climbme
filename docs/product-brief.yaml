@@ -22,6 +22,10 @@ intended_outcomes:
   to PostgreSQL through Railway environment variables, without claiming a live
   production deployment until its external ownership gate is satisfied.
 product_principles:
+- id: phone-first-navigation
+  statement: The responsive web client treats iPhone-width navigation, touch targets and primary entry as the design starting point while retaining an equally complete desktop view.
+- id: phone-first-attempt-entry
+  statement: The primary climbing-attempt flow keeps every required field visibly labelled, presents secondary detail progressively and makes saving a real attempt comfortable on a phone.
 - id: fast-honest-entry
   statement: Logging one real attempt must be quicker and clearer than maintaining a spreadsheet.
 - id: private-by-default

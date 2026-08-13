@@ -1,0 +1,123 @@
+kind: work
+version: 1
+id: climbme-mobile-first-ux-v1-05-training-presentation
+title: Deliver mobile training presentation
+status: verified
+baseline: 2768c5ce959f605e6f9f919dcd6f25ef213eabd8
+strict_verification: true
+serial_task_execution: true
+master_plan: docs/work/climbme-mobile-first-ux-v1-master.yaml
+execution_inventory: docs/work/climbme-mobile-first-ux-v1-execution-inventory.yaml
+tasks:
+- id: deliver-mobile-training-presentation
+  title: Make existing private training entry and history straightforward on a phone
+  type: implementation
+  status: done
+  inventory_item: training-presentation
+  observable_outcome: The existing training form and private training history are
+    visually clear and touch-friendly at iPhone width while retaining their current
+    API contract.
+  dependencies:
+  - routes-presentation
+  paths:
+  - frontend/src/main.js
+  - frontend/src/styles.css
+  - frontend/src/main.test.js
+  - docs/domain-library.yaml
+  required_paths:
+  - frontend/src/main.js
+  - frontend/src/styles.css
+  - frontend/src/main.test.js
+  - docs/domain-library.yaml
+  validation: npm --prefix frontend run test && npm --prefix frontend run build
+  evidence_boundary:
+  - Training client presentation only; no new session type, score meaning, API contract
+    or cross-domain analytics.
+  - No climbing-attempt, route or account behavior change.
+  started_at: '2026-08-13T05:59:29Z'
+  start_fingerprints:
+    frontend/src/main.js: 1078788e033879838419cb4883c28aa77d8fc130aeb000e35e04d2fe625a4bc1
+    frontend/src/styles.css: 996ab10150ba06d50956e9b39988f30d5acff9a86282d17fe8b138f11ef18963
+    frontend/src/main.test.js: 7e3c22f44a5a97c1df0b63ea8c514d98b10e4d7279d27930b91ece72a36c910e
+    docs/domain-library.yaml: 1a9dece5aed40c1d0786489c6f86649f078f3ca25bf81ce167386d175162a66a
+  start_workspace_paths:
+  - docs/ai-delivery-learning.md
+  - docs/domain-library.yaml
+  - docs/implementation-control.md
+  - docs/product-brief.yaml
+  - docs/research/climbme-mobile-first-ux-telemetry-case.yaml
+  - docs/research/idc-climbme-mobile-ux-baseline.md
+  - docs/work/climbme-mobile-first-ux-v1-00-plan-hardening.yaml
+  - docs/work/climbme-mobile-first-ux-v1-01-context-telemetry-protocol.yaml
+  - docs/work/climbme-mobile-first-ux-v1-02-navigation-shell.yaml
+  - docs/work/climbme-mobile-first-ux-v1-03-log-flow.yaml
+  - docs/work/climbme-mobile-first-ux-v1-04-routes-presentation.yaml
+  - docs/work/climbme-mobile-first-ux-v1-05-training-presentation.yaml
+  - docs/work/climbme-mobile-first-ux-v1-06-insights-presentation.yaml
+  - docs/work/climbme-mobile-first-ux-v1-07-navigation-log-runtime.yaml
+  - docs/work/climbme-mobile-first-ux-v1-08-routes-training-runtime.yaml
+  - docs/work/climbme-mobile-first-ux-v1-09-insights-runtime.yaml
+  - docs/work/climbme-mobile-first-ux-v1-10-learning-closeout.yaml
+  - docs/work/climbme-mobile-first-ux-v1-atomicity-review.md
+  - docs/work/climbme-mobile-first-ux-v1-execution-inventory.yaml
+  - docs/work/climbme-mobile-first-ux-v1-master.yaml
+  - frontend/index.html
+  - frontend/src/main.js
+  - frontend/src/main.test.js
+  - frontend/src/styles.css
+  - frontend/test-results/.last-run.json
+  - frontend/test-results/climbme-core-desktop-core/error-context.md
+  - frontend/test-results/climbme-core-mobile-core/error-context.md
+evidence:
+- task: deliver-mobile-training-presentation
+  command: npm --prefix frontend run test && npm --prefix frontend run build
+  ranAt: '2026-08-13T06:00:07Z'
+  revision: 2768c5ce959f605e6f9f919dcd6f25ef213eabd8
+  exitCode: 0
+  result: passed
+  timedOut: false
+  timeoutSeconds: 300
+  changedFiles:
+  - docs/domain-library.yaml
+  - frontend/src/main.js
+  - frontend/src/main.test.js
+  - frontend/src/styles.css
+  output: |2+
+
+    ✔ dashboard chart markup retains labels, values and a proportional visual bar (0.48825ms)
+    ✔ client helpers preserve CSRF, normalize email and render climbing choices (0.895875ms)
+    ✔ the app shell exposes exactly the four existing top-level V1 areas (0.104042ms)
+    ✔ the phone-first entry flow preserves every required climbing attempt field (1.046625ms)
+    ✔ the mobile Route Database keeps the complete derived route record visible (0.071209ms)
+    ✔ the mobile Training history keeps its existing private session fields (0.059583ms)
+    ℹ tests 6
+    ℹ suites 0
+    ℹ pass 6
+    ℹ fail 0
+    ℹ cancelled 0
+    ℹ skipped 0
+    ℹ todo 0
+    ℹ duration_ms 65.245583
+
+    > climbme@0.0.1 build
+    > node scripts/build.mjs
+
+
+  executionEnvironment:
+    shell: "/bin/zsh"
+    rubyVersion: 2.6.10
+    environmentExported: false
+  requiredPathDigests:
+    frontend/src/main.js: 04bf555cc829071d9f75cabcd202d9e9dc122bcb7f863dce8c6a9bd07e5933ae
+    frontend/src/styles.css: 87c154c65ed6ff588bb4f35380ce1917d0a51c7eb86d8698b251cfa817d9ae7c
+    frontend/src/main.test.js: 36392ed9724daebca5b3df6552a5cc828d6707757902917154957d3a2f9f1eae
+    docs/domain-library.yaml: 1335c192d682d11802b7856862e61b7f3f5a2bba374c42b084a5c8580394b6d6
+  requiredPaths: &1
+  - frontend/src/main.js
+  - frontend/src/styles.css
+  - frontend/src/main.test.js
+  - docs/domain-library.yaml
+  visualEvidencePaths: []
+  runtimeEvidencePaths: []
+  startedAt: '2026-08-13T05:59:29Z'
+  changedAfterStart: *1

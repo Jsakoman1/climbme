@@ -1,0 +1,148 @@
+kind: work
+version: 1
+id: climbme-mobile-first-ux-v1-10-learning-closeout
+title: Close out mobile UX delivery learning
+status: verified
+baseline: 2768c5ce959f605e6f9f919dcd6f25ef213eabd8
+strict_verification: true
+serial_task_execution: true
+master_plan: docs/work/climbme-mobile-first-ux-v1-master.yaml
+execution_inventory: docs/work/climbme-mobile-first-ux-v1-execution-inventory.yaml
+tasks:
+- id: record-mobile-ux-delivery-learning-and-readback
+  title: Record aggregate delivery learning and owner-readable residual gates
+  type: closeout
+  status: done
+  inventory_item: learning-closeout
+  observable_outcome: The completed master has a concise owner readback and an aggregate-only
+    learning record that identifies what helped Dora/IDC/CC-01 without retaining private
+    data or raw context.
+  dependencies:
+  - insights-runtime
+  paths:
+  - docs/ai-delivery-learning.md
+  - docs/project-memory.yaml
+  - docs/implementation-backlog.md
+  - docs/research/climbme-mobile-first-ux-telemetry-case.yaml
+  - docs/work/climbme-mobile-first-ux-v1-master.yaml
+  - docs/work/climbme-mobile-first-ux-v1-execution-inventory.yaml
+  required_paths:
+  - docs/ai-delivery-learning.md
+  - docs/project-memory.yaml
+  - docs/implementation-backlog.md
+  - docs/research/climbme-mobile-first-ux-telemetry-case.yaml
+  - docs/work/climbme-mobile-first-ux-v1-master.yaml
+  - docs/work/climbme-mobile-first-ux-v1-execution-inventory.yaml
+  validation: ruby -ryaml -e 'record=YAML.load_file("docs/research/climbme-mobile-first-ux-telemetry-case.yaml");
+    abort("unsafe telemetry") unless Array(record["prohibited_content"]).include?("raw_conversation")
+    && Array(record["prohibited_content"]).include?("user_performance_data"); abort("unclosed
+    context case") unless %w[completed evidence_unavailable].include?(record["status"])'
+    && ./bin/dora doctor .dora/project.yaml
+  evidence_boundary:
+  - Aggregate process learning and owner readback only; no raw user data, conversation,
+    prompt, source code excerpt, tool output, secret or external-release claim.
+  - The task cannot close a Railway, real-iPhone or public-launch gate unless separately
+    owner-provided evidence exists.
+  started_at: '2026-08-13T06:10:12Z'
+  start_fingerprints:
+    docs/ai-delivery-learning.md: f24eff3ea12f7a0622a8bc667abb36b0a692a6242905db3605aea646ca64df34
+    docs/project-memory.yaml: b14d4f12c0dba26e1745b0be63bc86625f86839313d07cac8d2ad12095b7d11d
+    docs/implementation-backlog.md: bc44b398aad67e537bda37c48e676f3f3f9e55e548cf5c482a125bdb01e12cf4
+    docs/research/climbme-mobile-first-ux-telemetry-case.yaml: efcabb759951a2707bf3076b924073e38e6b6cdbad03599a2228b34fb6f17abc
+    docs/work/climbme-mobile-first-ux-v1-master.yaml: c3b042cc0fe6bbbc8dd6753152b32405efe85d218a22b6aa700a6d60cee63f1b
+    docs/work/climbme-mobile-first-ux-v1-execution-inventory.yaml: 27cc957a03e23a02eee15a854ef5dd17fc9e0452ab268bb82f5e138216357e93
+  start_workspace_paths:
+  - docs/ai-delivery-learning.md
+  - docs/domain-library.yaml
+  - docs/implementation-control.md
+  - docs/product-brief.yaml
+  - docs/research/climbme-mobile-first-ux-telemetry-case.yaml
+  - docs/research/idc-climbme-mobile-ux-baseline.md
+  - docs/runtime-evidence/climbme-mobile-insights.md
+  - docs/runtime-evidence/climbme-mobile-navigation-log.md
+  - docs/runtime-evidence/climbme-mobile-routes-training.md
+  - docs/work/climbme-mobile-first-ux-v1-00-plan-hardening.yaml
+  - docs/work/climbme-mobile-first-ux-v1-01-context-telemetry-protocol.yaml
+  - docs/work/climbme-mobile-first-ux-v1-02-navigation-shell.yaml
+  - docs/work/climbme-mobile-first-ux-v1-03-log-flow.yaml
+  - docs/work/climbme-mobile-first-ux-v1-04-routes-presentation.yaml
+  - docs/work/climbme-mobile-first-ux-v1-05-training-presentation.yaml
+  - docs/work/climbme-mobile-first-ux-v1-06-insights-presentation.yaml
+  - docs/work/climbme-mobile-first-ux-v1-07-navigation-log-runtime.yaml
+  - docs/work/climbme-mobile-first-ux-v1-08-routes-training-runtime.yaml
+  - docs/work/climbme-mobile-first-ux-v1-09-insights-runtime.yaml
+  - docs/work/climbme-mobile-first-ux-v1-10-learning-closeout.yaml
+  - docs/work/climbme-mobile-first-ux-v1-atomicity-review.md
+  - docs/work/climbme-mobile-first-ux-v1-execution-inventory.yaml
+  - docs/work/climbme-mobile-first-ux-v1-master.yaml
+  - frontend/e2e/climbme-core.spec.js
+  - frontend/index.html
+  - frontend/src/dashboard.js
+  - frontend/src/dashboard.test.js
+  - frontend/src/main.js
+  - frontend/src/main.test.js
+  - frontend/src/styles.css
+  - frontend/test-results/.last-run.json
+evidence:
+- task: record-mobile-ux-delivery-learning-and-readback
+  command: ruby -ryaml -e 'record=YAML.load_file("docs/research/climbme-mobile-first-ux-telemetry-case.yaml");
+    abort("unsafe telemetry") unless Array(record["prohibited_content"]).include?("raw_conversation")
+    && Array(record["prohibited_content"]).include?("user_performance_data"); abort("unclosed
+    context case") unless %w[completed evidence_unavailable].include?(record["status"])'
+    && ./bin/dora doctor .dora/project.yaml
+  ranAt: '2026-08-13T06:11:41Z'
+  revision: 2768c5ce959f605e6f9f919dcd6f25ef213eabd8
+  exitCode: 0
+  result: passed
+  timedOut: false
+  timeoutSeconds: 300
+  changedFiles:
+  - docs/ai-delivery-learning.md
+  - docs/implementation-backlog.md
+  - docs/project-memory.yaml
+  - docs/research/climbme-mobile-first-ux-telemetry-case.yaml
+  - docs/work/climbme-mobile-first-ux-v1-execution-inventory.yaml
+  - docs/work/climbme-mobile-first-ux-v1-master.yaml
+  output: |+
+    PASSED adapter: adapter satisfies the Dora schema
+    PASSED path:docs: docs
+    PASSED path:work_plans: docs/work
+    PASSED path:audit_output: docs/audit-output
+    PASSED path:runtime_evidence: docs/runtime-evidence
+    PASSED command:work_start: ./bin/dora is available
+    PASSED command:work_verify: ./bin/dora is available
+    PASSED command:control_check: ./bin/dora is available
+    PASSED project-control: control bundle and declared control files exist
+    PASSED control:tool_catalog: dora_tool_catalog is configured
+    PASSED control:change_routing: dora_change_routing is configured
+    PASSED control:context_search: dora_context_search is configured
+    PASSED control:workspace_inventory: dora_workspace_inventory is configured
+    PASSED control:documentation_evidence: dora_documentation_evidence is configured
+    PASSED control:system_map: dora_system_map is configured
+    PASSED control:artifact_policy: dora_artifact_policy is configured
+    PASSED control:backlog: dora_backlog is configured
+    PASSED control:capability_inventory: adopted capability documentation controls are configured
+    PASSED project-knowledge: product brief, domain library, agent profile, and agent entrypoint are valid
+
+  executionEnvironment:
+    shell: "/bin/zsh"
+    rubyVersion: 2.6.10
+    environmentExported: false
+  requiredPathDigests:
+    docs/ai-delivery-learning.md: 864bd56e30cabb99abcb65724a73756a09deea2f94a2bb927fc9585b8f5487af
+    docs/project-memory.yaml: 4e0e892abd7289f3517f3e46f6cb0dbee6260d368f96de164c7de059c6ca7152
+    docs/implementation-backlog.md: 873c7cb047717ecbc9ecefb3c4e59c772728c4accacd607426eaad1a685284bb
+    docs/research/climbme-mobile-first-ux-telemetry-case.yaml: 7d5d206ca1a078f4688d3318ae6bc9e76c68a30670fe8df59a08e6e6dbfed4c4
+    docs/work/climbme-mobile-first-ux-v1-master.yaml: 1abf2fdb89eb1185d05db38d76b3810c34f4c050ee9d310971f14cbbc21e552b
+    docs/work/climbme-mobile-first-ux-v1-execution-inventory.yaml: a20280f31fa4160df0ebfc2b4bed4c3258019b0e64827ff845af51aa8088aea3
+  requiredPaths: &1
+  - docs/ai-delivery-learning.md
+  - docs/project-memory.yaml
+  - docs/implementation-backlog.md
+  - docs/research/climbme-mobile-first-ux-telemetry-case.yaml
+  - docs/work/climbme-mobile-first-ux-v1-master.yaml
+  - docs/work/climbme-mobile-first-ux-v1-execution-inventory.yaml
+  visualEvidencePaths: []
+  runtimeEvidencePaths: []
+  startedAt: '2026-08-13T06:10:12Z'
+  changedAfterStart: *1

@@ -14,5 +14,10 @@ document never replaces either.
 - Every implementation review records process-only learning in
   `docs/ai-delivery-learning.md`; it must not copy user performance data into
   Dora, IDC or any future private-context system.
+- An owner-authorized Context OS/CC-01 measurement case may retain only the
+  aggregate metrics explicitly declared in its local research record. It must
+  never retain raw conversations, prompts, source excerpts, tool output,
+  secrets, user records or personal-context material; it cannot itself prove a
+  Context OS, PC or CPPE capability.
 - Railway/GitHub/deployment operations require explicit owner authorization even
   when the repository is otherwise on an autonomous delivery path.

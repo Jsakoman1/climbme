@@ -1,0 +1,145 @@
+kind: execution_inventory
+version: 1
+id: climbme-mobile-first-ux-v1
+master_plan: docs/work/climbme-mobile-first-ux-v1-master.yaml
+state: verified
+execution_mode: strict_serial
+owner_authorization_required_before_start: true
+owner_authorization_record: The owner authorized discovery and planning on 2026-08-13.
+  A post-readback authorization is required before UI implementation starts.
+items:
+- id: plan-hardening
+  sequence: 1
+  order: 1
+  plan: docs/work/climbme-mobile-first-ux-v1-00-plan-hardening.yaml
+  task: harden-mobile-first-ux-plan
+  status: verified
+  started_at: '2026-08-13T05:47:59Z'
+  verified_at: '2026-08-13T05:49:16Z'
+  evidence:
+    plan: docs/work/climbme-mobile-first-ux-v1-00-plan-hardening.yaml
+    task: harden-mobile-first-ux-plan
+    revision: 2768c5ce959f605e6f9f919dcd6f25ef213eabd8
+- id: context-telemetry-protocol
+  sequence: 2
+  order: 2
+  plan: docs/work/climbme-mobile-first-ux-v1-01-context-telemetry-protocol.yaml
+  task: declare-mobile-ux-telemetry-boundary
+  status: verified
+  started_at: '2026-08-13T05:50:00Z'
+  verified_at: '2026-08-13T05:50:33Z'
+  evidence:
+    plan: docs/work/climbme-mobile-first-ux-v1-01-context-telemetry-protocol.yaml
+    task: declare-mobile-ux-telemetry-boundary
+    revision: 2768c5ce959f605e6f9f919dcd6f25ef213eabd8
+- id: navigation-shell
+  sequence: 3
+  order: 3
+  plan: docs/work/climbme-mobile-first-ux-v1-02-navigation-shell.yaml
+  task: deliver-real-mobile-section-navigation
+  status: verified
+  started_at: '2026-08-13T05:50:43Z'
+  verified_at: '2026-08-13T05:56:24Z'
+  evidence:
+    plan: docs/work/climbme-mobile-first-ux-v1-02-navigation-shell.yaml
+    task: deliver-real-mobile-section-navigation
+    revision: 2768c5ce959f605e6f9f919dcd6f25ef213eabd8
+- id: log-flow
+  sequence: 4
+  order: 4
+  plan: docs/work/climbme-mobile-first-ux-v1-03-log-flow.yaml
+  task: deliver-phone-first-attempt-entry-flow
+  status: verified
+  started_at: '2026-08-13T05:56:43Z'
+  verified_at: '2026-08-13T05:57:55Z'
+  evidence:
+    plan: docs/work/climbme-mobile-first-ux-v1-03-log-flow.yaml
+    task: deliver-phone-first-attempt-entry-flow
+    revision: 2768c5ce959f605e6f9f919dcd6f25ef213eabd8
+- id: routes-presentation
+  sequence: 5
+  order: 5
+  plan: docs/work/climbme-mobile-first-ux-v1-04-routes-presentation.yaml
+  task: deliver-mobile-route-history-presentation
+  status: verified
+  started_at: '2026-08-13T05:58:05Z'
+  verified_at: '2026-08-13T05:59:22Z'
+  evidence:
+    plan: docs/work/climbme-mobile-first-ux-v1-04-routes-presentation.yaml
+    task: deliver-mobile-route-history-presentation
+    revision: 2768c5ce959f605e6f9f919dcd6f25ef213eabd8
+- id: training-presentation
+  sequence: 6
+  order: 6
+  plan: docs/work/climbme-mobile-first-ux-v1-05-training-presentation.yaml
+  task: deliver-mobile-training-presentation
+  status: verified
+  started_at: '2026-08-13T05:59:29Z'
+  verified_at: '2026-08-13T06:00:08Z'
+  evidence:
+    plan: docs/work/climbme-mobile-first-ux-v1-05-training-presentation.yaml
+    task: deliver-mobile-training-presentation
+    revision: 2768c5ce959f605e6f9f919dcd6f25ef213eabd8
+- id: insights-presentation
+  sequence: 7
+  order: 7
+  plan: docs/work/climbme-mobile-first-ux-v1-06-insights-presentation.yaml
+  task: deliver-mobile-insights-presentation
+  status: verified
+  started_at: '2026-08-13T06:00:21Z'
+  verified_at: '2026-08-13T06:01:50Z'
+  evidence:
+    plan: docs/work/climbme-mobile-first-ux-v1-06-insights-presentation.yaml
+    task: deliver-mobile-insights-presentation
+    revision: 2768c5ce959f605e6f9f919dcd6f25ef213eabd8
+- id: navigation-log-runtime
+  sequence: 8
+  order: 8
+  plan: docs/work/climbme-mobile-first-ux-v1-07-navigation-log-runtime.yaml
+  task: prove-mobile-navigation-and-log-journey
+  status: verified
+  started_at: '2026-08-13T06:03:03Z'
+  verified_at: '2026-08-13T06:03:47Z'
+  evidence:
+    plan: docs/work/climbme-mobile-first-ux-v1-07-navigation-log-runtime.yaml
+    task: prove-mobile-navigation-and-log-journey
+    revision: 2768c5ce959f605e6f9f919dcd6f25ef213eabd8
+- id: routes-training-runtime
+  sequence: 9
+  order: 9
+  plan: docs/work/climbme-mobile-first-ux-v1-08-routes-training-runtime.yaml
+  task: prove-mobile-routes-and-training-journey
+  status: verified
+  started_at: '2026-08-13T06:03:59Z'
+  verified_at: '2026-08-13T06:08:47Z'
+  evidence:
+    plan: docs/work/climbme-mobile-first-ux-v1-08-routes-training-runtime.yaml
+    task: prove-mobile-routes-and-training-journey
+    revision: 2768c5ce959f605e6f9f919dcd6f25ef213eabd8
+- id: insights-runtime
+  sequence: 10
+  order: 10
+  plan: docs/work/climbme-mobile-first-ux-v1-09-insights-runtime.yaml
+  task: prove-mobile-insights-journey
+  status: verified
+  started_at: '2026-08-13T06:08:57Z'
+  verified_at: '2026-08-13T06:09:57Z'
+  evidence:
+    plan: docs/work/climbme-mobile-first-ux-v1-09-insights-runtime.yaml
+    task: prove-mobile-insights-journey
+    revision: 2768c5ce959f605e6f9f919dcd6f25ef213eabd8
+- id: learning-closeout
+  sequence: 11
+  order: 11
+  plan: docs/work/climbme-mobile-first-ux-v1-10-learning-closeout.yaml
+  task: record-mobile-ux-delivery-learning-and-readback
+  status: verified
+  started_at: '2026-08-13T06:10:12Z'
+  closeout_preparation: Local synthetic proof and aggregate-only learning are ready
+    for verifier reconciliation; physical iPhone/Safari evidence remains a separate
+    gate.
+  verified_at: '2026-08-13T06:11:41Z'
+  evidence:
+    plan: docs/work/climbme-mobile-first-ux-v1-10-learning-closeout.yaml
+    task: record-mobile-ux-delivery-learning-and-readback
+    revision: 2768c5ce959f605e6f9f919dcd6f25ef213eabd8

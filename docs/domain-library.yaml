@@ -89,10 +89,26 @@ acceptance_scenarios:
   given: A registered climber has signed in.
   when: They save a valid French-grade climbing attempt and refresh the web application.
   then: They see it in their own chronological log and another account cannot read it.
+- id: phone-first-attempt-entry
+  given: A signed-in climber is using an iPhone-width responsive viewport.
+  when: They open the Log section to record one climbing attempt.
+  then: Date, location, sector, route name, grade, style and send remain visibly labelled; optional performance context is progressively disclosed and saving preserves the existing private attempt workflow.
 - id: no-duplicate-route-entry
   given: A climber has recorded attempts for one route.
   when: They view Route Database.
   then: First-attempt date, send date, total attempts, sent style and status derive from those attempts.
+- id: mobile-route-history
+  given: A signed-in climber is using the Routes section at iPhone width.
+  when: They inspect a route derived from private attempts.
+  then: Route identity, grade, first try, send date, attempt count and derived status remain readable, and the existing Abandon action does not create a separate route record.
+- id: mobile-training-history
+  given: A signed-in climber is using the Training section at iPhone width.
+  when: They add or inspect a private training session.
+  then: The existing date, type, duration and optional strength/endurance/mobility context remain readable and the session stays private to its owner.
+- id: mobile-insights
+  given: A signed-in climber is using the Insights section at iPhone width.
+  when: They inspect private dashboard results.
+  then: Existing KPI labels/values, chart labels/values and achievements remain visible without changing the dashboard response, grade ordering or metric formulas.
 - id: analytics-precise-labels
   given: A climber has attempts and sends across grades and dates.
   when: They view Dashboard.

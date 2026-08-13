@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { chartMarkup } from "./dashboard.js";
+import { chartMarkup, insightMetricKeys } from "./dashboard.js";
 
 test("dashboard chart markup retains labels, values and a proportional visual bar", () => {
   const markup = chartMarkup("Sends by grade", [{ label: "6c", value: 2 }, { label: "7a", value: 4 }]);
@@ -8,4 +8,7 @@ test("dashboard chart markup retains labels, values and a proportional visual ba
   assert.match(markup, /6c/);
   assert.match(markup, /--chart-width:50%/);
   assert.match(markup, /--chart-width:100%/);
+});
+test("Insights retains the complete existing private metric set", () => {
+  assert.deepEqual(insightMetricKeys, ["totalAttempts", "totalSends", "sendRate", "hardestGradeSent", "hardestOnsight", "hardestRedpoint", "activeProjects", "climbingDays"]);
 });

@@ -1,0 +1,100 @@
+kind: master
+version: 1
+id: climbme-mobile-first-ux-v1
+title: Modernize ClimbMe into a mobile-first private climbing web experience
+status: verified
+baseline: 2768c5ce959f605e6f9f919dcd6f25ef213eabd8
+authority_boundary: This plan owns only ClimbMe presentation, its delivery documentation
+  and synthetic local runtime proof. It cannot change Dora, IDC, Context OS, Private
+  Context, CPPE, Railway, GitHub, the ClimbMe backend API, PostgreSQL schema, authentication,
+  privacy scope, analytics formulas or another repo. The IDC baseline remains advisory;
+  ClimbMe/Dora remains the canonical owner of decisions, plan state and verification
+  evidence.
+serial_execution: true
+strict_verification: true
+serial_task_execution: true
+execution_inventory: docs/work/climbme-mobile-first-ux-v1-execution-inventory.yaml
+scope_control:
+  reused_verified_plans:
+  - docs/work/climbme-v1-master.yaml at 2768c5ce959f605e6f9f919dcd6f25ef213eabd8
+  discovery_source: docs/research/idc-climbme-mobile-ux-baseline.md
+  residual_scope:
+  - Mobile-first app shell and four real V1 sections: Log, Routes, Training and Insights.
+  - Modern, touch-friendly presentation of the existing V1 data and actions.
+  - Synthetic iPhone-sized runtime proof and process-only learning evidence.
+  retest_triggers:
+  - Any client navigation, form, responsive, accessibility or presentation change.
+  - Any accidental change to existing API use, user-scoped data behavior or analytics
+    rendering.
+  non_duplication_rule: This is presentation work only. Existing route, training and
+    dashboard data contracts remain the sole source for their rendered values.
+planning_quality_gate:
+  semantic_atomicity_review:
+    status: passed
+    artifact: docs/work/climbme-mobile-first-ux-v1-atomicity-review.md
+    rule: Each owner gate, screen implementation, runtime case and learning synthesis
+      is an independent serial task. Evidence unavailable cannot be represented as
+      passing mobile-readiness proof.
+scope:
+  allowed:
+  - frontend client source, client tests, Playwright scenarios and static presentation
+    assets.
+  - ClimbMe product/domain/implementation/living documentation and work artifacts.
+  - Aggregate, process-only context telemetry compliant with Dora CC-01 policy.
+  - Local synthetic browser data and runtime evidence.
+  forbidden:
+  - Backend API, database, Flyway, auth, permissions, privacy scope or analytics-formula
+    changes.
+  - New persisted fields, coaching, social features, native iPhone application, dark-mode
+    requirement or rebrand.
+  - Real user performance data, raw conversations, secrets, deployment, network research
+    at runtime or changes to Dora/IDC/Context OS.
+success_conditions:
+- A signed-in climber can reach every existing V1 area on an iPhone-sized viewport
+  through real navigation.
+- The primary attempt-entry flow is faster to scan and use on a phone while preserving
+  all current fields and API behavior.
+- Routes, Training and Insights remain complete, readable and action-safe on phone
+  and desktop widths.
+- Each visual change is covered by scoped client checks; the final runtime cases prove
+  the required mobile journeys with synthetic data.
+- Learning records retain only permitted aggregate process information, never private
+  climbing data or raw agent context.
+children:
+- docs/work/climbme-mobile-first-ux-v1-00-plan-hardening.yaml
+- docs/work/climbme-mobile-first-ux-v1-01-context-telemetry-protocol.yaml
+- docs/work/climbme-mobile-first-ux-v1-02-navigation-shell.yaml
+- docs/work/climbme-mobile-first-ux-v1-03-log-flow.yaml
+- docs/work/climbme-mobile-first-ux-v1-04-routes-presentation.yaml
+- docs/work/climbme-mobile-first-ux-v1-05-training-presentation.yaml
+- docs/work/climbme-mobile-first-ux-v1-06-insights-presentation.yaml
+- docs/work/climbme-mobile-first-ux-v1-07-navigation-log-runtime.yaml
+- docs/work/climbme-mobile-first-ux-v1-08-routes-training-runtime.yaml
+- docs/work/climbme-mobile-first-ux-v1-09-insights-runtime.yaml
+- docs/work/climbme-mobile-first-ux-v1-10-learning-closeout.yaml
+non_goals:
+- Calling this redesign a native iPhone app or a production release.
+- Treating a local 390px viewport as proof of all physical iPhone/Safari behavior.
+- Using process telemetry to retain user records, prompts, code excerpts or personal
+  context.
+closeout_readback:
+  local_evidence: The approved presentation scope has local unit, build and three
+    synthetic 390px browser proofs. It preserves the existing protected data/API behavior.
+  retained_learning: Only aggregate process observations are retained; no climbing,
+    account, conversation, code-excerpt or tool-output content is part of closeout.
+  residual_owner_gate: CLIMBME-MOB-001 physical iPhone/Safari usability check.
+evidence:
+- verifiedAt: '2026-08-13T06:13:10Z'
+  revision: 2768c5ce959f605e6f9f919dcd6f25ef213eabd8
+  children:
+  - docs/work/climbme-mobile-first-ux-v1-00-plan-hardening.yaml
+  - docs/work/climbme-mobile-first-ux-v1-01-context-telemetry-protocol.yaml
+  - docs/work/climbme-mobile-first-ux-v1-02-navigation-shell.yaml
+  - docs/work/climbme-mobile-first-ux-v1-03-log-flow.yaml
+  - docs/work/climbme-mobile-first-ux-v1-04-routes-presentation.yaml
+  - docs/work/climbme-mobile-first-ux-v1-05-training-presentation.yaml
+  - docs/work/climbme-mobile-first-ux-v1-06-insights-presentation.yaml
+  - docs/work/climbme-mobile-first-ux-v1-07-navigation-log-runtime.yaml
+  - docs/work/climbme-mobile-first-ux-v1-08-routes-training-runtime.yaml
+  - docs/work/climbme-mobile-first-ux-v1-09-insights-runtime.yaml
+  - docs/work/climbme-mobile-first-ux-v1-10-learning-closeout.yaml
