@@ -18,6 +18,7 @@ export function authRequestOptions(method, payload, csrfToken) { return { method
 export function styleLabel(style) { return style.toLowerCase().replaceAll("_", " ").replace(/\b\w/g, character => character.toUpperCase()); }
 export function gradeOptions(selected = "6a") { return frenchGrades.map(grade => `<option value="${grade}" ${grade === selected ? "selected" : ""}>${grade}</option>`).join(""); }
 export function sectionLabel(id) { return appSections.find(section => section.id === id)?.label || "Log"; }
+export function sectionFromHash(hash = "") { const sectionId = hash.replace(/^#/, ""); return appSections.some(section => section.id === sectionId) ? sectionId : "log"; }
 
 async function ensureCsrf() { await fetch("/api/auth/csrf", { credentials: "same-origin" }); return csrfTokenFromCookie(document.cookie); }
 async function api(path, method = "GET", payload) { const options = method === "GET" ? { credentials: "same-origin" } : authRequestOptions(method, payload, await ensureCsrf()); const response = await fetch(path, options); if (!response.ok) throw new Error((await response.text()).replace(/^\{.*?"detail":"?([^"}]+).*$/, "$1") || "Unable to complete that request."); return response.status === 204 ? null : response.json(); }
@@ -41,16 +42,23 @@ function routeMarkup(routes) { const rows = routes.length ? routes.map(route => 
 function trainingMarkup(sessions) { const rows = sessions.length ? sessions.map(session => `<tr><td>${session.trainedOn}</td><td><strong>${styleLabel(session.sessionType)}</strong><span>${session.notes || ""}</span></td><td>${session.durationMinutes} min</td><td>${session.strength ?? "—"} / ${session.endurance ?? "—"} / ${session.mobility ?? "—"}</td><td><button class="table-button danger" data-delete-training="${session.id}">Delete</button></td></tr>`).join("") : `<tr><td colspan="5" class="empty-state">No training sessions yet.</td></tr>`; return `<section class="log-section" id="training"><div class="section-heading"><div><p class="eyebrow">TRAINING LOG</p><h2>Training sessions</h2></div></div><section class="entry-card"><form id="training-form"><div class="form-grid"><label>Date<input name="trainedOn" type="date" value="${new Date().toISOString().slice(0, 10)}" required></label><label>Session type<select name="sessionType">${["CLIMBING", "HANGBOARD", "GYM", "RUNNING", "REST", "MOBILITY"].map(type => `<option value="${type}">${styleLabel(type)}</option>`).join("")}</select></label><label>Duration (min)<input name="durationMinutes" type="number" min="1" required></label><label>Strength (1–10)<input name="strength" type="number" min="1" max="10"></label><label>Endurance (1–10)<input name="endurance" type="number" min="1" max="10"></label><label>Mobility (1–10)<input name="mobility" type="number" min="1" max="10"></label><label class="wide">Notes<textarea name="notes" rows="2"></textarea></label></div><div class="form-actions"><button type="submit">Add training</button></div></form></section><div class="table-wrap"><table><thead><tr><th>Date</th><th>Session</th><th>Duration</th><th>Strength / endurance / mobility</th><th></th></tr></thead><tbody>${rows}</tbody></table></div></section>`; }
 function trainingPayload(form) { return { trainedOn: form.get("trainedOn"), sessionType: form.get("sessionType"), durationMinutes: Number(form.get("durationMinutes")), strength: number(form, "strength"), endurance: number(form, "endurance"), mobility: number(form, "mobility"), notes: value(form, "notes") }; }
 
-function selectSection(root, sectionId) {
-  const selected = appSections.some(section => section.id === sectionId) ? sectionId : "log";
+let detachHistoryListener = () => {};
+
+function selectSection(root, sectionId, { updateHistory = false } = {}) {
+  const selected = sectionFromHash(`#${sectionId}`);
   root.querySelectorAll("[data-page-section]").forEach(section => { section.hidden = section.dataset.pageSection !== selected; });
   root.querySelectorAll("[data-section]").forEach(button => { const active = button.dataset.section === selected; button.classList.toggle("active", active); button.setAttribute("aria-current", active ? "page" : "false"); });
-  if (typeof history !== "undefined") history.replaceState(null, "", `#${selected}`);
+  if (updateHistory && typeof history !== "undefined" && window.location.hash !== `#${selected}`) history.pushState(null, "", `#${selected}`);
 }
 
 function attachNavigation(root) {
-  root.querySelectorAll("[data-section]").forEach(button => button.addEventListener("click", () => selectSection(root, button.dataset.section)));
-  root.querySelector("#go-log").addEventListener("click", () => selectSection(root, "log"));
+  root.querySelectorAll("[data-section]").forEach(button => button.addEventListener("click", () => selectSection(root, button.dataset.section, { updateHistory: true })));
+  root.querySelector("#go-log").addEventListener("click", () => selectSection(root, "log", { updateHistory: true }));
+  detachHistoryListener();
+  const restoreSection = () => selectSection(root, sectionFromHash(window.location.hash));
+  window.addEventListener("popstate", restoreSection);
+  window.addEventListener("hashchange", restoreSection);
+  detachHistoryListener = () => { window.removeEventListener("popstate", restoreSection); window.removeEventListener("hashchange", restoreSection); };
 }
 
 function keepDashboardInsideInsights(root) {
@@ -61,11 +69,12 @@ function keepDashboardInsideInsights(root) {
   new MutationObserver(moveDashboard).observe(page, { childList: true });
 }
 
-async function mountApp(account, editing = null, message = "", selectedSection = "log") {
+async function mountApp(account, editing = null, message = "", selectedSection = null) {
   try {
     const [attempts, routes, training] = await Promise.all([api("/api/attempts"), api("/api/routes"), api("/api/training")]);
     const root = document.querySelector("#app");
-    root.innerHTML = appMarkup(account, attempts, editing, message, selectedSection);
+    const activeSection = selectedSection || sectionFromHash(window.location.hash);
+    root.innerHTML = appMarkup(account, attempts, editing, message, activeSection);
     root.querySelector(".entry-card").classList.add("attempt-entry-card");
     root.querySelector("#attempt-form").dataset.entryFlow = "phone-first";
     root.querySelector("#log .table-wrap").classList.add("attempt-list");

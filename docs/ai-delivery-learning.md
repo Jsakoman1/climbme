@@ -24,6 +24,21 @@ decision. Do not pause merely because an intermediate slice is verified.
 
 ## Entries
 
+### 2026-08-13 — mobile navigation history (verified local evidence)
+
+- Intended outcome: make the existing four mobile sections restorable through a
+  browser URL and Back/Forward without creating a stored view preference.
+- Process signal: the first mobile shell verified section switching, but a
+  focused review found that using history replacement alone did not support a
+  direct section link or browser traversal.
+- Candidate reusable lesson: navigation acceptance criteria should name initial
+  URL state and Back/Forward behavior whenever a client-side shell changes a
+  visible section. This remains a small UX requirement, not a new product
+  feature or a context-system capability claim.
+- Evidence coverage: client unit/build checks, backend regression tests and one
+  isolated 390px synthetic browser journey passed. The remaining physical
+  iPhone/Safari gate remains unchanged.
+
 ### 2026-08-13 — mobile-first UX telemetry boundary (verified)
 
 - Intended outcome: define a privacy-safe, aggregate-only observation boundary

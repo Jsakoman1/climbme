@@ -1,0 +1,106 @@
+kind: work
+version: 1
+id: climbme-mobile-navigation-history-v1
+title: Preserve mobile section navigation in browser history
+status: verified
+baseline: fcea28c8b5de9fc392b03717543db2eee5b9a69e
+strict_verification: true
+serial_task_execution: true
+execution_inventory: docs/work/climbme-mobile-navigation-history-v1-execution-inventory.yaml
+tasks:
+- id: preserve-mobile-section-history
+  title: Restore and navigate between existing mobile sections through URL history
+  type: implementation
+  status: done
+  inventory_item: mobile-navigation-history
+  observable_outcome: Opening an existing ClimbMe section URL and using browser Back
+    or Forward selects the matching Log, Routes, Training or Insights view without
+    changing any stored product data.
+  dependencies: []
+  paths:
+  - frontend/src/main.js
+  - frontend/src/main.test.js
+  - frontend/e2e/climbme-core.spec.js
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-mobile-navigation-history-v1.yaml
+  - docs/work/climbme-mobile-navigation-history-v1-execution-inventory.yaml
+  required_paths:
+  - frontend/src/main.js
+  - frontend/src/main.test.js
+  - frontend/e2e/climbme-core.spec.js
+  - docs/ai-delivery-learning.md
+  validation: npm --prefix frontend run test && npm --prefix frontend run build
+  evidence_boundary:
+  - Client-side selection and browser history only; authentication, API contracts,
+    persisted data, analytics and user scoping remain unchanged.
+  - The real Context OS case may retain only approved aggregate process measures and
+    must not retain a route, account, browser address, source excerpt, tool output
+    or personal data.
+  observation_disposition: required_aggregate_only
+  started_at: '2026-08-13T09:34:27Z'
+  start_fingerprints:
+    frontend/src/main.js: 5643e80f877e6ccb90856a4c14fbd788dc5cc141c9be34f80fc3ae89b8acf252
+    frontend/src/main.test.js: 7ff7d5610e4d9a2db255865dda96aaf79b1caa5dcc12c8bdc2f4e3fa4b962205
+    frontend/e2e/climbme-core.spec.js: 7b1767174641f8071c36f325b52ff6a510f439c6086086e8f4df71e6f6c15016
+    docs/ai-delivery-learning.md: 864bd56e30cabb99abcb65724a73756a09deea2f94a2bb927fc9585b8f5487af
+  start_workspace_paths:
+  - docs/work/climbme-mobile-navigation-history-v1-execution-inventory.yaml
+  - docs/work/climbme-mobile-navigation-history-v1.yaml
+  start_workspace_fingerprints:
+    docs/work/climbme-mobile-navigation-history-v1-execution-inventory.yaml: e37508b3a9f95e0929116ccac378a5c78addc03b0753bc2d6c38c77e7fb8d73b
+    docs/work/climbme-mobile-navigation-history-v1.yaml: 3c85948efbfa34c91f5b413b9eed53f7e5c7e5c872a80d52fcbb3b84d9f6d405
+evidence:
+- task: preserve-mobile-section-history
+  command: npm --prefix frontend run test && npm --prefix frontend run build
+  ranAt: '2026-08-13T09:35:23Z'
+  revision: fcea28c8b5de9fc392b03717543db2eee5b9a69e
+  exitCode: 0
+  result: passed
+  timedOut: false
+  timeoutSeconds: 300
+  changedFiles:
+  - docs/ai-delivery-learning.md
+  - frontend/e2e/climbme-core.spec.js
+  - frontend/src/main.js
+  - frontend/src/main.test.js
+  - docs/work/climbme-mobile-navigation-history-v1-execution-inventory.yaml
+  - docs/work/climbme-mobile-navigation-history-v1.yaml
+  output: |+
+    ✔ client helpers preserve CSRF, normalize email and render climbing choices (0.994125ms)
+    ✔ the app shell exposes exactly the four existing top-level V1 areas (0.546041ms)
+    ✔ section URL hashes restore only an existing top-level V1 area (0.149875ms)
+    ✔ the phone-first entry flow preserves every required climbing attempt field (0.077292ms)
+    ✔ the mobile Route Database keeps the complete derived route record visible (0.083ms)
+    ✔ the mobile Training history keeps its existing private session fields (0.069917ms)
+    ✔ mobile Insights keeps the existing private dashboard inputs in scope (0.068458ms)
+    ℹ tests 9
+    ℹ suites 0
+    ℹ pass 9
+    ℹ fail 0
+    ℹ cancelled 0
+    ℹ skipped 0
+    ℹ todo 0
+    ℹ duration_ms 52.413208
+
+    > climbme@0.0.1 build
+    > node scripts/build.mjs
+
+
+  executionEnvironment:
+    shell: "/bin/zsh"
+    rubyVersion: 2.6.10
+    environmentExported: false
+  requiredPathDigests:
+    frontend/src/main.js: 31b8173d9daf580403490848bbcfd9f86898fcf93aa57327e5f509243f8d51b6
+    frontend/src/main.test.js: a76acc3d9ab9a1ccc77383aeeabc1804ddf093b3ca1574ddd6daaa9c446ed97d
+    frontend/e2e/climbme-core.spec.js: 62c8aa8e32f17590c7837d3f1b3a4cde7723e8076bf8bcbf4bf8b8fea0545c0c
+    docs/ai-delivery-learning.md: b2b18e4ac67a184c8a92a571d9a81ccd478dcf5d8ddb0a6b82e82a0aef99bea4
+  requiredPaths: &1
+  - frontend/src/main.js
+  - frontend/src/main.test.js
+  - frontend/e2e/climbme-core.spec.js
+  - docs/ai-delivery-learning.md
+  visualEvidencePaths: []
+  runtimeEvidencePaths: []
+  startedAt: '2026-08-13T09:34:27Z'
+  changedAfterStart: *1

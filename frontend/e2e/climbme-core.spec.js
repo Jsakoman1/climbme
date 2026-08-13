@@ -21,9 +21,14 @@ test("mobile navigation and Log preserve the primary climbing journey", async ({
   const tabs = page.locator(".mobile-tabbar");
   await tabs.getByRole("button", { name: "Routes" }).click();
   await expect(page.getByRole("heading", { name: "Route database" })).toBeVisible();
+  await expect(page).toHaveURL(/#routes$/);
   await tabs.getByRole("button", { name: "Training" }).click();
   await expect(page.getByRole("heading", { name: "Training sessions" })).toBeVisible();
   await tabs.getByRole("button", { name: "Insights" }).click();
+  await expect(page.getByRole("heading", { name: "Insights" })).toBeVisible();
+  await page.goBack();
+  await expect(page.getByRole("heading", { name: "Training sessions" })).toBeVisible();
+  await page.goForward();
   await expect(page.getByRole("heading", { name: "Insights" })).toBeVisible();
   await tabs.getByRole("button", { name: "Log" }).click();
   await expect(page.getByRole("heading", { name: "Recent attempts" })).toBeVisible();

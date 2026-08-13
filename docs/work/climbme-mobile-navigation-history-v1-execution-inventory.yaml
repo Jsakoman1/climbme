@@ -1,0 +1,21 @@
+kind: execution_inventory
+version: 1
+id: climbme-mobile-navigation-history-v1
+state: proposed
+execution_mode: strict_serial
+owner_authorization_required_before_start: true
+owner_authorization_record: Owner authorized the data-preserving ClimbMe mobile UX
+  fix and its aggregate-only Context OS real delivery case on 2026-08-13.
+items:
+- id: mobile-navigation-history
+  sequence: 1
+  order: 1
+  plan: docs/work/climbme-mobile-navigation-history-v1.yaml
+  task: preserve-mobile-section-history
+  status: verified
+  started_at: '2026-08-13T09:34:27Z'
+  verified_at: '2026-08-13T09:35:23Z'
+  evidence:
+    plan: docs/work/climbme-mobile-navigation-history-v1.yaml
+    task: preserve-mobile-section-history
+    revision: fcea28c8b5de9fc392b03717543db2eee5b9a69e
