@@ -15,9 +15,9 @@ commands:
 distribution:
   method: locked_local_cli
   lock_path: dora.lock.yaml
-  release_version: v1.16.2
-  source_commit: 25eb5ca8c7e8fd780f582f919feb114f1d48acfe
-  package_checksum: f4d967678ce8f699c9ffb5c1a28ea2db73858a61b91f952a86c790c01d2f5954
+  release_version: v1.16.4
+  source_commit: ef8c36f6bb9457f85627d17bac5fc2607c1033e2
+  package_checksum: fdf1f089a14f826231e42cd2704ca960e97774182ff14e754b1a4eabaf8cedac
   cache_layout: user_application_support_v1
   update_command: Use Dora locked-cli-rotation-preview and an owner-approved exact rotation record; do not use a checkout, PATH fallback or live network source.
   rollback_rule: Restore the prior exact lock and matching adapter identity through the same reviewed rotation path, or revert the isolated Dora lock commit.
