@@ -36,8 +36,9 @@ Railway never receives a Maven package credential.
    `AUTH_FOUNDATION_PACKAGES_TOKEN` to `GITHUB_PACKAGES_TOKEN` only for Maven
    because the consumer-owned settings file explicitly expects that variable.
 4. The workflow uploads only the prebuilt JAR, `Dockerfile.runtime` and
-   `railway.toml` to the existing `climbme` production service. It cannot read
-   provider variables or create a service.
+   `railway.toml` to the existing `climbme` production service. Its Railway CLI
+   step runs from that assembled context, so the runtime Dockerfile and manifest
+   are the deployment root. It cannot read provider variables or create a service.
 5. Verify health and the intended public runtime after the owner-authorized run.
 
 ## Optional paid private-image route

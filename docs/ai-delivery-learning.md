@@ -93,6 +93,18 @@ Dockerfile or Docker build arguments.
   in GitHub Actions. This static correction is not package-download, workflow or
   production deployment evidence.
 
+### 2026-08-14 — Railway runtime context-root correction (verified static contract)
+
+- Process signal: passing an isolated context as a CLI argument can leave its
+  `railway.toml` outside the provider CLI's configuration-discovery root, causing
+  a default build strategy instead of the intended runtime Dockerfile.
+- Reusable boundary: run the Railway CLI from the assembled runtime context and
+  statically reject parent-directory path uploads. This preserves the minimal
+  upload while making manifest selection explicit.
+- External state: an earlier upload was accepted but did not prove the expected
+  manifest; production health remained available. A fresh owner-authorized
+  workflow run is still required for runtime evidence.
+
 ### 2026-08-13 — locked Dora CLI compatibility pilot (verified local evidence)
 
 - Intended outcome: prove that the delivery-control CLI can be resolved from one

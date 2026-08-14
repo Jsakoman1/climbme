@@ -1,0 +1,154 @@
+kind: work
+version: 1
+id: climbme-railway-runtime-context-root-remediation-v1
+title: Correct Railway runtime-context root selection in deployment CI
+status: verified
+baseline: 9b0e6105c04551fe384702c95697e178bb60acad
+strict_verification: true
+serial_task_execution: true
+execution_inventory: docs/work/climbme-railway-runtime-context-root-remediation-v1-execution-inventory.yaml
+artifact_roles: explicit_v1
+scope_control:
+  residual_scope:
+  - Correct only the Actions working directory for Railway upload so the assembled
+    runtime context supplies its Dockerfile and manifest as the deployment root.
+  non_goals:
+  - Cancelling, deleting or reconfiguring a Railway deployment; changing provider
+    variables, secrets, database records, application behavior or package access.
+tasks:
+- id: run-railway-cli-from-assembled-runtime-root
+  inventory_item: runtime-context-root-remediation
+  title: Invoke Railway CLI from the assembled runtime context
+  type: implementation
+  observable_outcome: The manual Free deployment workflow uses `railway-context` as
+    the Railway CLI working directory, and static verification rejects a parent directory
+    path upload that could bypass the context-local manifest.
+  dependencies: []
+  input_paths:
+  - Dockerfile.runtime
+  - railway.toml
+  - docs/work/climbme-railway-free-ci-automation-v1.yaml
+  output_paths:
+  - ".github/workflows/deploy-railway-runtime.yml"
+  - scripts/verify_railway_runtime_pipeline.rb
+  - docs/operations/railway-deployment.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-railway-runtime-context-root-remediation-v1.yaml
+  - docs/work/climbme-railway-runtime-context-root-remediation-v1-execution-inventory.yaml
+  paths:
+  - Dockerfile.runtime
+  - railway.toml
+  - ".github/workflows/deploy-railway-runtime.yml"
+  - scripts/verify_railway_runtime_pipeline.rb
+  - docs/work/climbme-railway-free-ci-automation-v1.yaml
+  - docs/operations/railway-deployment.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-railway-runtime-context-root-remediation-v1.yaml
+  - docs/work/climbme-railway-runtime-context-root-remediation-v1-execution-inventory.yaml
+  required_paths:
+  - ".github/workflows/deploy-railway-runtime.yml"
+  - scripts/verify_railway_runtime_pipeline.rb
+  - docs/operations/railway-deployment.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-railway-runtime-context-root-remediation-v1.yaml
+  - docs/work/climbme-railway-runtime-context-root-remediation-v1-execution-inventory.yaml
+  verifier_footprint_paths: &1
+  - Dockerfile.runtime
+  - railway.toml
+  - ".github/workflows/deploy-railway-runtime.yml"
+  - scripts/verify_railway_runtime_pipeline.rb
+  - docs/work/climbme-railway-free-ci-automation-v1.yaml
+  - docs/operations/railway-deployment.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-railway-runtime-context-root-remediation-v1.yaml
+  - docs/work/climbme-railway-runtime-context-root-remediation-v1-execution-inventory.yaml
+  assertion_intent: Static validation must prove that the context-local Dockerfile
+    and Railway manifest are discovered from the CLI working directory before provider
+    upload, while credentials remain outside Docker and source files.
+  validation: ruby scripts/verify_railway_runtime_pipeline.rb
+  evidence_boundary:
+  - Static workflow and documentation evidence only.
+  - No deployment cancellation, provider-variable read, database data, token value,
+    GitHub Actions run or production health claim.
+  observation_disposition: required_aggregate_only
+  status: done
+  started_at: '2026-08-14T15:38:23Z'
+  start_fingerprints:
+    ".github/workflows/deploy-railway-runtime.yml": 0d04855c7ac533f36b19e49016d7929ad1f84fd2b3dd659513bc701593b3e5b5
+    scripts/verify_railway_runtime_pipeline.rb: d0958ccd2624cdd6d6aad16d84ab8dfbf7699674831a624f6529c8de996681a2
+    docs/operations/railway-deployment.md: aad8aaf73e198e79e7a6d0ed391412537196e8afc80c81f716b5095deb95f34c
+    docs/ai-delivery-learning.md: 5bc7839387d404ea26d7c476e094790395b3bb895a3be1c80a73f6dfff670ff4
+    docs/work/climbme-railway-runtime-context-root-remediation-v1.yaml: f33219afbd3be7f23974cece5fe79e3c210955d26777046137020f5f23fc3828
+    docs/work/climbme-railway-runtime-context-root-remediation-v1-execution-inventory.yaml: ed281e1c0cd33c4ce006f2e2a6ca0a4703f3eb28701701e5f76a36c558d8162f
+  start_input_fingerprints:
+    Dockerfile.runtime: 12f1872d5cdefa0f081412a2d963a465d8d0c06928d2de0e27d8282cba0db168
+    railway.toml: cab430ec210045f87c50e2e6e0dc1788742fe0301948fe85d1c5caf27480d6dc
+    docs/work/climbme-railway-free-ci-automation-v1.yaml: 53585eded8bcb9269b4a848a3c2f1fcd43bcfa4d9ccfc38317f7d76b4d50228c
+  start_output_fingerprints:
+    ".github/workflows/deploy-railway-runtime.yml": 0d04855c7ac533f36b19e49016d7929ad1f84fd2b3dd659513bc701593b3e5b5
+    scripts/verify_railway_runtime_pipeline.rb: d0958ccd2624cdd6d6aad16d84ab8dfbf7699674831a624f6529c8de996681a2
+    docs/operations/railway-deployment.md: aad8aaf73e198e79e7a6d0ed391412537196e8afc80c81f716b5095deb95f34c
+    docs/ai-delivery-learning.md: 5bc7839387d404ea26d7c476e094790395b3bb895a3be1c80a73f6dfff670ff4
+    docs/work/climbme-railway-runtime-context-root-remediation-v1.yaml: f33219afbd3be7f23974cece5fe79e3c210955d26777046137020f5f23fc3828
+    docs/work/climbme-railway-runtime-context-root-remediation-v1-execution-inventory.yaml: ed281e1c0cd33c4ce006f2e2a6ca0a4703f3eb28701701e5f76a36c558d8162f
+  start_verifier_footprint_fingerprints:
+    ".github/workflows/deploy-railway-runtime.yml": 0d04855c7ac533f36b19e49016d7929ad1f84fd2b3dd659513bc701593b3e5b5
+    scripts/verify_railway_runtime_pipeline.rb: d0958ccd2624cdd6d6aad16d84ab8dfbf7699674831a624f6529c8de996681a2
+    docs/operations/railway-deployment.md: aad8aaf73e198e79e7a6d0ed391412537196e8afc80c81f716b5095deb95f34c
+    docs/ai-delivery-learning.md: 5bc7839387d404ea26d7c476e094790395b3bb895a3be1c80a73f6dfff670ff4
+    docs/work/climbme-railway-runtime-context-root-remediation-v1.yaml: f33219afbd3be7f23974cece5fe79e3c210955d26777046137020f5f23fc3828
+    docs/work/climbme-railway-runtime-context-root-remediation-v1-execution-inventory.yaml: ed281e1c0cd33c4ce006f2e2a6ca0a4703f3eb28701701e5f76a36c558d8162f
+  start_workspace_paths:
+  - docs/work/climbme-railway-runtime-context-root-remediation-v1-execution-inventory.yaml
+  - docs/work/climbme-railway-runtime-context-root-remediation-v1.yaml
+  start_workspace_fingerprints:
+    docs/work/climbme-railway-runtime-context-root-remediation-v1-execution-inventory.yaml: ed281e1c0cd33c4ce006f2e2a6ca0a4703f3eb28701701e5f76a36c558d8162f
+    docs/work/climbme-railway-runtime-context-root-remediation-v1.yaml: f33219afbd3be7f23974cece5fe79e3c210955d26777046137020f5f23fc3828
+evidence:
+- task: run-railway-cli-from-assembled-runtime-root
+  command: ruby scripts/verify_railway_runtime_pipeline.rb
+  ranAt: '2026-08-14T15:38:54Z'
+  revision: 9b0e6105c04551fe384702c95697e178bb60acad
+  exitCode: 0
+  result: passed
+  timedOut: false
+  timeoutSeconds: 300
+  changedFiles:
+  - ".github/workflows/deploy-railway-runtime.yml"
+  - docs/ai-delivery-learning.md
+  - docs/operations/railway-deployment.md
+  - scripts/verify_railway_runtime_pipeline.rb
+  - docs/work/climbme-railway-runtime-context-root-remediation-v1-execution-inventory.yaml
+  - docs/work/climbme-railway-runtime-context-root-remediation-v1.yaml
+  executionEnvironment:
+    shell: "/bin/zsh"
+    rubyVersion: 2.6.10
+    environmentExported: false
+  requiredPathDigests:
+    ".github/workflows/deploy-railway-runtime.yml": f64ac85c660ee3455121ec13722ffcd8dd26b729478e3a848236641c5a8b1f6c
+    scripts/verify_railway_runtime_pipeline.rb: c31d72ef6601b1d5106f47141b07fd7696a50abde852b863d6b87b47a423247c
+    docs/operations/railway-deployment.md: df8ee248c01041c2cbed1a8463428c7ebb1ddaf1a872e27e67d4d5fee46c5303
+    docs/ai-delivery-learning.md: 50698b4d8b3c1a574e797244b5949b088d96ff0d9d0a39e43f168d1ba51d3b1a
+    docs/work/climbme-railway-runtime-context-root-remediation-v1.yaml: 35e286e0267836be3521227f23568e8283e56dc7dab174871ddbee128a95c399
+    docs/work/climbme-railway-runtime-context-root-remediation-v1-execution-inventory.yaml: a8048d7598cc984a138da42377c5b597cd2e7400cf77af284844efd97dfe1be4
+  output: Railway runtime pipeline valid
+  requiredPaths:
+  - ".github/workflows/deploy-railway-runtime.yml"
+  - scripts/verify_railway_runtime_pipeline.rb
+  - docs/operations/railway-deployment.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-railway-runtime-context-root-remediation-v1.yaml
+  - docs/work/climbme-railway-runtime-context-root-remediation-v1-execution-inventory.yaml
+  requiredRemovedDirectories: []
+  removedDirectoryEvidence: []
+  visualEvidencePaths: []
+  runtimeEvidencePaths: []
+  verifierFootprintPaths: *1
+  startedAt: '2026-08-14T15:38:23Z'
+  changedAfterStart:
+  - ".github/workflows/deploy-railway-runtime.yml"
+  - scripts/verify_railway_runtime_pipeline.rb
+  - docs/operations/railway-deployment.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-railway-runtime-context-root-remediation-v1.yaml
+  - docs/work/climbme-railway-runtime-context-root-remediation-v1-execution-inventory.yaml

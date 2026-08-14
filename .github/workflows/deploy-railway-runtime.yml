@@ -53,4 +53,5 @@ jobs:
           test -n "$RAILWAY_PROJECT_ID"
           test -n "$RAILWAY_TOKEN"
       - name: Upload runtime context to Railway
-        run: npx --yes @railway/cli@5.39.0 up railway-context --path-as-root --service climbme --environment production --project "$RAILWAY_PROJECT_ID" --ci
+        working-directory: railway-context
+        run: npx --yes @railway/cli@5.39.0 up --service climbme --environment production --project "$RAILWAY_PROJECT_ID" --ci

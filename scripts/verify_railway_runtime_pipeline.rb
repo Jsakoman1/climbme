@@ -26,11 +26,12 @@ assert_includes(workflow, "cp railway.toml railway-context/railway.toml", "Railw
 assert_includes(workflow, "test -n \"$RAILWAY_PROJECT_ID\"", "explicit project configuration check")
 assert_includes(workflow, "test -n \"$RAILWAY_TOKEN\"", "explicit token configuration check")
 assert_includes(workflow, "test -n \"$GITHUB_PACKAGES_TOKEN\"", "explicit package configuration check")
-assert_includes(workflow, "npx --yes @railway/cli@5.39.0 up railway-context --path-as-root --service climbme --environment production --project \"$RAILWAY_PROJECT_ID\" --ci", "pinned runtime-only Railway upload")
+assert_includes(workflow, "- name: Upload runtime context to Railway\n        working-directory: railway-context\n        run: npx --yes @railway/cli@5.39.0 up --service climbme --environment production --project \"$RAILWAY_PROJECT_ID\" --ci", "pinned context-root Railway upload")
 
 %w[packages: docker/login-action docker/build-push-action ghcr.io --build-arg RAILWAY_API_TOKEN railway\ login secrets.GITHUB_TOKEN].each do |forbidden|
   abort("Railway runtime pipeline validation failed: forbidden #{forbidden} in workflow") if workflow.include?(forbidden)
 end
+abort("Railway runtime pipeline validation failed: upload must not pass a parent-directory context path") if workflow.include?("up railway-context") || workflow.include?("--path-as-root")
 
 assert_includes(runtime_dockerfile, "FROM eclipse-temurin:21-jre-alpine", "runtime Java base image")
 assert_includes(runtime_dockerfile, "COPY app.jar app.jar", "prebuilt application artifact")
