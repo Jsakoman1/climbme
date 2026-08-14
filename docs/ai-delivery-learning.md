@@ -105,6 +105,18 @@ Dockerfile or Docker build arguments.
   manifest; production health remained available. A fresh owner-authorized
   workflow run is still required for runtime evidence.
 
+### 2026-08-14 — Railway Free Actions runtime deployment (verified)
+
+- Evidence coverage: the manual Actions route completed frontend and backend
+  verification, resolved the cross-repository private Maven package, uploaded the
+  isolated runtime context and produced a successful Railway runtime deployment
+  with a passing public health check.
+- Reusable boundary: package-read and Railway deployment credentials remain
+  separate, and the provider CLI must run from the context that contains the
+  runtime Dockerfile and manifest.
+- Residual risk: this confirms one production delivery path, not backups, custom
+  domains, email recovery, physical-device behavior or a general provider SLA.
+
 ### 2026-08-13 — locked Dora CLI compatibility pilot (verified local evidence)
 
 - Intended outcome: prove that the delivery-control CLI can be resolved from one
