@@ -37,7 +37,7 @@ runtime:
       product behavior.
     status: unresolved
 work:
-  plan: docs/work/first-work.yaml
+  plan: git:50c2e1fb7fa4474e09ad70cd8a946a37a462ab9c:docs/work/first-work.yaml
   task: establish-climbme-v1-baseline
 unresolved:
 - id: first-capability-test
