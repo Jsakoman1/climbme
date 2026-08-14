@@ -1,0 +1,195 @@
+kind: work
+version: 1
+id: climbme-auth-foundation-v1-adoption
+title: Adopt Auth Foundation v0.1.0 canonical email primitive
+status: verified
+baseline: c18ae8ec01c06b7ef45f438fd90af664a1e91e14
+strict_verification: true
+serial_task_execution: true
+execution_inventory: docs/work/climbme-auth-foundation-v1-adoption-execution-inventory.yaml
+artifact_roles: explicit_v1
+scope_control:
+  residual_scope:
+  - Resolve the immutable private package and delegate only canonical email normalization.
+  non_goals:
+  - Session, CSRF, BCrypt, authentication-manager, rate-limit, recovery, database,
+    Docker build, deploy and public auth-response changes.
+tasks:
+- id: adopt-versioned-email-normalization
+  inventory_item: auth-foundation-email-adoption
+  title: Use the immutable Auth Foundation canonical email primitive
+  type: implementation
+  observable_outcome: ClimbMe resolves Auth Foundation v0.1.0 through an environment-authenticated
+    private Maven registry and uses its canonical email primitive while preserving
+    existing login and registration behavior.
+  dependencies: []
+  input_paths:
+  - backend/src/test/java/com/climbme/app/auth/AuthIntegrationTest.java
+  - docs/implementation-control.md
+  output_paths:
+  - ".mvn/maven.config"
+  - ".mvn/settings.xml"
+  - backend/pom.xml
+  - backend/src/main/java/com/climbme/app/auth/AuthService.java
+  - docs/product-brief.yaml
+  - docs/domain-library.yaml
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-auth-foundation-v1-adoption.yaml
+  - docs/work/climbme-auth-foundation-v1-adoption-execution-inventory.yaml
+  paths:
+  - backend/src/main/java/com/climbme/app/auth/AuthService.java
+  - backend/src/test/java/com/climbme/app/auth/AuthIntegrationTest.java
+  - docs/implementation-control.md
+  - ".mvn/maven.config"
+  - ".mvn/settings.xml"
+  - backend/pom.xml
+  - docs/product-brief.yaml
+  - docs/domain-library.yaml
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-auth-foundation-v1-adoption.yaml
+  - docs/work/climbme-auth-foundation-v1-adoption-execution-inventory.yaml
+  required_paths:
+  - ".mvn/maven.config"
+  - ".mvn/settings.xml"
+  - backend/pom.xml
+  - backend/src/main/java/com/climbme/app/auth/AuthService.java
+  - docs/product-brief.yaml
+  - docs/domain-library.yaml
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-auth-foundation-v1-adoption.yaml
+  - docs/work/climbme-auth-foundation-v1-adoption-execution-inventory.yaml
+  verifier_footprint_paths: &1
+  - backend/src/test/java/com/climbme/app/auth/AuthIntegrationTest.java
+  - docs/implementation-control.md
+  - ".mvn/maven.config"
+  - ".mvn/settings.xml"
+  - backend/pom.xml
+  - backend/src/main/java/com/climbme/app/auth/AuthService.java
+  - docs/product-brief.yaml
+  - docs/domain-library.yaml
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-auth-foundation-v1-adoption.yaml
+  - docs/work/climbme-auth-foundation-v1-adoption-execution-inventory.yaml
+  validation: mvn -f backend/pom.xml test
+  evidence_boundary:
+  - Local dependency-resolution and backend-test evidence only.
+  - No credential value, account data, persistent data, provider configuration, Docker
+    build, Railway deploy or public runtime claim.
+  observation_disposition: required_aggregate_only
+  status: done
+  started_at: '2026-08-14T14:37:01Z'
+  start_fingerprints:
+    ".mvn/maven.config": __missing__
+    ".mvn/settings.xml": __missing__
+    backend/pom.xml: 259f98cc074f1310ac9bdee95eb2de5fa1ba23fbcb5e1c0cedac307861f520f3
+    backend/src/main/java/com/climbme/app/auth/AuthService.java: 70065fe5c0e530db39eadd97475cd1d488ec3f842b6c2afbe30deeef709438cd
+    docs/product-brief.yaml: 3d81592044a264c5418a59a6b829d1729b72d213785a005045dd2439d85b135d
+    docs/domain-library.yaml: 57038c9d9131dd6ae913db90c1ed9160edad6063bcaa44296e0944917916f22b
+    docs/ai-delivery-learning.md: 8e15f673d0a62334cbea3c76546f2ccc7aabc9852cec2f3348a0cbba7d030fc8
+    docs/work/climbme-auth-foundation-v1-adoption.yaml: 7aedd034be354f6a82d651cc5734955032a5ca3a006fd6dd4d2c4c085dc95ee6
+    docs/work/climbme-auth-foundation-v1-adoption-execution-inventory.yaml: 5d85550d2b8a7d22b584f95916e9faa1bf7712ae184c7097e701b8489e7b1bf9
+  start_input_fingerprints:
+    backend/src/test/java/com/climbme/app/auth/AuthIntegrationTest.java: ce50b0475639be4df544e2c37c4e1649dc86dd2ba30ab2539475358cc3dcdf0c
+    docs/implementation-control.md: 73248652c912da037c60d8c2c340fc88010ddf3392c6994c0b86aefc6e2da4c8
+  start_output_fingerprints:
+    ".mvn/maven.config": __missing__
+    ".mvn/settings.xml": __missing__
+    backend/pom.xml: 259f98cc074f1310ac9bdee95eb2de5fa1ba23fbcb5e1c0cedac307861f520f3
+    backend/src/main/java/com/climbme/app/auth/AuthService.java: 70065fe5c0e530db39eadd97475cd1d488ec3f842b6c2afbe30deeef709438cd
+    docs/product-brief.yaml: 3d81592044a264c5418a59a6b829d1729b72d213785a005045dd2439d85b135d
+    docs/domain-library.yaml: 57038c9d9131dd6ae913db90c1ed9160edad6063bcaa44296e0944917916f22b
+    docs/ai-delivery-learning.md: 8e15f673d0a62334cbea3c76546f2ccc7aabc9852cec2f3348a0cbba7d030fc8
+    docs/work/climbme-auth-foundation-v1-adoption.yaml: 7aedd034be354f6a82d651cc5734955032a5ca3a006fd6dd4d2c4c085dc95ee6
+    docs/work/climbme-auth-foundation-v1-adoption-execution-inventory.yaml: 5d85550d2b8a7d22b584f95916e9faa1bf7712ae184c7097e701b8489e7b1bf9
+  start_verifier_footprint_fingerprints:
+    ".mvn/maven.config": __missing__
+    ".mvn/settings.xml": __missing__
+    backend/pom.xml: 259f98cc074f1310ac9bdee95eb2de5fa1ba23fbcb5e1c0cedac307861f520f3
+    backend/src/main/java/com/climbme/app/auth/AuthService.java: 70065fe5c0e530db39eadd97475cd1d488ec3f842b6c2afbe30deeef709438cd
+    docs/product-brief.yaml: 3d81592044a264c5418a59a6b829d1729b72d213785a005045dd2439d85b135d
+    docs/domain-library.yaml: 57038c9d9131dd6ae913db90c1ed9160edad6063bcaa44296e0944917916f22b
+    docs/ai-delivery-learning.md: 8e15f673d0a62334cbea3c76546f2ccc7aabc9852cec2f3348a0cbba7d030fc8
+    docs/work/climbme-auth-foundation-v1-adoption.yaml: 7aedd034be354f6a82d651cc5734955032a5ca3a006fd6dd4d2c4c085dc95ee6
+    docs/work/climbme-auth-foundation-v1-adoption-execution-inventory.yaml: 5d85550d2b8a7d22b584f95916e9faa1bf7712ae184c7097e701b8489e7b1bf9
+  start_workspace_paths:
+  - backend/src/main/java/com/climbme/app/auth/AuthService.java
+  - docs/work/climbme-auth-foundation-v1-adoption-execution-inventory.yaml
+  - docs/work/climbme-auth-foundation-v1-adoption.yaml
+  start_workspace_fingerprints:
+    backend/src/main/java/com/climbme/app/auth/AuthService.java: 70065fe5c0e530db39eadd97475cd1d488ec3f842b6c2afbe30deeef709438cd
+    docs/work/climbme-auth-foundation-v1-adoption-execution-inventory.yaml: 5d85550d2b8a7d22b584f95916e9faa1bf7712ae184c7097e701b8489e7b1bf9
+    docs/work/climbme-auth-foundation-v1-adoption.yaml: 7aedd034be354f6a82d651cc5734955032a5ca3a006fd6dd4d2c4c085dc95ee6
+evidence:
+- task: adopt-versioned-email-normalization
+  command: mvn -f backend/pom.xml test
+  ranAt: '2026-08-14T14:39:40Z'
+  revision: c18ae8ec01c06b7ef45f438fd90af664a1e91e14
+  exitCode: 0
+  result: passed
+  timedOut: false
+  timeoutSeconds: 300
+  changedFiles:
+  - backend/pom.xml
+  - backend/src/main/java/com/climbme/app/auth/AuthService.java
+  - docs/ai-delivery-learning.md
+  - docs/domain-library.yaml
+  - docs/product-brief.yaml
+  - ".mvn/maven.config"
+  - ".mvn/settings.xml"
+  - docs/work/climbme-auth-foundation-v1-adoption-execution-inventory.yaml
+  - docs/work/climbme-auth-foundation-v1-adoption.yaml
+  executionEnvironment:
+    shell: "/bin/zsh"
+    rubyVersion: 2.6.10
+    environmentExported: false
+  requiredPathDigests:
+    ".mvn/maven.config": 28910bdd1c1ff2614c40d2bb64e133b8a86cc262809e6c2d1d05dbc064d185b4
+    ".mvn/settings.xml": 7a48d54194fa360e745c59979318d3bbe5f30e0c0ba159130201912c7d46dd51
+    backend/pom.xml: 1f4fe181586c19eb0728c0c6dda1293ab091c51e33b75147d641794e46973d3b
+    backend/src/main/java/com/climbme/app/auth/AuthService.java: 7b826fe5f52bf7fc645c787f1a69a941a7b262bb311eefad1e01c27cd2d4e9e1
+    docs/product-brief.yaml: 8b1744522aba7e631226b32dccc55604e8a95d98938585c0674dbc1219e5594b
+    docs/domain-library.yaml: 7689494ebc4a7f8a581ab3fafb5527f455c90359331624492ac8fa44540d1ad4
+    docs/ai-delivery-learning.md: 9d162fb2044fe784e685c9c993e4c6ebc4713f73e8492e14b038b7ddf261caba
+    docs/work/climbme-auth-foundation-v1-adoption.yaml: 8a4fd1b7e7b0764523f0bfa315e6382ed23814d858684309a5d1e8026e2cfff1
+    docs/work/climbme-auth-foundation-v1-adoption-execution-inventory.yaml: db54fecbe6389496815f963f54d6773a522453b9dc1bb42c8a58acee4efc1bca
+  output: "[INFO] \n[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0\n[INFO]
+    \n[INFO] ------------------------------------------------------------------------\n[INFO]
+    BUILD SUCCESS\n[INFO] ------------------------------------------------------------------------\n[INFO]
+    Total time:  11.279 s\n[INFO] Finished at: 2026-08-14T16:39:52+02:00\n[INFO] ------------------------------------------------------------------------\n\nWARNING:
+    A restricted method in java.lang.System has been called\nWARNING: java.lang.System::load
+    has been called by org.apache.tomcat.jni.Library in an unnamed module (file:/Users/jsakoman/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.31/tomcat-embed-core-10.1.31.jar)\nWARNING:
+    Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this
+    module\nWARNING: Restricted methods will be blocked in a future release unless
+    native access is enabled\n\nOpenJDK 64-Bit Server VM warning: Sharing is only
+    supported for boot loader classes because bootstrap classpath has been appended\nWARNING:
+    A Java agent has been loaded dynamically (/Users/jsakoman/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.19/byte-buddy-agent-1.14.19.jar)\nWARNING:
+    If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading
+    to hide this warning\nWARNING: If a serviceability tool is not in use, please
+    run with -Djdk.instrument.traceUsage for more information\nWARNING: Dynamic loading
+    of agents will be disallowed by default in a future release"
+  requiredPaths:
+  - ".mvn/maven.config"
+  - ".mvn/settings.xml"
+  - backend/pom.xml
+  - backend/src/main/java/com/climbme/app/auth/AuthService.java
+  - docs/product-brief.yaml
+  - docs/domain-library.yaml
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-auth-foundation-v1-adoption.yaml
+  - docs/work/climbme-auth-foundation-v1-adoption-execution-inventory.yaml
+  requiredRemovedDirectories: []
+  removedDirectoryEvidence: []
+  visualEvidencePaths: []
+  runtimeEvidencePaths: []
+  verifierFootprintPaths: *1
+  startedAt: '2026-08-14T14:37:01Z'
+  changedAfterStart:
+  - ".mvn/maven.config"
+  - ".mvn/settings.xml"
+  - backend/pom.xml
+  - backend/src/main/java/com/climbme/app/auth/AuthService.java
+  - docs/product-brief.yaml
+  - docs/domain-library.yaml
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-auth-foundation-v1-adoption.yaml
+  - docs/work/climbme-auth-foundation-v1-adoption-execution-inventory.yaml

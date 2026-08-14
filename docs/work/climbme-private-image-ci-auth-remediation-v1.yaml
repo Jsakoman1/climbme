@@ -1,0 +1,205 @@
+kind: work
+version: 1
+id: climbme-private-image-ci-auth-remediation-v1
+title: Correct private package credential mapping in CI
+status: verified
+baseline: c18ae8ec01c06b7ef45f438fd90af664a1e91e14
+strict_verification: true
+serial_task_execution: true
+execution_inventory: docs/work/climbme-private-image-ci-auth-remediation-v1-execution-inventory.yaml
+artifact_roles: explicit_v1
+scope_control:
+  residual_scope:
+  - Correct only the CI environment mapping that the consumer-owned Maven settings
+    file requires.
+  non_goals:
+  - Changing credentials, package access, image publication, Railway configuration,
+    deployment or application behavior.
+tasks:
+- id: map-ephemeral-ci-token-to-consumer-maven-setting
+  inventory_item: map-ephemeral-ci-token
+  title: Map the ephemeral Actions token only in the Maven verification step
+  type: implementation
+  observable_outcome: The manual image workflow maps the ephemeral GitHub Actions
+    token to the consumer Maven settings variable before Maven runs, while the verifier
+    proves that this variable never enters Docker configuration.
+  dependencies: []
+  input_paths:
+  - ".mvn/maven.config"
+  - ".mvn/settings.xml"
+  - docs/work/climbme-private-image-delivery-v1.yaml
+  - docs/work/climbme-private-image-delivery-v1-execution-inventory.yaml
+  output_paths:
+  - ".github/workflows/build-private-image.yml"
+  - scripts/verify_private_image_pipeline.rb
+  - docs/operations/shared-module-fast-path.md
+  - docs/operations/railway-deployment.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-private-image-ci-auth-remediation-v1.yaml
+  - docs/work/climbme-private-image-ci-auth-remediation-v1-execution-inventory.yaml
+  paths:
+  - ".mvn/maven.config"
+  - ".mvn/settings.xml"
+  - docs/work/climbme-private-image-delivery-v1.yaml
+  - docs/work/climbme-private-image-delivery-v1-execution-inventory.yaml
+  - ".github/workflows/build-private-image.yml"
+  - scripts/verify_private_image_pipeline.rb
+  - docs/operations/shared-module-fast-path.md
+  - docs/operations/railway-deployment.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-private-image-ci-auth-remediation-v1.yaml
+  - docs/work/climbme-private-image-ci-auth-remediation-v1-execution-inventory.yaml
+  required_paths:
+  - ".github/workflows/build-private-image.yml"
+  - scripts/verify_private_image_pipeline.rb
+  - docs/operations/shared-module-fast-path.md
+  - docs/operations/railway-deployment.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-private-image-ci-auth-remediation-v1.yaml
+  - docs/work/climbme-private-image-ci-auth-remediation-v1-execution-inventory.yaml
+  verifier_footprint_paths: &1
+  - ".mvn/maven.config"
+  - ".mvn/settings.xml"
+  - docs/work/climbme-private-image-delivery-v1.yaml
+  - docs/work/climbme-private-image-delivery-v1-execution-inventory.yaml
+  - ".github/workflows/build-private-image.yml"
+  - scripts/verify_private_image_pipeline.rb
+  - docs/operations/shared-module-fast-path.md
+  - docs/operations/railway-deployment.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-private-image-ci-auth-remediation-v1.yaml
+  - docs/work/climbme-private-image-ci-auth-remediation-v1-execution-inventory.yaml
+  assertion_intent: The workflow configuration must supply the consumer's expected
+    Maven environment variable only to the Maven step and the runtime image must remain
+    credential-free.
+  validation: ruby scripts/verify_private_image_pipeline.rb
+  evidence_boundary:
+  - Local workflow and settings-contract evidence only.
+  - No token value, GitHub Actions execution, package access change, image publication,
+    Railway configuration, deploy or production-runtime claim.
+  observation_disposition: required_aggregate_only
+  status: done
+  started_at: '2026-08-14T14:53:41Z'
+  start_fingerprints:
+    ".github/workflows/build-private-image.yml": b2d730988540677b3d94c566ea485899e4cf02dbacf8b84b62abdb3089a2ddc0
+    scripts/verify_private_image_pipeline.rb: 05f70e94721877d9eeeb5460970c83272e237811fc1f3babdd7bd370fbebac3c
+    docs/operations/shared-module-fast-path.md: e1d6b8666f7ca7308227ec9eb2cc884acdccf6ec6e6b2bb0a9617b837b790ed5
+    docs/operations/railway-deployment.md: fcfd7fa078e8f097ecb287f9c3fc0d8102dd6be340258bac0c8a7d4b170b9fec
+    docs/ai-delivery-learning.md: a0610e2b0fc9e3998b359d457cfa7339c8f1c8b2068e9de6cde69ff7a1059486
+    docs/work/climbme-private-image-ci-auth-remediation-v1.yaml: 5ade261c1a935a9925dd2e171b088edf0bb288de6ee5bc658118736bb303f517
+    docs/work/climbme-private-image-ci-auth-remediation-v1-execution-inventory.yaml: 1c67b8c7ddfb7c89c098d5fd4e558c6361bda30f5711b0f32a57617822c347f4
+  start_input_fingerprints:
+    ".mvn/maven.config": 28910bdd1c1ff2614c40d2bb64e133b8a86cc262809e6c2d1d05dbc064d185b4
+    ".mvn/settings.xml": 7a48d54194fa360e745c59979318d3bbe5f30e0c0ba159130201912c7d46dd51
+    docs/work/climbme-private-image-delivery-v1.yaml: c0de54b9e27b6fc722a2931c61ed3bb58520dc14886b19b0e6ceaa2856b45c6f
+    docs/work/climbme-private-image-delivery-v1-execution-inventory.yaml: 4c1ec1bf18800b29b5b299657bef123b482aa33197bd34c20ef404a45f32b7ed
+  start_output_fingerprints:
+    ".github/workflows/build-private-image.yml": b2d730988540677b3d94c566ea485899e4cf02dbacf8b84b62abdb3089a2ddc0
+    scripts/verify_private_image_pipeline.rb: 05f70e94721877d9eeeb5460970c83272e237811fc1f3babdd7bd370fbebac3c
+    docs/operations/shared-module-fast-path.md: e1d6b8666f7ca7308227ec9eb2cc884acdccf6ec6e6b2bb0a9617b837b790ed5
+    docs/operations/railway-deployment.md: fcfd7fa078e8f097ecb287f9c3fc0d8102dd6be340258bac0c8a7d4b170b9fec
+    docs/ai-delivery-learning.md: a0610e2b0fc9e3998b359d457cfa7339c8f1c8b2068e9de6cde69ff7a1059486
+    docs/work/climbme-private-image-ci-auth-remediation-v1.yaml: 5ade261c1a935a9925dd2e171b088edf0bb288de6ee5bc658118736bb303f517
+    docs/work/climbme-private-image-ci-auth-remediation-v1-execution-inventory.yaml: 1c67b8c7ddfb7c89c098d5fd4e558c6361bda30f5711b0f32a57617822c347f4
+  start_verifier_footprint_fingerprints:
+    ".github/workflows/build-private-image.yml": b2d730988540677b3d94c566ea485899e4cf02dbacf8b84b62abdb3089a2ddc0
+    scripts/verify_private_image_pipeline.rb: 05f70e94721877d9eeeb5460970c83272e237811fc1f3babdd7bd370fbebac3c
+    docs/operations/shared-module-fast-path.md: e1d6b8666f7ca7308227ec9eb2cc884acdccf6ec6e6b2bb0a9617b837b790ed5
+    docs/operations/railway-deployment.md: fcfd7fa078e8f097ecb287f9c3fc0d8102dd6be340258bac0c8a7d4b170b9fec
+    docs/ai-delivery-learning.md: a0610e2b0fc9e3998b359d457cfa7339c8f1c8b2068e9de6cde69ff7a1059486
+    docs/work/climbme-private-image-ci-auth-remediation-v1.yaml: 5ade261c1a935a9925dd2e171b088edf0bb288de6ee5bc658118736bb303f517
+    docs/work/climbme-private-image-ci-auth-remediation-v1-execution-inventory.yaml: 1c67b8c7ddfb7c89c098d5fd4e558c6361bda30f5711b0f32a57617822c347f4
+  start_workspace_paths:
+  - ".github/workflows/build-private-image.yml"
+  - ".mvn/maven.config"
+  - ".mvn/settings.xml"
+  - Dockerfile.runtime
+  - backend/pom.xml
+  - backend/src/main/java/com/climbme/app/auth/AuthService.java
+  - docs/ai-delivery-learning.md
+  - docs/domain-library.yaml
+  - docs/operations/railway-deployment.md
+  - docs/operations/shared-module-fast-path.md
+  - docs/product-brief.yaml
+  - docs/work/climbme-auth-foundation-v1-adoption-execution-inventory.yaml
+  - docs/work/climbme-auth-foundation-v1-adoption.yaml
+  - docs/work/climbme-private-image-ci-auth-remediation-v1-execution-inventory.yaml
+  - docs/work/climbme-private-image-ci-auth-remediation-v1.yaml
+  - docs/work/climbme-private-image-delivery-v1-execution-inventory.yaml
+  - docs/work/climbme-private-image-delivery-v1.yaml
+  - scripts/verify_private_image_pipeline.rb
+  start_workspace_fingerprints:
+    ".github/workflows/build-private-image.yml": b2d730988540677b3d94c566ea485899e4cf02dbacf8b84b62abdb3089a2ddc0
+    ".mvn/maven.config": 28910bdd1c1ff2614c40d2bb64e133b8a86cc262809e6c2d1d05dbc064d185b4
+    ".mvn/settings.xml": 7a48d54194fa360e745c59979318d3bbe5f30e0c0ba159130201912c7d46dd51
+    Dockerfile.runtime: 12f1872d5cdefa0f081412a2d963a465d8d0c06928d2de0e27d8282cba0db168
+    backend/pom.xml: 1f4fe181586c19eb0728c0c6dda1293ab091c51e33b75147d641794e46973d3b
+    backend/src/main/java/com/climbme/app/auth/AuthService.java: 7b826fe5f52bf7fc645c787f1a69a941a7b262bb311eefad1e01c27cd2d4e9e1
+    docs/ai-delivery-learning.md: a0610e2b0fc9e3998b359d457cfa7339c8f1c8b2068e9de6cde69ff7a1059486
+    docs/domain-library.yaml: 7689494ebc4a7f8a581ab3fafb5527f455c90359331624492ac8fa44540d1ad4
+    docs/operations/railway-deployment.md: fcfd7fa078e8f097ecb287f9c3fc0d8102dd6be340258bac0c8a7d4b170b9fec
+    docs/operations/shared-module-fast-path.md: e1d6b8666f7ca7308227ec9eb2cc884acdccf6ec6e6b2bb0a9617b837b790ed5
+    docs/product-brief.yaml: 8b1744522aba7e631226b32dccc55604e8a95d98938585c0674dbc1219e5594b
+    docs/work/climbme-auth-foundation-v1-adoption-execution-inventory.yaml: f58998b5fd00bd4fe2d887fbadb468b7fe07237daaa02b9d95b4d11fc9270828
+    docs/work/climbme-auth-foundation-v1-adoption.yaml: fc331830a813ba7b2f250ae8a7848ef095a863e826ed7607f1ff331780994362
+    docs/work/climbme-private-image-ci-auth-remediation-v1-execution-inventory.yaml: 1c67b8c7ddfb7c89c098d5fd4e558c6361bda30f5711b0f32a57617822c347f4
+    docs/work/climbme-private-image-ci-auth-remediation-v1.yaml: 5ade261c1a935a9925dd2e171b088edf0bb288de6ee5bc658118736bb303f517
+    docs/work/climbme-private-image-delivery-v1-execution-inventory.yaml: 4c1ec1bf18800b29b5b299657bef123b482aa33197bd34c20ef404a45f32b7ed
+    docs/work/climbme-private-image-delivery-v1.yaml: c0de54b9e27b6fc722a2931c61ed3bb58520dc14886b19b0e6ceaa2856b45c6f
+    scripts/verify_private_image_pipeline.rb: 05f70e94721877d9eeeb5460970c83272e237811fc1f3babdd7bd370fbebac3c
+evidence:
+- task: map-ephemeral-ci-token-to-consumer-maven-setting
+  command: ruby scripts/verify_private_image_pipeline.rb
+  ranAt: '2026-08-14T14:55:28Z'
+  revision: c18ae8ec01c06b7ef45f438fd90af664a1e91e14
+  exitCode: 0
+  result: passed
+  timedOut: false
+  timeoutSeconds: 300
+  changedFiles:
+  - docs/ai-delivery-learning.md
+  - docs/operations/railway-deployment.md
+  - ".github/workflows/build-private-image.yml"
+  - ".mvn/maven.config"
+  - ".mvn/settings.xml"
+  - docs/operations/shared-module-fast-path.md
+  - docs/work/climbme-private-image-ci-auth-remediation-v1-execution-inventory.yaml
+  - docs/work/climbme-private-image-ci-auth-remediation-v1.yaml
+  - docs/work/climbme-private-image-delivery-v1-execution-inventory.yaml
+  - docs/work/climbme-private-image-delivery-v1.yaml
+  - scripts/verify_private_image_pipeline.rb
+  executionEnvironment:
+    shell: "/bin/zsh"
+    rubyVersion: 2.6.10
+    environmentExported: false
+  requiredPathDigests:
+    ".github/workflows/build-private-image.yml": e69fee39e0a915bef120f9a33818b72db8800cdf4bdd4daadbcdad4051c042e0
+    scripts/verify_private_image_pipeline.rb: 21f87452231aad7b941d0e64122544814d8a64f2d822da1870952bdb648df182
+    docs/operations/shared-module-fast-path.md: c033c530351520576f709aab0f3efd8ff7f0982c8888f58a49d04087a407053e
+    docs/operations/railway-deployment.md: 495fd7379320fc5a2a49ec9ada586d1bf2f15cbd9cdefd7f9b0e85ff59152cbc
+    docs/ai-delivery-learning.md: ed84f5af50fc02b8cd9a6eedec04a0a8a4fe3f6587b5fec6ea3414ea0bfd966f
+    docs/work/climbme-private-image-ci-auth-remediation-v1.yaml: 139b06bec4546e2b7979712aa958e740108f86ac34e913c4ebff24212c2fe3e3
+    docs/work/climbme-private-image-ci-auth-remediation-v1-execution-inventory.yaml: ddabc4c3d8cdc0af85e203c19fecd4e0306bfc3e1f28464ed42126737d309024
+  output: private image pipeline valid
+  requiredPaths:
+  - ".github/workflows/build-private-image.yml"
+  - scripts/verify_private_image_pipeline.rb
+  - docs/operations/shared-module-fast-path.md
+  - docs/operations/railway-deployment.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-private-image-ci-auth-remediation-v1.yaml
+  - docs/work/climbme-private-image-ci-auth-remediation-v1-execution-inventory.yaml
+  requiredRemovedDirectories: []
+  removedDirectoryEvidence: []
+  visualEvidencePaths: []
+  runtimeEvidencePaths: []
+  verifierFootprintPaths: *1
+  startedAt: '2026-08-14T14:53:41Z'
+  changedAfterStart:
+  - ".github/workflows/build-private-image.yml"
+  - scripts/verify_private_image_pipeline.rb
+  - docs/operations/shared-module-fast-path.md
+  - docs/operations/railway-deployment.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-private-image-ci-auth-remediation-v1.yaml
+  - docs/work/climbme-private-image-ci-auth-remediation-v1-execution-inventory.yaml

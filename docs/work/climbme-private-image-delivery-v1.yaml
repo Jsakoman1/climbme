@@ -1,0 +1,217 @@
+kind: work
+version: 1
+id: climbme-private-image-delivery-v1
+title: Prepare token-safe private image delivery
+status: verified
+baseline: c18ae8ec01c06b7ef45f438fd90af664a1e91e14
+strict_verification: true
+serial_task_execution: true
+execution_inventory: docs/work/climbme-private-image-delivery-v1-execution-inventory.yaml
+artifact_roles: explicit_v1
+scope_control:
+  residual_scope:
+  - Prepare a manual GitHub Actions build that resolves the private package before
+    Docker and publishes an immutable private runtime image.
+  non_goals:
+  - Changing the existing Railway service, granting GitHub package access, storing
+    a provider credential, pushing repository changes, publishing an image or deploying.
+tasks:
+- id: prepare-token-safe-private-image-pipeline
+  inventory_item: token-safe-private-image-pipeline
+  title: Define and locally verify the prebuilt private image workflow
+  type: implementation
+  observable_outcome: A manually triggered GitHub Actions workflow builds the frontend
+    and backend with an ephemeral token before Docker, and publishes an immutable
+    GHCR runtime image that contains no Maven build step or package credential.
+  dependencies: []
+  input_paths:
+  - Dockerfile
+  - railway.toml
+  - backend/pom.xml
+  - ".mvn/maven.config"
+  - ".mvn/settings.xml"
+  - frontend/package.json
+  - frontend/package-lock.json
+  - docs/implementation-control.md
+  output_paths:
+  - Dockerfile.runtime
+  - ".github/workflows/build-private-image.yml"
+  - scripts/verify_private_image_pipeline.rb
+  - docs/operations/shared-module-fast-path.md
+  - docs/operations/railway-deployment.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-private-image-delivery-v1.yaml
+  - docs/work/climbme-private-image-delivery-v1-execution-inventory.yaml
+  paths:
+  - Dockerfile
+  - railway.toml
+  - backend/pom.xml
+  - ".mvn/maven.config"
+  - ".mvn/settings.xml"
+  - frontend/package.json
+  - frontend/package-lock.json
+  - docs/implementation-control.md
+  - Dockerfile.runtime
+  - ".github/workflows/build-private-image.yml"
+  - scripts/verify_private_image_pipeline.rb
+  - docs/operations/shared-module-fast-path.md
+  - docs/operations/railway-deployment.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-private-image-delivery-v1.yaml
+  - docs/work/climbme-private-image-delivery-v1-execution-inventory.yaml
+  required_paths:
+  - Dockerfile.runtime
+  - ".github/workflows/build-private-image.yml"
+  - scripts/verify_private_image_pipeline.rb
+  - docs/operations/shared-module-fast-path.md
+  - docs/operations/railway-deployment.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-private-image-delivery-v1.yaml
+  - docs/work/climbme-private-image-delivery-v1-execution-inventory.yaml
+  verifier_footprint_paths: &1
+  - Dockerfile
+  - railway.toml
+  - backend/pom.xml
+  - ".mvn/maven.config"
+  - ".mvn/settings.xml"
+  - frontend/package.json
+  - frontend/package-lock.json
+  - docs/implementation-control.md
+  - Dockerfile.runtime
+  - ".github/workflows/build-private-image.yml"
+  - scripts/verify_private_image_pipeline.rb
+  - docs/operations/shared-module-fast-path.md
+  - docs/operations/railway-deployment.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-private-image-delivery-v1.yaml
+  - docs/work/climbme-private-image-delivery-v1-execution-inventory.yaml
+  assertion_intent: The verifier proves only source-level token separation, manual
+    trigger, immutable tag and documented external deployment gates.
+  validation: ruby scripts/verify_private_image_pipeline.rb
+  evidence_boundary:
+  - Local workflow and runtime-Dockerfile contract evidence only.
+  - No GitHub Actions execution, package-permission change, provider credential, image
+    publication, Railway configuration, deploy, production data or public-runtime
+    claim.
+  observation_disposition: required_aggregate_only
+  status: done
+  started_at: '2026-08-14T14:50:19Z'
+  start_fingerprints:
+    Dockerfile.runtime: __missing__
+    ".github/workflows/build-private-image.yml": __missing__
+    scripts/verify_private_image_pipeline.rb: __missing__
+    docs/operations/shared-module-fast-path.md: __missing__
+    docs/operations/railway-deployment.md: 63ea93700b1723558466ef3ab2302f00c0131d69e0a315e4c32dffc904221f0d
+    docs/ai-delivery-learning.md: 9d162fb2044fe784e685c9c993e4c6ebc4713f73e8492e14b038b7ddf261caba
+    docs/work/climbme-private-image-delivery-v1.yaml: 59f796d9f16ac436fd359a29e997cd240f423fa245d616c1d53e20b04615bacf
+    docs/work/climbme-private-image-delivery-v1-execution-inventory.yaml: f6eca2cc023cfb2e76230f94a4b7b3270069a1a0aee78c5970920571808fabeb
+  start_input_fingerprints:
+    Dockerfile: dc354a7a06986217ea8fcf781b6529a9768859e24ddcccb9d7e645446ab5db49
+    railway.toml: cab430ec210045f87c50e2e6e0dc1788742fe0301948fe85d1c5caf27480d6dc
+    backend/pom.xml: 1f4fe181586c19eb0728c0c6dda1293ab091c51e33b75147d641794e46973d3b
+    ".mvn/maven.config": 28910bdd1c1ff2614c40d2bb64e133b8a86cc262809e6c2d1d05dbc064d185b4
+    ".mvn/settings.xml": 7a48d54194fa360e745c59979318d3bbe5f30e0c0ba159130201912c7d46dd51
+    frontend/package.json: 0757b7953fac89bccc90e0a14a02f26f279b7d81825abe06a8e9c514001664f0
+    frontend/package-lock.json: 48eb3e37c5e2feb8eadf8960c8d0ae89aa7959721dcfd3a10d8ddf7f60ea7722
+    docs/implementation-control.md: 73248652c912da037c60d8c2c340fc88010ddf3392c6994c0b86aefc6e2da4c8
+  start_output_fingerprints:
+    Dockerfile.runtime: __missing__
+    ".github/workflows/build-private-image.yml": __missing__
+    scripts/verify_private_image_pipeline.rb: __missing__
+    docs/operations/shared-module-fast-path.md: __missing__
+    docs/operations/railway-deployment.md: 63ea93700b1723558466ef3ab2302f00c0131d69e0a315e4c32dffc904221f0d
+    docs/ai-delivery-learning.md: 9d162fb2044fe784e685c9c993e4c6ebc4713f73e8492e14b038b7ddf261caba
+    docs/work/climbme-private-image-delivery-v1.yaml: 59f796d9f16ac436fd359a29e997cd240f423fa245d616c1d53e20b04615bacf
+    docs/work/climbme-private-image-delivery-v1-execution-inventory.yaml: f6eca2cc023cfb2e76230f94a4b7b3270069a1a0aee78c5970920571808fabeb
+  start_verifier_footprint_fingerprints:
+    Dockerfile.runtime: __missing__
+    ".github/workflows/build-private-image.yml": __missing__
+    scripts/verify_private_image_pipeline.rb: __missing__
+    docs/operations/shared-module-fast-path.md: __missing__
+    docs/operations/railway-deployment.md: 63ea93700b1723558466ef3ab2302f00c0131d69e0a315e4c32dffc904221f0d
+    docs/ai-delivery-learning.md: 9d162fb2044fe784e685c9c993e4c6ebc4713f73e8492e14b038b7ddf261caba
+    docs/work/climbme-private-image-delivery-v1.yaml: 59f796d9f16ac436fd359a29e997cd240f423fa245d616c1d53e20b04615bacf
+    docs/work/climbme-private-image-delivery-v1-execution-inventory.yaml: f6eca2cc023cfb2e76230f94a4b7b3270069a1a0aee78c5970920571808fabeb
+  start_workspace_paths:
+  - ".mvn/maven.config"
+  - ".mvn/settings.xml"
+  - backend/pom.xml
+  - backend/src/main/java/com/climbme/app/auth/AuthService.java
+  - docs/ai-delivery-learning.md
+  - docs/domain-library.yaml
+  - docs/product-brief.yaml
+  - docs/work/climbme-auth-foundation-v1-adoption-execution-inventory.yaml
+  - docs/work/climbme-auth-foundation-v1-adoption.yaml
+  - docs/work/climbme-private-image-delivery-v1-execution-inventory.yaml
+  - docs/work/climbme-private-image-delivery-v1.yaml
+  start_workspace_fingerprints:
+    ".mvn/maven.config": 28910bdd1c1ff2614c40d2bb64e133b8a86cc262809e6c2d1d05dbc064d185b4
+    ".mvn/settings.xml": 7a48d54194fa360e745c59979318d3bbe5f30e0c0ba159130201912c7d46dd51
+    backend/pom.xml: 1f4fe181586c19eb0728c0c6dda1293ab091c51e33b75147d641794e46973d3b
+    backend/src/main/java/com/climbme/app/auth/AuthService.java: 7b826fe5f52bf7fc645c787f1a69a941a7b262bb311eefad1e01c27cd2d4e9e1
+    docs/ai-delivery-learning.md: 9d162fb2044fe784e685c9c993e4c6ebc4713f73e8492e14b038b7ddf261caba
+    docs/domain-library.yaml: 7689494ebc4a7f8a581ab3fafb5527f455c90359331624492ac8fa44540d1ad4
+    docs/product-brief.yaml: 8b1744522aba7e631226b32dccc55604e8a95d98938585c0674dbc1219e5594b
+    docs/work/climbme-auth-foundation-v1-adoption-execution-inventory.yaml: f58998b5fd00bd4fe2d887fbadb468b7fe07237daaa02b9d95b4d11fc9270828
+    docs/work/climbme-auth-foundation-v1-adoption.yaml: fc331830a813ba7b2f250ae8a7848ef095a863e826ed7607f1ff331780994362
+    docs/work/climbme-private-image-delivery-v1-execution-inventory.yaml: f6eca2cc023cfb2e76230f94a4b7b3270069a1a0aee78c5970920571808fabeb
+    docs/work/climbme-private-image-delivery-v1.yaml: 59f796d9f16ac436fd359a29e997cd240f423fa245d616c1d53e20b04615bacf
+evidence:
+- task: prepare-token-safe-private-image-pipeline
+  command: ruby scripts/verify_private_image_pipeline.rb
+  ranAt: '2026-08-14T14:51:58Z'
+  revision: c18ae8ec01c06b7ef45f438fd90af664a1e91e14
+  exitCode: 0
+  result: passed
+  timedOut: false
+  timeoutSeconds: 300
+  changedFiles:
+  - backend/pom.xml
+  - docs/ai-delivery-learning.md
+  - docs/operations/railway-deployment.md
+  - ".github/workflows/build-private-image.yml"
+  - ".mvn/maven.config"
+  - ".mvn/settings.xml"
+  - Dockerfile.runtime
+  - docs/operations/shared-module-fast-path.md
+  - docs/work/climbme-private-image-delivery-v1-execution-inventory.yaml
+  - docs/work/climbme-private-image-delivery-v1.yaml
+  - scripts/verify_private_image_pipeline.rb
+  executionEnvironment:
+    shell: "/bin/zsh"
+    rubyVersion: 2.6.10
+    environmentExported: false
+  requiredPathDigests:
+    Dockerfile.runtime: 12f1872d5cdefa0f081412a2d963a465d8d0c06928d2de0e27d8282cba0db168
+    ".github/workflows/build-private-image.yml": b2d730988540677b3d94c566ea485899e4cf02dbacf8b84b62abdb3089a2ddc0
+    scripts/verify_private_image_pipeline.rb: 05f70e94721877d9eeeb5460970c83272e237811fc1f3babdd7bd370fbebac3c
+    docs/operations/shared-module-fast-path.md: e1d6b8666f7ca7308227ec9eb2cc884acdccf6ec6e6b2bb0a9617b837b790ed5
+    docs/operations/railway-deployment.md: fcfd7fa078e8f097ecb287f9c3fc0d8102dd6be340258bac0c8a7d4b170b9fec
+    docs/ai-delivery-learning.md: a0610e2b0fc9e3998b359d457cfa7339c8f1c8b2068e9de6cde69ff7a1059486
+    docs/work/climbme-private-image-delivery-v1.yaml: b6e5476c4709c41f5151462e7c17d031edf58235efe9670763563a63fb39b9b9
+    docs/work/climbme-private-image-delivery-v1-execution-inventory.yaml: 9025c032b6904bba402a7a6e17cb66737ee33c3ef50fd7689ec350cfc8bff7d9
+  output: private image pipeline valid
+  requiredPaths:
+  - Dockerfile.runtime
+  - ".github/workflows/build-private-image.yml"
+  - scripts/verify_private_image_pipeline.rb
+  - docs/operations/shared-module-fast-path.md
+  - docs/operations/railway-deployment.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-private-image-delivery-v1.yaml
+  - docs/work/climbme-private-image-delivery-v1-execution-inventory.yaml
+  requiredRemovedDirectories: []
+  removedDirectoryEvidence: []
+  visualEvidencePaths: []
+  runtimeEvidencePaths: []
+  verifierFootprintPaths: *1
+  startedAt: '2026-08-14T14:50:19Z'
+  changedAfterStart:
+  - Dockerfile.runtime
+  - ".github/workflows/build-private-image.yml"
+  - scripts/verify_private_image_pipeline.rb
+  - docs/operations/shared-module-fast-path.md
+  - docs/operations/railway-deployment.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-private-image-delivery-v1.yaml
+  - docs/work/climbme-private-image-delivery-v1-execution-inventory.yaml

@@ -1,5 +1,6 @@
 package com.climbme.app.auth;
 
+import com.jsakoman.authfoundation.NormalizedEmail;
 import com.climbme.app.climbing.ClimbingAttempt;
 import com.climbme.app.climbing.ClimbingAttemptRepository;
 import com.climbme.app.routes.RouteStatusOverride;
@@ -135,9 +136,7 @@ public class AuthService {
         }
     }
 
-    private String normalizeEmail(String email) {
-        return email.trim().toLowerCase(Locale.ROOT);
-    }
+    private String normalizeEmail(String email) { return NormalizedEmail.from(email).value(); }
 
     private void requireAttemptCapacity(String key) {
         if (failuresFor(key).size() >= MAX_FAILED_ATTEMPTS) {

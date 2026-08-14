@@ -1,0 +1,57 @@
+name: Build private ClimbMe image
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build-private-image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Verify and build frontend
+        run: |
+          npm --prefix frontend ci
+          npm --prefix frontend run test
+          npm --prefix frontend run build
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+          server-id: github
+          server-username: GITHUB_ACTOR
+          server-password: GITHUB_TOKEN
+      - name: Verify and package application
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_PACKAGES_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p backend/src/main/resources/static
+          cp -R frontend/dist/. backend/src/main/resources/static/
+          mvn --batch-mode -f backend/pom.xml verify
+      - name: Assemble image context
+        run: |
+          mkdir image-context
+          cp backend/target/*.jar image-context/app.jar
+      - name: Sign in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and publish immutable private image
+        uses: docker/build-push-action@v6
+        with:
+          context: image-context
+          file: Dockerfile.runtime
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/climbme:${{ github.sha }}

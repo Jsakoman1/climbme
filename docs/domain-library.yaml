@@ -3,6 +3,8 @@ version: 1
 vocabulary:
 - id: account
   description: One authenticated ClimbMe user with a unique email and private performance data.
+- id: canonical-email
+  description: The trimmed lower-case account lookup key supplied by Auth Foundation v0.1.0; it does not create a shared account identity.
 - id: climbing-attempt
   description: One dated attempt on one named route at a location and sector; it is the primary record in the climbing log.
 - id: route-projection
@@ -28,7 +30,7 @@ invariants:
 - id: private-user-isolation
   description: Every service query and mutation scopes records to the authenticated user; client-provided user identifiers never grant access.
 - id: local-account-security
-  description: Passwords are stored only as BCrypt hashes. Browser mutations require a CSRF token, sessions are server-side, and repeated failed local account attempts are temporarily limited per client address.
+  description: Passwords are stored only as BCrypt hashes. Browser mutations require a CSRF token, sessions are server-side, repeated failed local account attempts are temporarily limited per client address, and account lookup uses the package-supplied canonical email.
 - id: attempt-primary-record
   description: A climbing-log row is one attempt, not one route or one session. Route views and dashboard totals derive from attempts.
 - id: no-route-duplication

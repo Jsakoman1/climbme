@@ -24,6 +24,41 @@ decision. Do not pause merely because an intermediate slice is verified.
 
 ## Entries
 
+### 2026-08-14 — versioned shared auth package adoption (verified local evidence)
+
+- Intended outcome: replace local email normalization with Auth Foundation v0.1.0
+  without changing ClimbMe session, CSRF, BCrypt, rate-limit, database or public
+  auth behavior.
+- Reusable boundary: an authenticated private Maven package must resolve through
+  environment-provided build credentials; a developer-local Maven cache is not a
+  reproducible deployment dependency.
+- Evidence coverage: Auth Foundation v0.1.0 resolved from the private registry and
+  ClimbMe's complete backend suite passed. Session, CSRF, BCrypt, failure limits,
+  database and public auth responses were unchanged.
+- Residual risk: Docker and Railway package-secret injection are deliberately not
+  configured; this is not deployment evidence and must not be pushed into an
+  automatic deployment path until a secret-safe build solution is approved.
+
+### 2026-08-14 — private package delivery boundary (verified local design)
+
+- Intended outcome: keep private Maven package credentials out of Docker build
+  arguments, image layers and Railway source-build variables.
+- Delivery design: GitHub Actions resolves and verifies the package with its
+  ephemeral workflow token, then publishes an immutable private runtime image
+  assembled from a prebuilt JAR.
+- External gate: package access for the consumer workflow and Railway's read-only
+  GHCR pull credential remain owner-visible provider configuration; neither is
+  created by this repository change.
+
+### 2026-08-14 — consumer-owned Maven settings in CI (verified local remediation)
+
+- Process signal: a CI setup action can create its own Maven server settings, but
+  a consumer that explicitly selects a project-owned settings file must receive
+  the environment variable that file declares.
+- Reusable boundary: map the ephemeral workflow token only into the Maven step;
+  verify that no equivalent credential configuration is present in the runtime
+  Dockerfile or Docker build arguments.
+
 ### 2026-08-13 — locked Dora CLI compatibility pilot (verified local evidence)
 
 - Intended outcome: prove that the delivery-control CLI can be resolved from one

@@ -1,0 +1,17 @@
+kind: execution_inventory
+version: 1
+id: climbme-auth-foundation-v1-adoption
+master_plan: docs/work/climbme-auth-foundation-v1-adoption.yaml
+items:
+- id: auth-foundation-email-adoption
+  order: 1
+  plan: docs/work/climbme-auth-foundation-v1-adoption.yaml
+  task: adopt-versioned-email-normalization
+  status: verified
+  started_at: '2026-08-14T14:37:01Z'
+  verified_at: '2026-08-14T14:39:52Z'
+  evidence:
+    plan: docs/work/climbme-auth-foundation-v1-adoption.yaml
+    task: adopt-versioned-email-normalization
+    revision: c18ae8ec01c06b7ef45f438fd90af664a1e91e14
+state: verified
