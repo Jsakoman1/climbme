@@ -1,0 +1,148 @@
+kind: work
+version: 1
+id: climbme-railway-runtime-only-free-deploy-v1
+title: Deploy a prebuilt runtime-only artifact on Railway Free
+status: verified
+baseline: 88fdec5c18baaf83f431b590e5cf5b8202cd17af
+strict_verification: true
+serial_task_execution: true
+execution_inventory: docs/work/climbme-railway-runtime-only-free-deploy-v1-execution-inventory.yaml
+artifact_roles: explicit_v1
+scope_control:
+  residual_scope:
+  - Disconnect the Railway production service from source autodeploy and deploy one
+    locally built runtime-only context with the existing authenticated Railway CLI.
+  non_goals:
+  - Reading provider variables, storing tokens, publishing a container image, changing
+    database records, making an image public or creating a GitHub Actions secret.
+tasks:
+- id: deploy-prebuilt-runtime-only-context
+  inventory_item: runtime-only-free-deploy
+  title: Deploy the verified prebuilt runtime context without a Railway Maven build
+  type: implementation
+  observable_outcome: Railway production runs a deployment assembled from a prebuilt
+    ClimbMe JAR and runtime-only Dockerfile after its GitHub source autodeploy is
+    disconnected.
+  dependencies: []
+  input_paths:
+  - Dockerfile.runtime
+  - railway.toml
+  - backend/pom.xml
+  - ".mvn/maven.config"
+  - ".mvn/settings.xml"
+  - frontend/package.json
+  - frontend/package-lock.json
+  output_paths:
+  - docs/runtime-evidence/climbme-railway-runtime-only-free-deploy.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-railway-runtime-only-free-deploy-v1.yaml
+  - docs/work/climbme-railway-runtime-only-free-deploy-v1-execution-inventory.yaml
+  paths:
+  - Dockerfile.runtime
+  - railway.toml
+  - backend/pom.xml
+  - ".mvn/maven.config"
+  - ".mvn/settings.xml"
+  - frontend/package.json
+  - frontend/package-lock.json
+  - docs/runtime-evidence/climbme-railway-runtime-only-free-deploy.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-railway-runtime-only-free-deploy-v1.yaml
+  - docs/work/climbme-railway-runtime-only-free-deploy-v1-execution-inventory.yaml
+  required_paths:
+  - docs/runtime-evidence/climbme-railway-runtime-only-free-deploy.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-railway-runtime-only-free-deploy-v1.yaml
+  - docs/work/climbme-railway-runtime-only-free-deploy-v1-execution-inventory.yaml
+  verifier_footprint_paths: &1
+  - Dockerfile.runtime
+  - railway.toml
+  - backend/pom.xml
+  - ".mvn/maven.config"
+  - ".mvn/settings.xml"
+  - frontend/package.json
+  - frontend/package-lock.json
+  - docs/runtime-evidence/climbme-railway-runtime-only-free-deploy.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-railway-runtime-only-free-deploy-v1.yaml
+  - docs/work/climbme-railway-runtime-only-free-deploy-v1-execution-inventory.yaml
+  assertion_intent: Deployment evidence must establish that Railway built only the
+    runtime context and health passed, without retaining provider secrets, URLs or
+    database data.
+  validation: ruby scripts/verify_private_image_pipeline.rb
+  evidence_boundary:
+  - Sanitized Railway production deployment and health evidence only.
+  - No provider variable values, token, database content, account data, public URL
+    or container image publication evidence.
+  observation_disposition: required_aggregate_only
+  status: done
+  started_at: '2026-08-14T15:07:12Z'
+  start_fingerprints:
+    docs/runtime-evidence/climbme-railway-runtime-only-free-deploy.md: __missing__
+    docs/ai-delivery-learning.md: ed84f5af50fc02b8cd9a6eedec04a0a8a4fe3f6587b5fec6ea3414ea0bfd966f
+    docs/work/climbme-railway-runtime-only-free-deploy-v1.yaml: c4ed35bf683af51176e5bb386df05c9cb84790fb92b502395b0225dc46f9cb0f
+    docs/work/climbme-railway-runtime-only-free-deploy-v1-execution-inventory.yaml: 27087e3e74afc91a91129bd54a8df6cd7157a9cceaaec9b093ace6a0ca32bc16
+  start_input_fingerprints:
+    Dockerfile.runtime: 12f1872d5cdefa0f081412a2d963a465d8d0c06928d2de0e27d8282cba0db168
+    railway.toml: cab430ec210045f87c50e2e6e0dc1788742fe0301948fe85d1c5caf27480d6dc
+    backend/pom.xml: 1f4fe181586c19eb0728c0c6dda1293ab091c51e33b75147d641794e46973d3b
+    ".mvn/maven.config": 28910bdd1c1ff2614c40d2bb64e133b8a86cc262809e6c2d1d05dbc064d185b4
+    ".mvn/settings.xml": 7a48d54194fa360e745c59979318d3bbe5f30e0c0ba159130201912c7d46dd51
+    frontend/package.json: 0757b7953fac89bccc90e0a14a02f26f279b7d81825abe06a8e9c514001664f0
+    frontend/package-lock.json: 48eb3e37c5e2feb8eadf8960c8d0ae89aa7959721dcfd3a10d8ddf7f60ea7722
+  start_output_fingerprints:
+    docs/runtime-evidence/climbme-railway-runtime-only-free-deploy.md: __missing__
+    docs/ai-delivery-learning.md: ed84f5af50fc02b8cd9a6eedec04a0a8a4fe3f6587b5fec6ea3414ea0bfd966f
+    docs/work/climbme-railway-runtime-only-free-deploy-v1.yaml: c4ed35bf683af51176e5bb386df05c9cb84790fb92b502395b0225dc46f9cb0f
+    docs/work/climbme-railway-runtime-only-free-deploy-v1-execution-inventory.yaml: 27087e3e74afc91a91129bd54a8df6cd7157a9cceaaec9b093ace6a0ca32bc16
+  start_verifier_footprint_fingerprints:
+    docs/runtime-evidence/climbme-railway-runtime-only-free-deploy.md: __missing__
+    docs/ai-delivery-learning.md: ed84f5af50fc02b8cd9a6eedec04a0a8a4fe3f6587b5fec6ea3414ea0bfd966f
+    docs/work/climbme-railway-runtime-only-free-deploy-v1.yaml: c4ed35bf683af51176e5bb386df05c9cb84790fb92b502395b0225dc46f9cb0f
+    docs/work/climbme-railway-runtime-only-free-deploy-v1-execution-inventory.yaml: 27087e3e74afc91a91129bd54a8df6cd7157a9cceaaec9b093ace6a0ca32bc16
+  start_workspace_paths:
+  - docs/work/climbme-railway-runtime-only-free-deploy-v1-execution-inventory.yaml
+  - docs/work/climbme-railway-runtime-only-free-deploy-v1.yaml
+  start_workspace_fingerprints:
+    docs/work/climbme-railway-runtime-only-free-deploy-v1-execution-inventory.yaml: 27087e3e74afc91a91129bd54a8df6cd7157a9cceaaec9b093ace6a0ca32bc16
+    docs/work/climbme-railway-runtime-only-free-deploy-v1.yaml: c4ed35bf683af51176e5bb386df05c9cb84790fb92b502395b0225dc46f9cb0f
+evidence:
+- task: deploy-prebuilt-runtime-only-context
+  command: ruby scripts/verify_private_image_pipeline.rb
+  ranAt: '2026-08-14T15:10:17Z'
+  revision: 88fdec5c18baaf83f431b590e5cf5b8202cd17af
+  exitCode: 0
+  result: passed
+  timedOut: false
+  timeoutSeconds: 300
+  changedFiles:
+  - docs/ai-delivery-learning.md
+  - docs/runtime-evidence/climbme-railway-runtime-only-free-deploy.md
+  - docs/work/climbme-railway-runtime-only-free-deploy-v1-execution-inventory.yaml
+  - docs/work/climbme-railway-runtime-only-free-deploy-v1.yaml
+  executionEnvironment:
+    shell: "/bin/zsh"
+    rubyVersion: 2.6.10
+    environmentExported: false
+  requiredPathDigests:
+    docs/runtime-evidence/climbme-railway-runtime-only-free-deploy.md: 1620229a57582f68ea89667112ac22806c17e25e761878510ec09754b2f5cc16
+    docs/ai-delivery-learning.md: dd0a2f0c52c66aaf8495e7ec176e73d14bd4bc0eff17cd6d7e6bfe748ccaedf2
+    docs/work/climbme-railway-runtime-only-free-deploy-v1.yaml: f1d7ac096dfb2fa791dfa63637efdfa883587e44fbd3f00426669771c7d4bd89
+    docs/work/climbme-railway-runtime-only-free-deploy-v1-execution-inventory.yaml: 6dc9c96ef7db52e8b01100da74c0e1c5f480d123246c60e72dbe2e4c12e34781
+  output: private image pipeline valid
+  requiredPaths:
+  - docs/runtime-evidence/climbme-railway-runtime-only-free-deploy.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-railway-runtime-only-free-deploy-v1.yaml
+  - docs/work/climbme-railway-runtime-only-free-deploy-v1-execution-inventory.yaml
+  requiredRemovedDirectories: []
+  removedDirectoryEvidence: []
+  visualEvidencePaths: []
+  runtimeEvidencePaths: []
+  verifierFootprintPaths: *1
+  startedAt: '2026-08-14T15:07:12Z'
+  changedAfterStart:
+  - docs/runtime-evidence/climbme-railway-runtime-only-free-deploy.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-railway-runtime-only-free-deploy-v1.yaml
+  - docs/work/climbme-railway-runtime-only-free-deploy-v1-execution-inventory.yaml

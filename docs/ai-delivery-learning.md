@@ -57,7 +57,16 @@ decision. Do not pause merely because an intermediate slice is verified.
   the environment variable that file declares.
 - Reusable boundary: map the ephemeral workflow token only into the Maven step;
   verify that no equivalent credential configuration is present in the runtime
-  Dockerfile or Docker build arguments.
+Dockerfile or Docker build arguments.
+
+### 2026-08-14 — Railway Free runtime-only deployment (verified)
+
+- Process signal: Railway Free cannot pull a private registry image, but its
+  authenticated CLI can deploy a prebuilt runtime-only context without exposing
+  a Maven package credential to Railway.
+- Reusable boundary: disconnect source autodeploy before adopting this path, and
+  keep future automation gated on an owner-created, project-scoped Railway token
+  stored as a GitHub Actions secret.
 
 ### 2026-08-13 — locked Dora CLI compatibility pilot (verified local evidence)
 
