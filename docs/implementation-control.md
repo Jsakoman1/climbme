@@ -23,5 +23,8 @@ document never replaces either.
   when the repository is otherwise on an autonomous delivery path.
 - ClimbMe's Dora launcher may resolve only the exact release named by `dora.lock.yaml`
   from the private local cache. It has no live-checkout, generic PATH or network fallback.
-  The current vendored `dora/` package remains the explicit rollback path until a separate
-  verified removal plan is approved.
+  Its adapter metadata repeats the same exact release identity. A new work entry must pass
+  the locked launcher's current-release doctor check; rollback restores the prior reviewed
+  lock and adapter identity rather than a vendored package.
+- Run `ruby scripts/verify_dora_locked_cli.rb` after a reviewed Dora lock rotation to
+  confirm the local lock and adapter identity still agree.

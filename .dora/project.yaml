@@ -14,9 +14,13 @@ commands:
   control_check: "./bin/dora doctor .dora/project.yaml"
 distribution:
   method: locked_local_cli
-  lock_file: dora.lock.yaml
+  lock_path: dora.lock.yaml
+  release_version: v1.16.2
+  source_commit: 25eb5ca8c7e8fd780f582f919feb114f1d48acfe
+  package_checksum: f4d967678ce8f699c9ffb5c1a28ea2db73858a61b91f952a86c790c01d2f5954
   cache_layout: user_application_support_v1
-  rollback_rule: Keep the existing vendored dora package until a later owner-approved removal plan verifies the ClimbMe pilot and explicit rollback.
+  update_command: Use Dora locked-cli-rotation-preview and an owner-approved exact rotation record; do not use a checkout, PATH fallback or live network source.
+  rollback_rule: Restore the prior exact lock and matching adapter identity through the same reviewed rotation path, or revert the isolated Dora lock commit.
 extensions:
 - id: project-documentation
   category: documentation
