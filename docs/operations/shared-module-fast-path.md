@@ -12,10 +12,11 @@ a stable, small boundary. Auth Foundation is the first example.
    token or pass one into a Docker build argument.
 4. First validate the consumer locally with a short-lived package credential.
    Keep the adoption limited to one primitive before migrating more behavior.
-5. For a deployable consumer, use GitHub Actions to map its ephemeral token to
-   the consumer Maven settings variable, resolve the package, test and package
-   the app, then assemble a runtime-only context. The Dockerfile receives only
-   the prebuilt JAR.
+5. For a private Maven package owned by a separate repository, use a short-lived
+   classic `read:packages` token stored as a dedicated consumer repository secret.
+   Map it only to the consumer Maven settings variable, resolve the package, test
+   and package the app, then assemble a runtime-only context. The Dockerfile
+   receives only the prebuilt JAR.
 6. On Railway Free, use an owner-created environment-scoped project deployment
    token as a GitHub Actions secret and upload only that runtime context to the
    named service. Keep source autodeploy disconnected and verify health after
@@ -24,13 +25,12 @@ a stable, small boundary. Auth Foundation is the first example.
 
 ## Current ClimbMe delivery path
 
-`deploy-railway-runtime.yml` is intentionally manual. It uses the GitHub Actions
-token only for Maven, builds the frontend and backend before Docker runs, then
-uploads only a JAR, runtime Dockerfile and Railway manifest. Its project-scoped
+`deploy-railway-runtime.yml` is intentionally manual. It uses the dedicated
+`AUTH_FOUNDATION_PACKAGES_TOKEN` only for Maven, builds the frontend and backend
+before Docker runs, then uploads only a JAR, runtime Dockerfile and Railway
+manifest. Its project-scoped
 `RAILWAY_TOKEN` and non-secret `RAILWAY_PROJECT_ID` are configured in GitHub,
-not source. The workflow needs read access to the private Auth Foundation
-package; grant the `climbme` repository the least-privileged package access
-before the first run.
+not source.
 
 The production Railway service remains source-disconnected. A manual workflow
 run is still a visible owner-authorized external action.

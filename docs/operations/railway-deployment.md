@@ -23,16 +23,18 @@ Railway never receives a Maven package credential.
 
 ## Railway Free Actions route
 
-1. Grant the `climbme` GitHub Actions repository read access to the private
-   Auth Foundation package.
+1. Create a short-lived GitHub classic personal access token with only
+   `read:packages`, then store it as the `AUTH_FOUNDATION_PACKAGES_TOKEN`
+   repository secret. Apache Maven packages are repository-scoped; this dedicated
+   secret is required to read Auth Foundation from a separate private repository.
 2. In GitHub Actions configuration, set `RAILWAY_PROJECT_ID` as a repository
    variable for the selected Railway project. Create `RAILWAY_TOKEN` as a
    repository secret from a Railway **project token scoped only to production
    deployment actions**. Do not paste the token into source code, a Docker build,
    Railway variables or chat.
-3. Run the manual `Deploy ClimbMe runtime to Railway` workflow. It maps the
-   ephemeral Actions token to `GITHUB_PACKAGES_TOKEN` only for Maven because the
-   consumer-owned settings file explicitly expects that variable.
+3. Run the manual `Deploy ClimbMe runtime to Railway` workflow. It maps
+   `AUTH_FOUNDATION_PACKAGES_TOKEN` to `GITHUB_PACKAGES_TOKEN` only for Maven
+   because the consumer-owned settings file explicitly expects that variable.
 4. The workflow uploads only the prebuilt JAR, `Dockerfile.runtime` and
    `railway.toml` to the existing `climbme` production service. It cannot read
    provider variables or create a service.

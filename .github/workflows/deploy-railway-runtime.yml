@@ -5,7 +5,6 @@ on:
 
 permissions:
   contents: read
-  packages: read
 
 concurrency:
   group: climbme-production-runtime-deploy
@@ -37,8 +36,9 @@ jobs:
       - name: Verify and package application
         env:
           GITHUB_ACTOR: ${{ github.actor }}
-          GITHUB_PACKAGES_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_PACKAGES_TOKEN: ${{ secrets.AUTH_FOUNDATION_PACKAGES_TOKEN }}
         run: |
+          test -n "$GITHUB_PACKAGES_TOKEN"
           mkdir -p backend/src/main/resources/static
           cp -R frontend/dist/. backend/src/main/resources/static/
           mvn --batch-mode -f backend/pom.xml verify

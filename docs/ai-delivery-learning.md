@@ -81,6 +81,18 @@ Dockerfile or Docker build arguments.
   non-secret repository variable. This static contract is not GitHub Actions or
   production deployment evidence.
 
+### 2026-08-14 — cross-repository Maven package credential correction (verified static contract)
+
+- Process signal: Apache Maven packages are repository-scoped, so a workflow in
+  a separate private consumer repository cannot rely on package-level Actions
+  access controls that the Maven package UI does not provide.
+- Reusable boundary: use a dedicated, short-lived classic `read:packages` token
+  only for the Maven dependency-resolution step. Remove the unnecessary workflow
+  package permission and prohibit the token from Docker and Railway steps.
+- External gate: the owner creates and rotates `AUTH_FOUNDATION_PACKAGES_TOKEN`
+  in GitHub Actions. This static correction is not package-download, workflow or
+  production deployment evidence.
+
 ### 2026-08-13 — locked Dora CLI compatibility pilot (verified local evidence)
 
 - Intended outcome: prove that the delivery-control CLI can be resolved from one
