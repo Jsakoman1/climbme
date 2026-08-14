@@ -22,6 +22,10 @@ a stable, small boundary. Auth Foundation is the first example.
    named service. Keep source autodeploy disconnected and verify health after
    the run. A private-image registry route is optional for a plan that supports
    private pulls; it is not a prerequisite for the Free route.
+7. When the runtime context contains the provider manifest or Dockerfile, run
+   the provider CLI with that assembled context as its working directory. Passing
+   a context path while invoking the CLI from its parent can make the provider
+   ignore the intended manifest and fall back to a default build strategy.
 
 ## Current ClimbMe delivery path
 

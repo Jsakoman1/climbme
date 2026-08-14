@@ -5,6 +5,7 @@ ROOT = File.expand_path("..", __dir__)
 WORKFLOW = File.join(ROOT, ".github/workflows/deploy-railway-runtime.yml")
 RUNTIME_DOCKERFILE = File.join(ROOT, "Dockerfile.runtime")
 RAILWAY_DOCS = File.join(ROOT, "docs/operations/railway-deployment.md")
+FAST_PATH_DOCS = File.join(ROOT, "docs/operations/shared-module-fast-path.md")
 
 def assert_includes(source, fragment, label)
   abort("Railway runtime pipeline validation failed: missing #{label}") unless source.include?(fragment)
@@ -13,6 +14,7 @@ end
 workflow = File.read(WORKFLOW)
 runtime_dockerfile = File.read(RUNTIME_DOCKERFILE)
 railway_docs = File.read(RAILWAY_DOCS)
+fast_path_docs = File.read(FAST_PATH_DOCS)
 
 assert_includes(workflow, "workflow_dispatch:", "manual deployment trigger")
 assert_includes(workflow, "contents: read", "read-only source permission")
@@ -44,5 +46,6 @@ assert_includes(railway_docs, "RAILWAY_PROJECT_ID", "documented deployment targe
 assert_includes(railway_docs, "AUTH_FOUNDATION_PACKAGES_TOKEN", "documented package-read secret")
 assert_includes(railway_docs, "source autodeploy disconnected", "documented source boundary")
 assert_includes(railway_docs, "Railway Free", "documented Free-plan route")
+assert_includes(fast_path_docs, "assembled context as its working directory", "reusable runtime-context root Fast Path")
 
 puts "Railway runtime pipeline valid"

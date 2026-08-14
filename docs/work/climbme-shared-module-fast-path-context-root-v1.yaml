@@ -1,0 +1,122 @@
+kind: work
+version: 1
+id: climbme-shared-module-fast-path-context-root-v1
+title: Add runtime-context root rule to the shared-module Fast Path
+status: verified
+baseline: 035e709bf690bf1dd8cc752220b70f8110007e2a
+strict_verification: true
+serial_task_execution: true
+execution_inventory: docs/work/climbme-shared-module-fast-path-context-root-v1-execution-inventory.yaml
+artifact_roles: explicit_v1
+tasks:
+- id: document-provider-cli-runtime-context-root
+  inventory_item: fast-path-context-root
+  title: Preserve the provider CLI context-root rule in reusable guidance
+  observable_outcome: The shared-module Fast Path requires the provider CLI to run
+    from the assembled runtime context, and the static Railway verifier guards that
+    rule.
+  dependencies: []
+  input_paths:
+  - ".github/workflows/deploy-railway-runtime.yml"
+  - Dockerfile.runtime
+  - railway.toml
+  output_paths:
+  - docs/operations/shared-module-fast-path.md
+  - scripts/verify_railway_runtime_pipeline.rb
+  - docs/work/climbme-shared-module-fast-path-context-root-v1.yaml
+  - docs/work/climbme-shared-module-fast-path-context-root-v1-execution-inventory.yaml
+  paths:
+  - ".github/workflows/deploy-railway-runtime.yml"
+  - Dockerfile.runtime
+  - railway.toml
+  - docs/operations/shared-module-fast-path.md
+  - scripts/verify_railway_runtime_pipeline.rb
+  - docs/work/climbme-shared-module-fast-path-context-root-v1.yaml
+  - docs/work/climbme-shared-module-fast-path-context-root-v1-execution-inventory.yaml
+  required_paths:
+  - docs/operations/shared-module-fast-path.md
+  - scripts/verify_railway_runtime_pipeline.rb
+  - docs/work/climbme-shared-module-fast-path-context-root-v1.yaml
+  - docs/work/climbme-shared-module-fast-path-context-root-v1-execution-inventory.yaml
+  verifier_footprint_paths: &1
+  - ".github/workflows/deploy-railway-runtime.yml"
+  - Dockerfile.runtime
+  - railway.toml
+  - docs/operations/shared-module-fast-path.md
+  - scripts/verify_railway_runtime_pipeline.rb
+  - docs/work/climbme-shared-module-fast-path-context-root-v1.yaml
+  - docs/work/climbme-shared-module-fast-path-context-root-v1-execution-inventory.yaml
+  validation: ruby scripts/verify_railway_runtime_pipeline.rb
+  evidence_boundary:
+  - Static source and guidance verification only.
+  - No GitHub dispatch
+  - Railway action
+  - database access or secret read.
+  observation_disposition: sanitized_observation
+  status: done
+  started_at: '2026-08-14T15:57:46Z'
+  start_fingerprints:
+    docs/operations/shared-module-fast-path.md: 6d22f8c96fa1cd8ba2309628084125415f578045e80b4f21c2f4838ed3c8c6f4
+    scripts/verify_railway_runtime_pipeline.rb: c31d72ef6601b1d5106f47141b07fd7696a50abde852b863d6b87b47a423247c
+    docs/work/climbme-shared-module-fast-path-context-root-v1.yaml: 13dcd619fbd12b08e98c585f91aede2eeba66de2d3f07eb2f9def5d9a3caf022
+    docs/work/climbme-shared-module-fast-path-context-root-v1-execution-inventory.yaml: dfe223d33373831dc6b0da6c14c3cb9f76eefeccd9d60afccb1bda513506d9dc
+  start_input_fingerprints:
+    ".github/workflows/deploy-railway-runtime.yml": f64ac85c660ee3455121ec13722ffcd8dd26b729478e3a848236641c5a8b1f6c
+    Dockerfile.runtime: 12f1872d5cdefa0f081412a2d963a465d8d0c06928d2de0e27d8282cba0db168
+    railway.toml: cab430ec210045f87c50e2e6e0dc1788742fe0301948fe85d1c5caf27480d6dc
+  start_output_fingerprints:
+    docs/operations/shared-module-fast-path.md: 6d22f8c96fa1cd8ba2309628084125415f578045e80b4f21c2f4838ed3c8c6f4
+    scripts/verify_railway_runtime_pipeline.rb: c31d72ef6601b1d5106f47141b07fd7696a50abde852b863d6b87b47a423247c
+    docs/work/climbme-shared-module-fast-path-context-root-v1.yaml: 13dcd619fbd12b08e98c585f91aede2eeba66de2d3f07eb2f9def5d9a3caf022
+    docs/work/climbme-shared-module-fast-path-context-root-v1-execution-inventory.yaml: dfe223d33373831dc6b0da6c14c3cb9f76eefeccd9d60afccb1bda513506d9dc
+  start_verifier_footprint_fingerprints:
+    docs/operations/shared-module-fast-path.md: 6d22f8c96fa1cd8ba2309628084125415f578045e80b4f21c2f4838ed3c8c6f4
+    scripts/verify_railway_runtime_pipeline.rb: c31d72ef6601b1d5106f47141b07fd7696a50abde852b863d6b87b47a423247c
+    docs/work/climbme-shared-module-fast-path-context-root-v1.yaml: 13dcd619fbd12b08e98c585f91aede2eeba66de2d3f07eb2f9def5d9a3caf022
+    docs/work/climbme-shared-module-fast-path-context-root-v1-execution-inventory.yaml: dfe223d33373831dc6b0da6c14c3cb9f76eefeccd9d60afccb1bda513506d9dc
+  start_workspace_paths:
+  - docs/work/climbme-shared-module-fast-path-context-root-v1-execution-inventory.yaml
+  - docs/work/climbme-shared-module-fast-path-context-root-v1.yaml
+  start_workspace_fingerprints:
+    docs/work/climbme-shared-module-fast-path-context-root-v1-execution-inventory.yaml: dfe223d33373831dc6b0da6c14c3cb9f76eefeccd9d60afccb1bda513506d9dc
+    docs/work/climbme-shared-module-fast-path-context-root-v1.yaml: 13dcd619fbd12b08e98c585f91aede2eeba66de2d3f07eb2f9def5d9a3caf022
+evidence:
+- task: document-provider-cli-runtime-context-root
+  command: ruby scripts/verify_railway_runtime_pipeline.rb
+  ranAt: '2026-08-14T15:58:08Z'
+  revision: 035e709bf690bf1dd8cc752220b70f8110007e2a
+  exitCode: 0
+  result: passed
+  timedOut: false
+  timeoutSeconds: 300
+  changedFiles:
+  - docs/operations/shared-module-fast-path.md
+  - scripts/verify_railway_runtime_pipeline.rb
+  - docs/work/climbme-shared-module-fast-path-context-root-v1-execution-inventory.yaml
+  - docs/work/climbme-shared-module-fast-path-context-root-v1.yaml
+  executionEnvironment:
+    shell: "/bin/zsh"
+    rubyVersion: 2.6.10
+    environmentExported: false
+  requiredPathDigests:
+    docs/operations/shared-module-fast-path.md: c9b61a9b8c957607d4e9283ae8a196f6787cc4f0a29d964241d97a29600a138d
+    scripts/verify_railway_runtime_pipeline.rb: 1f3a9d4ce7cbc53bac755e692d18f459ba2222a1575ff94466f30168b98be6c2
+    docs/work/climbme-shared-module-fast-path-context-root-v1.yaml: 6fd37ca5ccfdb665dbcc0a78847fb02639c2a065bd1545f31c6f210ac91da750
+    docs/work/climbme-shared-module-fast-path-context-root-v1-execution-inventory.yaml: e4a671176ca5212f8af731ad878f8c721b120a8b43393d169ec52df1ac600569
+  output: Railway runtime pipeline valid
+  requiredPaths:
+  - docs/operations/shared-module-fast-path.md
+  - scripts/verify_railway_runtime_pipeline.rb
+  - docs/work/climbme-shared-module-fast-path-context-root-v1.yaml
+  - docs/work/climbme-shared-module-fast-path-context-root-v1-execution-inventory.yaml
+  requiredRemovedDirectories: []
+  removedDirectoryEvidence: []
+  visualEvidencePaths: []
+  runtimeEvidencePaths: []
+  verifierFootprintPaths: *1
+  startedAt: '2026-08-14T15:57:46Z'
+  changedAfterStart:
+  - docs/operations/shared-module-fast-path.md
+  - scripts/verify_railway_runtime_pipeline.rb
+  - docs/work/climbme-shared-module-fast-path-context-root-v1.yaml
+  - docs/work/climbme-shared-module-fast-path-context-root-v1-execution-inventory.yaml

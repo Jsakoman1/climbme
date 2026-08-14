@@ -1,0 +1,19 @@
+kind: execution_inventory
+version: 1
+id: climbme-shared-module-fast-path-context-root-v1
+master_plan: docs/work/climbme-shared-module-fast-path-context-root-v1.yaml
+state: verified
+execution_mode: strict_serial
+items:
+- id: fast-path-context-root
+  order: 1
+  plan: docs/work/climbme-shared-module-fast-path-context-root-v1.yaml
+  task: document-provider-cli-runtime-context-root
+  status: verified
+  observation_disposition: sanitized_observation
+  started_at: '2026-08-14T15:57:46Z'
+  verified_at: '2026-08-14T15:58:09Z'
+  evidence:
+    plan: docs/work/climbme-shared-module-fast-path-context-root-v1.yaml
+    task: document-provider-cli-runtime-context-root
+    revision: 035e709bf690bf1dd8cc752220b70f8110007e2a
