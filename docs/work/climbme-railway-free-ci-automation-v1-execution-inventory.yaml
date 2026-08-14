@@ -1,0 +1,17 @@
+kind: execution_inventory
+version: 1
+id: climbme-railway-free-ci-automation-v1
+master_plan: docs/work/climbme-railway-free-ci-automation-v1.yaml
+items:
+- id: free-plan-runtime-deployment-workflow
+  order: 1
+  plan: docs/work/climbme-railway-free-ci-automation-v1.yaml
+  task: define-free-plan-runtime-deployment-workflow
+  status: verified
+  started_at: '2026-08-14T15:15:11Z'
+  verified_at: '2026-08-14T15:16:55Z'
+  evidence:
+    plan: docs/work/climbme-railway-free-ci-automation-v1.yaml
+    task: define-free-plan-runtime-deployment-workflow
+    revision: beeb194b0519def5ab276750bfdc504e4bc7e9af
+state: verified

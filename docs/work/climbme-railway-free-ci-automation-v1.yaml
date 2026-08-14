@@ -1,0 +1,197 @@
+kind: work
+version: 1
+id: climbme-railway-free-ci-automation-v1
+title: Prepare a token-scoped Railway Free deployment workflow
+status: verified
+baseline: beeb194b0519def5ab276750bfdc504e4bc7e9af
+strict_verification: true
+serial_task_execution: true
+execution_inventory: docs/work/climbme-railway-free-ci-automation-v1-execution-inventory.yaml
+artifact_roles: explicit_v1
+scope_control:
+  residual_scope:
+  - Define and locally verify one manual GitHub Actions route that builds the existing
+    consumer, uploads only a runtime context and deploys it with a project-scoped
+    Railway token.
+  non_goals:
+  - Creating or reading a Railway token, GitHub secret or provider variable.
+  - Running the GitHub Actions workflow, deploying production, changing database records,
+    reconnecting source autodeploy or publishing an image.
+tasks:
+- id: define-free-plan-runtime-deployment-workflow
+  inventory_item: free-plan-runtime-deployment-workflow
+  title: Define a least-privileged manual Railway runtime deployment route
+  type: implementation
+  observable_outcome: A statically verified manual Actions workflow builds ClimbMe
+    with the ephemeral package token, uploads only an assembled runtime context to
+    the named Railway service and requires a project-scoped deployment token.
+  dependencies: []
+  input_paths:
+  - Dockerfile.runtime
+  - railway.toml
+  - backend/pom.xml
+  - ".mvn/maven.config"
+  - ".mvn/settings.xml"
+  - frontend/package.json
+  - frontend/package-lock.json
+  - ".github/workflows/build-private-image.yml"
+  - scripts/verify_private_image_pipeline.rb
+  - docs/work/climbme-railway-runtime-only-free-deploy-v1.yaml
+  output_paths:
+  - ".github/workflows/deploy-railway-runtime.yml"
+  - scripts/verify_railway_runtime_pipeline.rb
+  - docs/operations/railway-deployment.md
+  - docs/operations/shared-module-fast-path.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-railway-free-ci-automation-v1.yaml
+  - docs/work/climbme-railway-free-ci-automation-v1-execution-inventory.yaml
+  paths:
+  - Dockerfile.runtime
+  - railway.toml
+  - backend/pom.xml
+  - ".mvn/maven.config"
+  - ".mvn/settings.xml"
+  - frontend/package.json
+  - frontend/package-lock.json
+  - ".github/workflows/build-private-image.yml"
+  - scripts/verify_private_image_pipeline.rb
+  - docs/operations/railway-deployment.md
+  - docs/operations/shared-module-fast-path.md
+  - docs/work/climbme-railway-runtime-only-free-deploy-v1.yaml
+  - ".github/workflows/deploy-railway-runtime.yml"
+  - scripts/verify_railway_runtime_pipeline.rb
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-railway-free-ci-automation-v1.yaml
+  - docs/work/climbme-railway-free-ci-automation-v1-execution-inventory.yaml
+  required_paths:
+  - ".github/workflows/deploy-railway-runtime.yml"
+  - scripts/verify_railway_runtime_pipeline.rb
+  - docs/operations/railway-deployment.md
+  - docs/operations/shared-module-fast-path.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-railway-free-ci-automation-v1.yaml
+  - docs/work/climbme-railway-free-ci-automation-v1-execution-inventory.yaml
+  verifier_footprint_paths: &1
+  - Dockerfile.runtime
+  - railway.toml
+  - backend/pom.xml
+  - ".mvn/maven.config"
+  - ".mvn/settings.xml"
+  - frontend/package.json
+  - frontend/package-lock.json
+  - ".github/workflows/build-private-image.yml"
+  - scripts/verify_private_image_pipeline.rb
+  - docs/operations/railway-deployment.md
+  - docs/operations/shared-module-fast-path.md
+  - docs/work/climbme-railway-runtime-only-free-deploy-v1.yaml
+  - ".github/workflows/deploy-railway-runtime.yml"
+  - scripts/verify_railway_runtime_pipeline.rb
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-railway-free-ci-automation-v1.yaml
+  - docs/work/climbme-railway-free-ci-automation-v1-execution-inventory.yaml
+  assertion_intent: The workflow contract must prove runtime-only upload and explicit
+    service/environment targeting without leaking Maven or Railway credentials into
+    Docker, repository files or provider configuration.
+  validation: ruby scripts/verify_private_image_pipeline.rb && ruby scripts/verify_railway_runtime_pipeline.rb
+  evidence_boundary:
+  - Static workflow and documentation evidence only.
+  - No token values, provider variables, package contents, database data, image publication,
+    GitHub Actions execution, Railway deployment or public URL.
+  observation_disposition: required_aggregate_only
+  status: done
+  started_at: '2026-08-14T15:15:11Z'
+  start_fingerprints:
+    ".github/workflows/deploy-railway-runtime.yml": __missing__
+    scripts/verify_railway_runtime_pipeline.rb: __missing__
+    docs/operations/railway-deployment.md: 495fd7379320fc5a2a49ec9ada586d1bf2f15cbd9cdefd7f9b0e85ff59152cbc
+    docs/operations/shared-module-fast-path.md: c033c530351520576f709aab0f3efd8ff7f0982c8888f58a49d04087a407053e
+    docs/ai-delivery-learning.md: dd0a2f0c52c66aaf8495e7ec176e73d14bd4bc0eff17cd6d7e6bfe748ccaedf2
+    docs/work/climbme-railway-free-ci-automation-v1.yaml: 4a03cf59ef6fd74d9847d4a9e90d3a8978388a2a120b97e82f0b6ef2c403c5b9
+    docs/work/climbme-railway-free-ci-automation-v1-execution-inventory.yaml: a62931a737a5a348dac93e476b37136f02f509766b3ae358d3f41a2f29a1f62a
+  start_input_fingerprints:
+    Dockerfile.runtime: 12f1872d5cdefa0f081412a2d963a465d8d0c06928d2de0e27d8282cba0db168
+    railway.toml: cab430ec210045f87c50e2e6e0dc1788742fe0301948fe85d1c5caf27480d6dc
+    backend/pom.xml: 1f4fe181586c19eb0728c0c6dda1293ab091c51e33b75147d641794e46973d3b
+    ".mvn/maven.config": 28910bdd1c1ff2614c40d2bb64e133b8a86cc262809e6c2d1d05dbc064d185b4
+    ".mvn/settings.xml": 7a48d54194fa360e745c59979318d3bbe5f30e0c0ba159130201912c7d46dd51
+    frontend/package.json: 0757b7953fac89bccc90e0a14a02f26f279b7d81825abe06a8e9c514001664f0
+    frontend/package-lock.json: 48eb3e37c5e2feb8eadf8960c8d0ae89aa7959721dcfd3a10d8ddf7f60ea7722
+    ".github/workflows/build-private-image.yml": e69fee39e0a915bef120f9a33818b72db8800cdf4bdd4daadbcdad4051c042e0
+    scripts/verify_private_image_pipeline.rb: 21f87452231aad7b941d0e64122544814d8a64f2d822da1870952bdb648df182
+    docs/work/climbme-railway-runtime-only-free-deploy-v1.yaml: a1f05051e0f50e8a9a398483bfdcc32947d4cd082ca71504ce4a9f9bd2e34e53
+  start_output_fingerprints:
+    ".github/workflows/deploy-railway-runtime.yml": __missing__
+    scripts/verify_railway_runtime_pipeline.rb: __missing__
+    docs/operations/railway-deployment.md: 495fd7379320fc5a2a49ec9ada586d1bf2f15cbd9cdefd7f9b0e85ff59152cbc
+    docs/operations/shared-module-fast-path.md: c033c530351520576f709aab0f3efd8ff7f0982c8888f58a49d04087a407053e
+    docs/ai-delivery-learning.md: dd0a2f0c52c66aaf8495e7ec176e73d14bd4bc0eff17cd6d7e6bfe748ccaedf2
+    docs/work/climbme-railway-free-ci-automation-v1.yaml: 4a03cf59ef6fd74d9847d4a9e90d3a8978388a2a120b97e82f0b6ef2c403c5b9
+    docs/work/climbme-railway-free-ci-automation-v1-execution-inventory.yaml: a62931a737a5a348dac93e476b37136f02f509766b3ae358d3f41a2f29a1f62a
+  start_verifier_footprint_fingerprints:
+    ".github/workflows/deploy-railway-runtime.yml": __missing__
+    scripts/verify_railway_runtime_pipeline.rb: __missing__
+    docs/operations/railway-deployment.md: 495fd7379320fc5a2a49ec9ada586d1bf2f15cbd9cdefd7f9b0e85ff59152cbc
+    docs/operations/shared-module-fast-path.md: c033c530351520576f709aab0f3efd8ff7f0982c8888f58a49d04087a407053e
+    docs/ai-delivery-learning.md: dd0a2f0c52c66aaf8495e7ec176e73d14bd4bc0eff17cd6d7e6bfe748ccaedf2
+    docs/work/climbme-railway-free-ci-automation-v1.yaml: 4a03cf59ef6fd74d9847d4a9e90d3a8978388a2a120b97e82f0b6ef2c403c5b9
+    docs/work/climbme-railway-free-ci-automation-v1-execution-inventory.yaml: a62931a737a5a348dac93e476b37136f02f509766b3ae358d3f41a2f29a1f62a
+  start_workspace_paths:
+  - docs/work/climbme-railway-free-ci-automation-v1-execution-inventory.yaml
+  - docs/work/climbme-railway-free-ci-automation-v1.yaml
+  start_workspace_fingerprints:
+    docs/work/climbme-railway-free-ci-automation-v1-execution-inventory.yaml: a62931a737a5a348dac93e476b37136f02f509766b3ae358d3f41a2f29a1f62a
+    docs/work/climbme-railway-free-ci-automation-v1.yaml: 4a03cf59ef6fd74d9847d4a9e90d3a8978388a2a120b97e82f0b6ef2c403c5b9
+evidence:
+- task: define-free-plan-runtime-deployment-workflow
+  command: ruby scripts/verify_private_image_pipeline.rb && ruby scripts/verify_railway_runtime_pipeline.rb
+  ranAt: '2026-08-14T15:16:55Z'
+  revision: beeb194b0519def5ab276750bfdc504e4bc7e9af
+  exitCode: 0
+  result: passed
+  timedOut: false
+  timeoutSeconds: 300
+  changedFiles:
+  - docs/ai-delivery-learning.md
+  - docs/operations/railway-deployment.md
+  - docs/operations/shared-module-fast-path.md
+  - ".github/workflows/deploy-railway-runtime.yml"
+  - docs/work/climbme-railway-free-ci-automation-v1-execution-inventory.yaml
+  - docs/work/climbme-railway-free-ci-automation-v1.yaml
+  - scripts/verify_railway_runtime_pipeline.rb
+  executionEnvironment:
+    shell: "/bin/zsh"
+    rubyVersion: 2.6.10
+    environmentExported: false
+  requiredPathDigests:
+    ".github/workflows/deploy-railway-runtime.yml": 72bdeccce4a5b694e2840f93610731e2978f24bf5b3df0fbf53820a9f7304ff8
+    scripts/verify_railway_runtime_pipeline.rb: 471f08860e14ce4aab02e2497e9ae3fd616aec9b5a508241507a1d16b4245e24
+    docs/operations/railway-deployment.md: 5ef16d265c5a3fbb03c55dd53808a53494871405ad961f0e159f35e01f8bb586
+    docs/operations/shared-module-fast-path.md: f3b29b69228c063e2ad517698e84f90e95ea7bbe3341b42028784362c4dca8fa
+    docs/ai-delivery-learning.md: 472f37a10e3be3ded9ee7501ce3b45d5e7aedb4e3750655f7cddbdb262418262
+    docs/work/climbme-railway-free-ci-automation-v1.yaml: 687fe8228880b7ff1f0daa53650ab63be5e3a4893a865be08548452be92a92ec
+    docs/work/climbme-railway-free-ci-automation-v1-execution-inventory.yaml: 9088e91c45d3fc603e6abb26cf022ac5df1bbbc892e84806ffba3c8a3c038ded
+  output: |-
+    private image pipeline valid
+    Railway runtime pipeline valid
+  requiredPaths:
+  - ".github/workflows/deploy-railway-runtime.yml"
+  - scripts/verify_railway_runtime_pipeline.rb
+  - docs/operations/railway-deployment.md
+  - docs/operations/shared-module-fast-path.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-railway-free-ci-automation-v1.yaml
+  - docs/work/climbme-railway-free-ci-automation-v1-execution-inventory.yaml
+  requiredRemovedDirectories: []
+  removedDirectoryEvidence: []
+  visualEvidencePaths: []
+  runtimeEvidencePaths: []
+  verifierFootprintPaths: *1
+  startedAt: '2026-08-14T15:15:11Z'
+  changedAfterStart:
+  - ".github/workflows/deploy-railway-runtime.yml"
+  - scripts/verify_railway_runtime_pipeline.rb
+  - docs/operations/railway-deployment.md
+  - docs/operations/shared-module-fast-path.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-railway-free-ci-automation-v1.yaml
+  - docs/work/climbme-railway-free-ci-automation-v1-execution-inventory.yaml

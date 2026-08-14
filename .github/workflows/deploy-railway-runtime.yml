@@ -1,0 +1,56 @@
+name: Deploy ClimbMe runtime to Railway
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: read
+
+concurrency:
+  group: climbme-production-runtime-deploy
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy-runtime:
+    runs-on: ubuntu-latest
+    env:
+      RAILWAY_PROJECT_ID: ${{ vars.RAILWAY_PROJECT_ID }}
+      RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Verify and build frontend
+        run: |
+          npm --prefix frontend ci
+          npm --prefix frontend run test
+          npm --prefix frontend run build
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Verify and package application
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_PACKAGES_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p backend/src/main/resources/static
+          cp -R frontend/dist/. backend/src/main/resources/static/
+          mvn --batch-mode -f backend/pom.xml verify
+      - name: Assemble isolated runtime context
+        run: |
+          mkdir railway-context
+          cp backend/target/*.jar railway-context/app.jar
+          cp Dockerfile.runtime railway-context/Dockerfile
+          cp railway.toml railway-context/railway.toml
+      - name: Validate deployment configuration
+        run: |
+          test -n "$RAILWAY_PROJECT_ID"
+          test -n "$RAILWAY_TOKEN"
+      - name: Upload runtime context to Railway
+        run: npx --yes @railway/cli@5.39.0 up railway-context --path-as-root --service climbme --environment production --project "$RAILWAY_PROJECT_ID" --ci

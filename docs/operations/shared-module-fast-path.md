@@ -14,19 +14,23 @@ a stable, small boundary. Auth Foundation is the first example.
    Keep the adoption limited to one primitive before migrating more behavior.
 5. For a deployable consumer, use GitHub Actions to map its ephemeral token to
    the consumer Maven settings variable, resolve the package, test and package
-   the app, then publish an immutable private container image. The Dockerfile
-   receives only the prebuilt JAR.
-6. Before a Railway deploy, configure a read-only registry credential in the
-   Railway service and select the immutable image tag. Verify health and the
-   intended public runtime separately.
+   the app, then assemble a runtime-only context. The Dockerfile receives only
+   the prebuilt JAR.
+6. On Railway Free, use an owner-created environment-scoped project deployment
+   token as a GitHub Actions secret and upload only that runtime context to the
+   named service. Keep source autodeploy disconnected and verify health after
+   the run. A private-image registry route is optional for a plan that supports
+   private pulls; it is not a prerequisite for the Free route.
 
 ## Current ClimbMe delivery path
 
-`build-private-image.yml` is intentionally manual. It uses the GitHub Actions
-token for Maven and GHCR, builds the frontend and backend before Docker runs,
-then publishes only `ghcr.io/<owner>/climbme:<commit-sha>`. The workflow needs
-read access to the private Auth Foundation package; grant the `climbme`
-repository the least-privileged package access before the first run.
+`deploy-railway-runtime.yml` is intentionally manual. It uses the GitHub Actions
+token only for Maven, builds the frontend and backend before Docker runs, then
+uploads only a JAR, runtime Dockerfile and Railway manifest. Its project-scoped
+`RAILWAY_TOKEN` and non-secret `RAILWAY_PROJECT_ID` are configured in GitHub,
+not source. The workflow needs read access to the private Auth Foundation
+package; grant the `climbme` repository the least-privileged package access
+before the first run.
 
-Railway is not configured by this repository change. Its private-registry
-credential, selected image tag and deployment remain visible external actions.
+The production Railway service remains source-disconnected. A manual workflow
+run is still a visible owner-authorized external action.

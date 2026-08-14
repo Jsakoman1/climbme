@@ -68,6 +68,19 @@ Dockerfile or Docker build arguments.
   keep future automation gated on an owner-created, project-scoped Railway token
   stored as a GitHub Actions secret.
 
+### 2026-08-14 — Railway Free deployment automation (verified static contract)
+
+- Process signal: a source-disconnected production service needs a repeatable
+  upload route, but its token must be scoped to deployment actions and remain
+  outside both Maven and Docker configuration.
+- Reusable boundary: a manually triggered workflow can build the consumer with
+  the ephemeral package token, then upload only the prebuilt JAR, runtime
+  Dockerfile and Railway manifest using a pinned Railway CLI.
+- External gate: the owner must create the production-scoped project token and
+  add it as the GitHub `RAILWAY_TOKEN` secret; the project identifier is a
+  non-secret repository variable. This static contract is not GitHub Actions or
+  production deployment evidence.
+
 ### 2026-08-13 — locked Dora CLI compatibility pilot (verified local evidence)
 
 - Intended outcome: prove that the delivery-control CLI can be resolved from one

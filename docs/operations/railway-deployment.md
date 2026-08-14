@@ -1,39 +1,52 @@
 # Railway deployment
 
-ClimbMe is packaged as one Docker service plus a Railway PostgreSQL service.
-The checked-in Dockerfile supports source builds. When the application consumes
-the private Auth Foundation package, the safer release path is the manual
-GitHub Actions workflow: it resolves the package and builds an immutable private
-GHCR image before Railway pulls that already-built image. Both paths expose
-`GET /actuator/health` as the health endpoint.
+ClimbMe is one Docker service plus a Railway PostgreSQL service. The production
+service uses a runtime-only Dockerfile and exposes `GET /actuator/health`.
+
+The current Railway Free route is manual GitHub Actions deployment: Actions
+resolves the private Auth Foundation package, verifies the application, assembles
+only a JAR plus runtime Dockerfile and uploads that isolated context to Railway.
+Railway never receives a Maven package credential.
 
 ## Required Railway setup
 
-1. Create or select the private `Jsakoman1/climbme` repository as the service
-   source and add a PostgreSQL service in the same Railway project.
-2. Configure the app service from `railway.toml`; do not use a generated Nix
+1. Keep the production app service source autodeploy disconnected. The checked-in
+   `railway.toml` selects the runtime Dockerfile; do not use a generated Nix
    buildpack in parallel.
-3. Reference PostgreSQL service variables into the app service: `PGHOST`,
+2. Reference PostgreSQL service variables into the app service: `PGHOST`,
    `PGPORT`, `PGDATABASE`, `PGUSER`, and `PGPASSWORD`. Alternatively provide a
    complete JDBC URL as `JDBC_DATABASE_URL`.
-4. Set `CLIMBME_OPERATIONS_SECURE_COOKIES=true` for the public HTTPS service.
+3. Set `CLIMBME_OPERATIONS_SECURE_COOKIES=true` for the public HTTPS service.
    Railway supplies `PORT`; it must not be hard-coded as a production variable.
-5. Confirm migrations complete, `/actuator/health` is healthy, and a new account
+4. Confirm migrations complete, `/actuator/health` is healthy, and a new account
    can register before sharing the Railway URL.
 
-## Private image release path
+## Railway Free Actions route
 
 1. Grant the `climbme` GitHub Actions repository read access to the private
    Auth Foundation package.
-2. Run the manual `Build private ClimbMe image` workflow and retain the emitted
-   immutable commit-SHA image tag. The workflow maps the ephemeral Actions token
+2. In GitHub Actions configuration, set `RAILWAY_PROJECT_ID` as a repository
+   variable for the selected Railway project. Create `RAILWAY_TOKEN` as a
+   repository secret from a Railway **project token scoped only to production
+   deployment actions**. Do not paste the token into source code, a Docker build,
+   Railway variables or chat.
+3. Run the manual `Deploy ClimbMe runtime to Railway` workflow. It maps the
+   ephemeral Actions token to `GITHUB_PACKAGES_TOKEN` only for Maven because the
+   consumer-owned settings file explicitly expects that variable.
+4. The workflow uploads only the prebuilt JAR, `Dockerfile.runtime` and
+   `railway.toml` to the existing `climbme` production service. It cannot read
+   provider variables or create a service.
+5. Verify health and the intended public runtime after the owner-authorized run.
+
+## Optional paid private-image route
+
+`build-private-image.yml` remains a manual build-only route for a future plan
+that supports private registry pulls. It publishes an immutable private image;
+it does not deploy the current Railway Free service. If this route is adopted,
+configure a read-only GHCR credential in Railway and select an immutable image
+tag. The workflow maps the ephemeral Actions token
    to `GITHUB_PACKAGES_TOKEN` only for Maven because the consumer-owned settings
    file explicitly expects that variable.
-3. In Railway, configure a read-only GHCR registry credential and set that
-   image as the service source. Do not place a GitHub Packages Maven token in
-   Railway variables or a Docker build argument.
-4. Deploy only after the owner confirms the selected service and image tag;
-   then verify the health endpoint and the intended public runtime.
 
 No Railway password, token, database URL, public domain, or user record belongs
 in this repository. A real deployment is an owner-visible external operation.
