@@ -26,6 +26,12 @@ a stable, small boundary. Auth Foundation is the first example.
    the provider CLI with that assembled context as its working directory. Passing
    a context path while invoking the CLI from its parent can make the provider
    ignore the intended manifest and fall back to a default build strategy.
+8. For an Auth Foundation policy update, run the focused auth test before the
+   full backend and frontend suite. Keep Unicode-aware password length at the
+   shared service boundary rather than a DTO or browser-only minimum: browser
+   `minlength` improves guidance but does not count Unicode code points. Apply
+   the new-password policy to registration or password change only; login must
+   retain compatibility with existing stored password hashes.
 
 ## Current ClimbMe delivery path
 

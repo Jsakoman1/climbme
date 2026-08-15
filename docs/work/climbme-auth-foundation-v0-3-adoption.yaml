@@ -1,0 +1,199 @@
+kind: work
+version: 1
+id: climbme-auth-foundation-v0-3-adoption
+title: Adopt Auth Foundation v0.3 single-factor password policy
+status: verified
+baseline: b463ba9b837654ccc89beb82a2c132dc54e758a2
+strict_verification: true
+serial_task_execution: true
+execution_inventory: docs/work/climbme-auth-foundation-v0-3-adoption-inventory.yaml
+scope_control:
+  non_goals:
+  - No account migration, forced reset, database, session, CSRF, BCrypt, rate-limit,
+    deployment or public API shape change.
+tasks:
+- id: adopt-single-factor-password-policy
+  inventory_item: auth-foundation-single-factor-policy
+  title: Enforce the shared v0.3 password policy for new credentials
+  observable_outcome: Registration and authenticated password change reject passwords
+    shorter than 15 Unicode code points through Auth Foundation v0.3, while existing
+    stored BCrypt hashes can still sign in and ClimbMe retains all session and data
+    authority.
+  dependencies: []
+  input_paths:
+  - backend/src/test/java/com/climbme/app/auth/AuthIntegrationTest.java
+  - docs/product-brief.yaml
+  - docs/domain-library.yaml
+  output_paths:
+  - backend/pom.xml
+  - backend/src/main/java/com/climbme/app/auth/AuthService.java
+  - backend/src/main/java/com/climbme/app/auth/AuthController.java
+  - backend/src/test/java/com/climbme/app/auth/AuthIntegrationTest.java
+  - frontend/src/main.js
+  - frontend/e2e/climbme-core.spec.js
+  - docs/product-brief.yaml
+  - docs/domain-library.yaml
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-auth-foundation-v0-3-adoption.yaml
+  - docs/work/climbme-auth-foundation-v0-3-adoption-inventory.yaml
+  paths:
+  - backend/pom.xml
+  - backend/src/main/java/com/climbme/app/auth/AuthService.java
+  - backend/src/main/java/com/climbme/app/auth/AuthController.java
+  - backend/src/test/java/com/climbme/app/auth/AuthIntegrationTest.java
+  - frontend/src/main.js
+  - frontend/e2e/climbme-core.spec.js
+  - docs/product-brief.yaml
+  - docs/domain-library.yaml
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-auth-foundation-v0-3-adoption.yaml
+  - docs/work/climbme-auth-foundation-v0-3-adoption-inventory.yaml
+  required_paths:
+  - backend/pom.xml
+  - backend/src/main/java/com/climbme/app/auth/AuthService.java
+  - backend/src/main/java/com/climbme/app/auth/AuthController.java
+  - backend/src/test/java/com/climbme/app/auth/AuthIntegrationTest.java
+  - frontend/src/main.js
+  - frontend/e2e/climbme-core.spec.js
+  - docs/product-brief.yaml
+  - docs/domain-library.yaml
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-auth-foundation-v0-3-adoption.yaml
+  - docs/work/climbme-auth-foundation-v0-3-adoption-inventory.yaml
+  verifier_footprint_paths: &1
+  - backend/pom.xml
+  - backend/src/main/java/com/climbme/app/auth/AuthService.java
+  - backend/src/main/java/com/climbme/app/auth/AuthController.java
+  - backend/src/test/java/com/climbme/app/auth/AuthIntegrationTest.java
+  - frontend/src/main.js
+  - frontend/e2e/climbme-core.spec.js
+  - docs/product-brief.yaml
+  - docs/domain-library.yaml
+  - docs/ai-delivery-learning.md
+  validation: mvn -q -f backend/pom.xml test && npm --prefix frontend run test &&
+    npm --prefix frontend run build && git diff --check
+  evidence_boundary:
+  - Local package and synthetic test evidence only.
+  - No password, account, climbing data, secret, provider, deploy or runtime claim.
+  observation_disposition: required_aggregate_only
+  status: done
+  started_at: '2026-08-14T20:40:47Z'
+  start_fingerprints:
+    backend/pom.xml: 1f4fe181586c19eb0728c0c6dda1293ab091c51e33b75147d641794e46973d3b
+    backend/src/main/java/com/climbme/app/auth/AuthService.java: 7b826fe5f52bf7fc645c787f1a69a941a7b262bb311eefad1e01c27cd2d4e9e1
+    backend/src/main/java/com/climbme/app/auth/AuthController.java: 68b0aeafe76ceba065f4a6b94ba8ea2d0e995271b555e5afa2322d8c336899bf
+    backend/src/test/java/com/climbme/app/auth/AuthIntegrationTest.java: ce50b0475639be4df544e2c37c4e1649dc86dd2ba30ab2539475358cc3dcdf0c
+    frontend/src/main.js: 31b8173d9daf580403490848bbcfd9f86898fcf93aa57327e5f509243f8d51b6
+    frontend/e2e/climbme-core.spec.js: 62c8aa8e32f17590c7837d3f1b3a4cde7723e8076bf8bcbf4bf8b8fea0545c0c
+    docs/product-brief.yaml: 8b1744522aba7e631226b32dccc55604e8a95d98938585c0674dbc1219e5594b
+    docs/domain-library.yaml: 7689494ebc4a7f8a581ab3fafb5527f455c90359331624492ac8fa44540d1ad4
+    docs/ai-delivery-learning.md: 936aae58094528587b3c14661c8d12be8cdce5f008dc49df8ad88781601e27f2
+    docs/work/climbme-auth-foundation-v0-3-adoption.yaml: e4b7a7a6e40cf787d89af368300703602ba479dbb4f135ca9d68e850d864f854
+    docs/work/climbme-auth-foundation-v0-3-adoption-inventory.yaml: 1c5e46802fad90cfad1f2d9e02b46cf829b79b57c8a03538f86f37c8a55ebb1f
+  start_verifier_footprint_fingerprints:
+    backend/pom.xml: 1f4fe181586c19eb0728c0c6dda1293ab091c51e33b75147d641794e46973d3b
+    backend/src/main/java/com/climbme/app/auth/AuthService.java: 7b826fe5f52bf7fc645c787f1a69a941a7b262bb311eefad1e01c27cd2d4e9e1
+    backend/src/main/java/com/climbme/app/auth/AuthController.java: 68b0aeafe76ceba065f4a6b94ba8ea2d0e995271b555e5afa2322d8c336899bf
+    backend/src/test/java/com/climbme/app/auth/AuthIntegrationTest.java: ce50b0475639be4df544e2c37c4e1649dc86dd2ba30ab2539475358cc3dcdf0c
+    frontend/src/main.js: 31b8173d9daf580403490848bbcfd9f86898fcf93aa57327e5f509243f8d51b6
+    frontend/e2e/climbme-core.spec.js: 62c8aa8e32f17590c7837d3f1b3a4cde7723e8076bf8bcbf4bf8b8fea0545c0c
+    docs/product-brief.yaml: 8b1744522aba7e631226b32dccc55604e8a95d98938585c0674dbc1219e5594b
+    docs/domain-library.yaml: 7689494ebc4a7f8a581ab3fafb5527f455c90359331624492ac8fa44540d1ad4
+    docs/ai-delivery-learning.md: 936aae58094528587b3c14661c8d12be8cdce5f008dc49df8ad88781601e27f2
+    docs/work/climbme-auth-foundation-v0-3-adoption.yaml: e4b7a7a6e40cf787d89af368300703602ba479dbb4f135ca9d68e850d864f854
+    docs/work/climbme-auth-foundation-v0-3-adoption-inventory.yaml: 1c5e46802fad90cfad1f2d9e02b46cf829b79b57c8a03538f86f37c8a55ebb1f
+  start_workspace_paths:
+  - docs/work/climbme-auth-foundation-v0-3-adoption-inventory.yaml
+  - docs/work/climbme-auth-foundation-v0-3-adoption.yaml
+  start_workspace_fingerprints:
+    docs/work/climbme-auth-foundation-v0-3-adoption-inventory.yaml: 1c5e46802fad90cfad1f2d9e02b46cf829b79b57c8a03538f86f37c8a55ebb1f
+    docs/work/climbme-auth-foundation-v0-3-adoption.yaml: e4b7a7a6e40cf787d89af368300703602ba479dbb4f135ca9d68e850d864f854
+evidence:
+- task: adopt-single-factor-password-policy
+  command: mvn -q -f backend/pom.xml test && npm --prefix frontend run test && npm
+    --prefix frontend run build && git diff --check
+  ranAt: '2026-08-14T20:42:44Z'
+  revision: b463ba9b837654ccc89beb82a2c132dc54e758a2
+  exitCode: 0
+  result: passed
+  timedOut: false
+  timeoutSeconds: 300
+  changedFiles:
+  - backend/pom.xml
+  - backend/src/main/java/com/climbme/app/auth/AuthController.java
+  - backend/src/main/java/com/climbme/app/auth/AuthService.java
+  - backend/src/test/java/com/climbme/app/auth/AuthIntegrationTest.java
+  - docs/ai-delivery-learning.md
+  - docs/domain-library.yaml
+  - docs/product-brief.yaml
+  - frontend/e2e/climbme-core.spec.js
+  - frontend/src/main.js
+  - docs/work/climbme-auth-foundation-v0-3-adoption-inventory.yaml
+  - docs/work/climbme-auth-foundation-v0-3-adoption.yaml
+  executionEnvironment:
+    shell: "/bin/zsh"
+    rubyVersion: 2.6.10
+    environmentExported: false
+  requiredPathDigests:
+    backend/pom.xml: 79c5f0feabeb314938ca60a76b8896ab1cb6986dadc2b8a5d1e150b774a58db3
+    backend/src/main/java/com/climbme/app/auth/AuthService.java: 6379eb83a6e57de20c89ec271d2b4749247585bc8b606fca6ff7684de8ed3ea1
+    backend/src/main/java/com/climbme/app/auth/AuthController.java: 277b9da2ca0972eb144807b4237f8107ed3e598e6dceaebd3d56109702198235
+    backend/src/test/java/com/climbme/app/auth/AuthIntegrationTest.java: 1c0b6abf9e671a770639d34fe6fd76d6b25c8c5fe4166c1d16fa3265852fcaaf
+    frontend/src/main.js: 8f10559b5e7f0e3dbd1e9a5b048c9df37c6eac6966542d6e41a90df3bb8d2ce9
+    frontend/e2e/climbme-core.spec.js: 9b96491f9749572445e9648c7db2065b5be3e8aa21512dfc1846f7b22dd8fbee
+    docs/product-brief.yaml: d24da530b48970be24f4deba62d144ebd6f19586a4b3c4e73242a4fbcd5aae3c
+    docs/domain-library.yaml: da4f8873161f6477cb59407a4d2c2e01b87262d012fbb82fab4e01f50fdda679
+    docs/ai-delivery-learning.md: b1dd0df606a176df14b010642d3cb1b22543206a8dc117a9022434327e2f46ba
+    docs/work/climbme-auth-foundation-v0-3-adoption.yaml: b52cb7f8a30af3bbad00d68bb10ab0b47a664e1d9b3bde1f98ca5949514f2908
+    docs/work/climbme-auth-foundation-v0-3-adoption-inventory.yaml: 2e15c61766171f8cbb92dfc9fd546686e4e7e9c9b2a140b36a5bad9f56111fe7
+  output: |-
+    ✔ the mobile Training history keeps its existing private session fields (0.057333ms)
+    ✔ mobile Insights keeps the existing private dashboard inputs in scope (0.057167ms)
+    ℹ tests 9
+    ℹ suites 0
+    ℹ pass 9
+    ℹ fail 0
+    ℹ cancelled 0
+    ℹ skipped 0
+    ℹ todo 0
+    ℹ duration_ms 49.523833
+
+    > climbme@0.0.1 build
+    > node scripts/build.mjs
+
+
+    WARNING: A Java agent has been loaded dynamically (/Users/jsakoman/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.19/byte-buddy-agent-1.14.19.jar)
+    WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+    WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+    WARNING: Dynamic loading of agents will be disallowed by default in a future release
+    OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+  requiredPaths:
+  - backend/pom.xml
+  - backend/src/main/java/com/climbme/app/auth/AuthService.java
+  - backend/src/main/java/com/climbme/app/auth/AuthController.java
+  - backend/src/test/java/com/climbme/app/auth/AuthIntegrationTest.java
+  - frontend/src/main.js
+  - frontend/e2e/climbme-core.spec.js
+  - docs/product-brief.yaml
+  - docs/domain-library.yaml
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-auth-foundation-v0-3-adoption.yaml
+  - docs/work/climbme-auth-foundation-v0-3-adoption-inventory.yaml
+  requiredRemovedDirectories: []
+  removedDirectoryEvidence: []
+  visualEvidencePaths: []
+  runtimeEvidencePaths: []
+  verifierFootprintPaths: *1
+  startedAt: '2026-08-14T20:40:47Z'
+  changedAfterStart:
+  - backend/pom.xml
+  - backend/src/main/java/com/climbme/app/auth/AuthService.java
+  - backend/src/main/java/com/climbme/app/auth/AuthController.java
+  - backend/src/test/java/com/climbme/app/auth/AuthIntegrationTest.java
+  - frontend/src/main.js
+  - frontend/e2e/climbme-core.spec.js
+  - docs/product-brief.yaml
+  - docs/domain-library.yaml
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-auth-foundation-v0-3-adoption.yaml
+  - docs/work/climbme-auth-foundation-v0-3-adoption-inventory.yaml

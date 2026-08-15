@@ -1,6 +1,8 @@
 package com.climbme.app.auth;
 
-import com.jsakoman.authfoundation.NormalizedEmail;
+import com.jsakoman.authfoundation.CredentialInputPolicy;
+import com.jsakoman.authfoundation.EmailPolicy;
+import com.jsakoman.authfoundation.PasswordPolicyProfile;
 import com.climbme.app.climbing.ClimbingAttempt;
 import com.climbme.app.climbing.ClimbingAttemptRepository;
 import com.climbme.app.routes.RouteStatusOverride;
@@ -33,6 +35,8 @@ import org.springframework.security.web.context.SecurityContextRepository;
 public class AuthService {
     private static final int MAX_FAILED_ATTEMPTS = 5;
     private static final Duration ATTEMPT_WINDOW = Duration.ofMinutes(15);
+    private static final CredentialInputPolicy CREDENTIAL_INPUT_POLICY = CredentialInputPolicy.forProfile(
+            EmailPolicy.legacyCompatibleBaseline(), PasswordPolicyProfile.SINGLE_FACTOR);
 
     private final UserAccountRepository accounts;
     private final PasswordEncoder passwordEncoder;
@@ -65,13 +69,14 @@ public class AuthService {
         String key = request.getRemoteAddr();
         requireAttemptCapacity(key);
         String email = normalizeEmail(rawEmail);
+        String validatedPassword = validateNewPassword(password);
         if (accounts.findByEmail(email).isPresent()) {
             recordFailure(key);
             throw new ResponseStatusException(HttpStatus.CONFLICT, "An account already exists for this email address.");
         }
-        accounts.save(new UserAccount(email, passwordEncoder.encode(password)));
+        accounts.save(new UserAccount(email, passwordEncoder.encode(validatedPassword)));
         clearFailures(key);
-        return authenticate(email, password, request, response, key);
+        return authenticate(email, validatedPassword, request, response, key);
     }
 
     public AccountView login(String rawEmail, String password, HttpServletRequest request, HttpServletResponse response) {
@@ -85,7 +90,7 @@ public class AuthService {
         if (!passwordEncoder.matches(currentPassword, account.getPassword())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Current password is incorrect.");
         }
-        account.changePassword(passwordEncoder.encode(newPassword));
+        account.changePassword(passwordEncoder.encode(validateNewPassword(newPassword)));
         accounts.save(account);
     }
 
@@ -136,7 +141,15 @@ public class AuthService {
         }
     }
 
-    private String normalizeEmail(String email) { return NormalizedEmail.from(email).value(); }
+    private String normalizeEmail(String email) { return CREDENTIAL_INPUT_POLICY.normalizeEmail(email).value(); }
+
+    private String validateNewPassword(String password) {
+        try {
+            return CREDENTIAL_INPUT_POLICY.validatePassword(password);
+        } catch (IllegalArgumentException exception) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password must contain at least 15 Unicode characters.");
+        }
+    }
 
     private void requireAttemptCapacity(String key) {
         if (failuresFor(key).size() >= MAX_FAILED_ATTEMPTS) {

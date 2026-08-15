@@ -84,10 +84,10 @@ public class AuthController {
     }
 
     public record RegistrationRequest(@NotBlank @Email @Size(max = 254) String email,
-                                      @NotBlank @Size(min = 12, max = 128) String password) { }
+                                      @NotBlank @Size(max = 512) String password) { }
     public record LoginRequest(@NotBlank @Email @Size(max = 254) String email,
-                               @NotBlank @Size(max = 128) String password) { }
-    public record PasswordChangeRequest(@NotBlank @Size(max = 128) String currentPassword,
-                                        @NotBlank @Size(min = 12, max = 128) String newPassword) { }
-    public record AccountDeletionRequest(@NotBlank @Size(max = 128) String currentPassword) { }
+                               @NotBlank @Size(max = 512) String password) { }
+    public record PasswordChangeRequest(@NotBlank @Size(max = 512) String currentPassword,
+                                        @NotBlank @Size(max = 512) String newPassword) { }
+    public record AccountDeletionRequest(@NotBlank @Size(max = 512) String currentPassword) { }
 }

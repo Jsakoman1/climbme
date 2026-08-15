@@ -62,6 +62,17 @@ class AuthIntegrationTest {
     }
 
     @Test
+    void registrationUsesTheSharedUnicodeSingleFactorPasswordPolicy() throws Exception {
+        mvc.perform(post("/api/auth/register").with(csrf()).contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"email\":\"too-short@example.com\",\"password\":\"" + "🔐".repeat(14) + "\"}"))
+                .andExpect(status().isBadRequest());
+
+        mvc.perform(post("/api/auth/register").with(csrf()).contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"email\":\"unicode-valid@example.com\",\"password\":\"" + "🔐".repeat(15) + "\"}"))
+                .andExpect(status().isCreated());
+    }
+
+    @Test
     void failedAuthenticationIsTemporarilyLimitedPerClientAddress() throws Exception {
         String blockedAddress = "198.51.100.41";
         for (int attempt = 0; attempt < 5; attempt++) {

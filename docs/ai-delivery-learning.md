@@ -24,6 +24,19 @@ decision. Do not pause merely because an intermediate slice is verified.
 
 ## Entries
 
+### 2026-08-14 — shared password-policy consumer adoption (verified local evidence)
+
+- Intended outcome: apply Auth Foundation v0.3's explicit single-factor policy
+  to ClimbMe's new credentials without changing its session, CSRF, BCrypt,
+  rate-limit, account data or private climbing records.
+- Process signal: browser `minlength` is a usability hint, not Unicode-aware
+  security enforcement. The consumer must validate the same policy in its
+  backend while leaving login compatible with existing stored hashes.
+- Evidence coverage: synthetic 14- and 15-code-point credentials exercise the
+  backend boundary; existing credential and private-data tests remain required.
+- Residual risk: this is local behavior evidence only and makes no provider or
+  deployment claim.
+
 ### 2026-08-14 — versioned shared auth package adoption (verified local evidence)
 
 - Intended outcome: replace local email normalization with Auth Foundation v0.1.0

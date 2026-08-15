@@ -4,6 +4,7 @@ async function registerAndAddAttempt(page, suffix) {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
   await page.getByRole("button", { name: "New here? Create an account" }).click();
+  await expect(page.getByLabel("Password")).toHaveAttribute("minlength", "15");
   await page.getByLabel("Email").fill(`mobile-${suffix}-${Date.now()}@example.com`);
   await page.getByLabel("Password").fill("safe-password-123");
   await page.getByRole("button", { name: "Create account" }).click();
