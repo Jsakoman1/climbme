@@ -7,6 +7,8 @@ The current Railway Free route is manual GitHub Actions deployment: Actions
 resolves the private Auth Foundation package, verifies the application, assembles
 only a JAR plus runtime Dockerfile and uploads that isolated context to Railway.
 Railway never receives a Maven package credential.
+The workflow uses the maintained v5 checkout, Node, and Java setup actions so a
+successful deployment does not retain the deprecated Node 20 action runtime.
 
 ## Required Railway setup
 

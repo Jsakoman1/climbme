@@ -1,0 +1,134 @@
+kind: work
+version: 1
+id: climbme-actions-runtime-compatibility-v1
+title: Maintain the manual Railway workflow on current GitHub Actions runtimes
+status: verified
+baseline: '018ac715cb33e1193ead94206ab020afe343582a'
+strict_verification: true
+serial_task_execution: true
+execution_inventory: docs/work/climbme-actions-runtime-compatibility-v1-execution-inventory.yaml
+artifact_roles: explicit_v1
+tasks:
+- id: maintain-runtime-workflow-actions
+  inventory_item: actions-runtime-maintenance
+  title: Upgrade manual Railway workflow setup actions to v5
+  type: implementation
+  status: done
+  observable_outcome: The manual Railway workflow uses v5 checkout, Node, and Java
+    setup actions, while its static verifier and operational guidance prevent a return
+    to the deprecated action-runtime versions without changing deployment scope.
+  dependencies: []
+  input_paths: []
+  output_paths:
+  - ".github/workflows/deploy-railway-runtime.yml"
+  - scripts/verify_railway_runtime_pipeline.rb
+  - docs/operations/railway-deployment.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-actions-runtime-compatibility-v1.yaml
+  - docs/work/climbme-actions-runtime-compatibility-v1-execution-inventory.yaml
+  paths:
+  - ".github/workflows/deploy-railway-runtime.yml"
+  - scripts/verify_railway_runtime_pipeline.rb
+  - docs/operations/railway-deployment.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-actions-runtime-compatibility-v1.yaml
+  - docs/work/climbme-actions-runtime-compatibility-v1-execution-inventory.yaml
+  required_paths:
+  - ".github/workflows/deploy-railway-runtime.yml"
+  - scripts/verify_railway_runtime_pipeline.rb
+  - docs/operations/railway-deployment.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-actions-runtime-compatibility-v1.yaml
+  - docs/work/climbme-actions-runtime-compatibility-v1-execution-inventory.yaml
+  verifier_footprint_paths: &1
+  - ".github/workflows/deploy-railway-runtime.yml"
+  - scripts/verify_railway_runtime_pipeline.rb
+  - docs/operations/railway-deployment.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-actions-runtime-compatibility-v1.yaml
+  - docs/work/climbme-actions-runtime-compatibility-v1-execution-inventory.yaml
+  validation: ruby scripts/verify_railway_runtime_pipeline.rb
+  evidence_boundary:
+  - Static workflow and documentation evidence only.
+  - No GitHub dispatch, Railway action, provider secret read, database access, or
+    public-health claim.
+  observation_disposition: sanitized_observation
+  started_at: '2026-08-15T15:25:14Z'
+  start_fingerprints:
+    ".github/workflows/deploy-railway-runtime.yml": f64ac85c660ee3455121ec13722ffcd8dd26b729478e3a848236641c5a8b1f6c
+    scripts/verify_railway_runtime_pipeline.rb: 1f3a9d4ce7cbc53bac755e692d18f459ba2222a1575ff94466f30168b98be6c2
+    docs/operations/railway-deployment.md: df8ee248c01041c2cbed1a8463428c7ebb1ddaf1a872e27e67d4d5fee46c5303
+    docs/ai-delivery-learning.md: 7cce9e3236876fdaa2076b4f83301dfcf5325f6c08e0a09cd918c2897edc0836
+    docs/work/climbme-actions-runtime-compatibility-v1.yaml: f68e30a71b066d4292e43324505a281db8a72371c1cd476d533d0840a051bf54
+    docs/work/climbme-actions-runtime-compatibility-v1-execution-inventory.yaml: d79909dc9fc1e6e723eff380711f8ab0d1bb7cfe9d3be17f208c8209330514b3
+  start_input_fingerprints: {}
+  start_output_fingerprints:
+    ".github/workflows/deploy-railway-runtime.yml": f64ac85c660ee3455121ec13722ffcd8dd26b729478e3a848236641c5a8b1f6c
+    scripts/verify_railway_runtime_pipeline.rb: 1f3a9d4ce7cbc53bac755e692d18f459ba2222a1575ff94466f30168b98be6c2
+    docs/operations/railway-deployment.md: df8ee248c01041c2cbed1a8463428c7ebb1ddaf1a872e27e67d4d5fee46c5303
+    docs/ai-delivery-learning.md: 7cce9e3236876fdaa2076b4f83301dfcf5325f6c08e0a09cd918c2897edc0836
+    docs/work/climbme-actions-runtime-compatibility-v1.yaml: f68e30a71b066d4292e43324505a281db8a72371c1cd476d533d0840a051bf54
+    docs/work/climbme-actions-runtime-compatibility-v1-execution-inventory.yaml: d79909dc9fc1e6e723eff380711f8ab0d1bb7cfe9d3be17f208c8209330514b3
+  start_verifier_footprint_fingerprints:
+    ".github/workflows/deploy-railway-runtime.yml": f64ac85c660ee3455121ec13722ffcd8dd26b729478e3a848236641c5a8b1f6c
+    scripts/verify_railway_runtime_pipeline.rb: 1f3a9d4ce7cbc53bac755e692d18f459ba2222a1575ff94466f30168b98be6c2
+    docs/operations/railway-deployment.md: df8ee248c01041c2cbed1a8463428c7ebb1ddaf1a872e27e67d4d5fee46c5303
+    docs/ai-delivery-learning.md: 7cce9e3236876fdaa2076b4f83301dfcf5325f6c08e0a09cd918c2897edc0836
+    docs/work/climbme-actions-runtime-compatibility-v1.yaml: f68e30a71b066d4292e43324505a281db8a72371c1cd476d533d0840a051bf54
+    docs/work/climbme-actions-runtime-compatibility-v1-execution-inventory.yaml: d79909dc9fc1e6e723eff380711f8ab0d1bb7cfe9d3be17f208c8209330514b3
+  start_workspace_paths:
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-actions-runtime-compatibility-v1-execution-inventory.yaml
+  - docs/work/climbme-actions-runtime-compatibility-v1.yaml
+  start_workspace_fingerprints:
+    docs/ai-delivery-learning.md: 7cce9e3236876fdaa2076b4f83301dfcf5325f6c08e0a09cd918c2897edc0836
+    docs/work/climbme-actions-runtime-compatibility-v1-execution-inventory.yaml: d79909dc9fc1e6e723eff380711f8ab0d1bb7cfe9d3be17f208c8209330514b3
+    docs/work/climbme-actions-runtime-compatibility-v1.yaml: f68e30a71b066d4292e43324505a281db8a72371c1cd476d533d0840a051bf54
+evidence:
+- task: maintain-runtime-workflow-actions
+  command: ruby scripts/verify_railway_runtime_pipeline.rb
+  ranAt: '2026-08-15T15:25:46Z'
+  revision: '018ac715cb33e1193ead94206ab020afe343582a'
+  exitCode: 0
+  result: passed
+  timedOut: false
+  timeoutSeconds: 300
+  changedFiles:
+  - ".github/workflows/deploy-railway-runtime.yml"
+  - docs/ai-delivery-learning.md
+  - docs/operations/railway-deployment.md
+  - scripts/verify_railway_runtime_pipeline.rb
+  - docs/work/climbme-actions-runtime-compatibility-v1-execution-inventory.yaml
+  - docs/work/climbme-actions-runtime-compatibility-v1.yaml
+  executionEnvironment:
+    shell: "/bin/zsh"
+    rubyVersion: 2.6.10
+    environmentExported: false
+  requiredPathDigests:
+    ".github/workflows/deploy-railway-runtime.yml": 667d050eed25267e5087a7a2811600179e4ee8fafcc4aa0044e22339b6911361
+    scripts/verify_railway_runtime_pipeline.rb: 0e7a9c642a90e70d52af2f7699ce2b9645befdc8a657c68c3ee7f2d55b2aaeca
+    docs/operations/railway-deployment.md: e28e7a693f4d44308f724c74cffd613f9fba808c009aba9911b31fdfad0bb087
+    docs/ai-delivery-learning.md: f4750c5947fa078b83bf434dce1f4b6e9af0fe8754e7d54edaa8d5be5aef4e48
+    docs/work/climbme-actions-runtime-compatibility-v1.yaml: 7eb006283c4de1f12f58b002d231f09d7182b268a9842eaf4307f4a62c08368b
+    docs/work/climbme-actions-runtime-compatibility-v1-execution-inventory.yaml: 6898bb288ecaab67efed24320bf55df82e858a02dac58a26b1b0eddbbd04a270
+  output: Railway runtime pipeline valid
+  requiredPaths:
+  - ".github/workflows/deploy-railway-runtime.yml"
+  - scripts/verify_railway_runtime_pipeline.rb
+  - docs/operations/railway-deployment.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-actions-runtime-compatibility-v1.yaml
+  - docs/work/climbme-actions-runtime-compatibility-v1-execution-inventory.yaml
+  requiredRemovedDirectories: []
+  removedDirectoryEvidence: []
+  visualEvidencePaths: []
+  runtimeEvidencePaths: []
+  verifierFootprintPaths: *1
+  startedAt: '2026-08-15T15:25:14Z'
+  changedAfterStart:
+  - ".github/workflows/deploy-railway-runtime.yml"
+  - scripts/verify_railway_runtime_pipeline.rb
+  - docs/operations/railway-deployment.md
+  - docs/ai-delivery-learning.md
+  - docs/work/climbme-actions-runtime-compatibility-v1.yaml
+  - docs/work/climbme-actions-runtime-compatibility-v1-execution-inventory.yaml

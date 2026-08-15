@@ -24,6 +24,20 @@ decision. Do not pause merely because an intermediate slice is verified.
 
 ## Entries
 
+### 2026-08-15 — GitHub Actions runtime maintenance pilot (verified static contract)
+
+- Intended outcome: move ClimbMe's manual runtime workflow to the reviewed v5
+  checkout, Node, and Java setup actions after the successful release workflow
+  reported deprecated action-runtime annotations.
+- Process signal: a green external workflow can still expose a future
+  compatibility risk. Preserve the runtime-only Railway boundary while a static
+  verifier prevents a silent return to the deprecated action versions.
+- Evidence coverage: workflow and documentation contract verification only; no
+  token, provider value, GitHub dispatch, Railway action, database access, or
+  public-health claim is retained.
+
+
+
 ### 2026-08-14 — shared password-policy consumer adoption (verified local evidence)
 
 - Intended outcome: apply Auth Foundation v0.3's explicit single-factor policy

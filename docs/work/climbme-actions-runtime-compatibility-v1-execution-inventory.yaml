@@ -1,0 +1,19 @@
+kind: execution_inventory
+version: 1
+id: climbme-actions-runtime-compatibility-v1
+master_plan: docs/work/climbme-actions-runtime-compatibility-v1.yaml
+state: verified
+execution_mode: strict_serial
+items:
+- id: actions-runtime-maintenance
+  order: 1
+  plan: docs/work/climbme-actions-runtime-compatibility-v1.yaml
+  task: maintain-runtime-workflow-actions
+  status: verified
+  observation_disposition: sanitized_observation
+  started_at: '2026-08-15T15:25:14Z'
+  verified_at: '2026-08-15T15:25:46Z'
+  evidence:
+    plan: docs/work/climbme-actions-runtime-compatibility-v1.yaml
+    task: maintain-runtime-workflow-actions
+    revision: '018ac715cb33e1193ead94206ab020afe343582a'

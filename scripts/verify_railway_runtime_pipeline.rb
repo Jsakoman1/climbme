@@ -18,6 +18,9 @@ fast_path_docs = File.read(FAST_PATH_DOCS)
 
 assert_includes(workflow, "workflow_dispatch:", "manual deployment trigger")
 assert_includes(workflow, "contents: read", "read-only source permission")
+assert_includes(workflow, "uses: actions/checkout@v5", "current checkout action runtime")
+assert_includes(workflow, "uses: actions/setup-node@v5", "current Node setup action runtime")
+assert_includes(workflow, "uses: actions/setup-java@v5", "current Java setup action runtime")
 assert_includes(workflow, "GITHUB_PACKAGES_TOKEN: ${{ secrets.AUTH_FOUNDATION_PACKAGES_TOKEN }}", "dedicated package-read secret mapping")
 assert_includes(workflow, "RAILWAY_PROJECT_ID: ${{ vars.RAILWAY_PROJECT_ID }}", "non-secret project target")
 assert_includes(workflow, "RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}", "project-scoped deployment token")
@@ -30,7 +33,7 @@ assert_includes(workflow, "test -n \"$RAILWAY_TOKEN\"", "explicit token configur
 assert_includes(workflow, "test -n \"$GITHUB_PACKAGES_TOKEN\"", "explicit package configuration check")
 assert_includes(workflow, "- name: Upload runtime context to Railway\n        working-directory: railway-context\n        run: npx --yes @railway/cli@5.39.0 up --service climbme --environment production --project \"$RAILWAY_PROJECT_ID\" --ci", "pinned context-root Railway upload")
 
-%w[packages: docker/login-action docker/build-push-action ghcr.io --build-arg RAILWAY_API_TOKEN railway\ login secrets.GITHUB_TOKEN].each do |forbidden|
+%w[uses:\ actions/checkout@v4 uses:\ actions/setup-node@v4 uses:\ actions/setup-java@v4 packages: docker/login-action docker/build-push-action ghcr.io --build-arg RAILWAY_API_TOKEN railway\ login secrets.GITHUB_TOKEN].each do |forbidden|
   abort("Railway runtime pipeline validation failed: forbidden #{forbidden} in workflow") if workflow.include?(forbidden)
 end
 abort("Railway runtime pipeline validation failed: upload must not pass a parent-directory context path") if workflow.include?("up railway-context") || workflow.include?("--path-as-root")
